@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《彩票後台 - 會員管理改版 PRD》- 4. 上方按鈕與搜尋篩選模塊</title>
+  <meta name="description" content="整合獨立快捷按鈕、批量操作選單、搜尋條件規範、自訂維度與權限連動隱藏機制。">
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Sticky Bar -->
+  <header class="site-header">
+    <a href="index.html" class="brand-area">
+      <div class="brand-icon">🎰</div>
+      <div class="brand-info">
+        <h1>
+          彩票後台 · 會員管理改版 PRD
+          <span class="badge-tag badge-primary">v1.2.0</span>
+          <span class="badge-tag badge-emerald">已審核通過</span>
+        </h1>
+      </div>
+    </a>
+
+    <div class="header-actions">
+      <!-- Direct Prototype Link -->
+      <a href="https://pm-doc-new-sport.pages.dev/" target="_blank" class="btn btn-primary" id="open-prototype-btn">
+        <span>🚀</span>
+        <span>開啟原型系統</span>
+      </a>
+
+      <!-- Quick Embed Preview Trigger -->
+      <button class="btn btn-outline" onclick="openPrototypeModal('https://pm-doc-new-sport.pages.dev/content.html?mock=normal')">
+        <span>👁️</span>
+        <span>即時預覽</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="app-container">
+
+    <!-- Left Sidebar: TOC -->
+    <aside class="sidebar">
+      <div class="toc-search-box">
+        <span class="toc-search-icon">🔍</span>
+        <input type="text" class="toc-search-input" id="toc-filter" placeholder="搜尋 PRD 章節或關鍵字..." oninput="filterTOC()">
+      </div>
+
+      <nav class="toc-nav">
+        <ul class="toc-list" id="toc-list">
+          <li class="toc-item">
+            <a href="section-1.html" class="toc-link">
+              <span>1. 概述與文檔資訊</span>
+              <span class="toc-badge">01</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-1.html#sec-1-1" class="toc-sublink">1.1 文檔版本紀錄</a></li>
+              <li><a href="section-1.html#sec-1-2" class="toc-sublink">1.2 需求背景與目標</a></li>
+              <li><a href="section-1.html#sec-1-3" class="toc-sublink">1.3 核心使用者角色與場景</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-2.html" class="toc-link">
+              <span>2. 全局通用設計規範</span>
+              <span class="toc-badge">02</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-2.html#sec-2-1" class="toc-sublink">2.1 交互佈局改版區塊說明</a></li>
+              <li><a href="section-2.html#sec-2-2" class="toc-sublink">2.2 交互佈局與組件規範 (抽屜模式)</a></li>
+              <li><a href="section-2.html#sec-2-3" class="toc-sublink">2.3 數據格式化與呈現規範</a></li>
+              <li><a href="section-2.html#sec-2-4" class="toc-sublink">2.4 前端狀態保存機制</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-3.html" class="toc-link">
+              <span>3. 權限管控矩陣</span>
+              <span class="toc-badge">03</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-3.html#sec-3-1" class="toc-sublink">3.1 舊有權限映射表</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-4.html" class="toc-link active">
+              <span>4. 上方按鈕與搜尋篩選模塊</span>
+              <span class="toc-badge">04</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="#sec-4-1" class="toc-sublink">4.1 獨立快捷按鈕</a></li>
+              <li><a href="#sec-4-2" class="toc-sublink">4.2 批量操作收納選單</a></li>
+              <li><a href="#sec-4-3" class="toc-sublink">4.3 批量業務流程與權限</a></li>
+              <li><a href="#sec-4-4" class="toc-sublink">4.4 篩選欄位與控制項規格</a></li>
+              <li><a href="#sec-4-5" class="toc-sublink">4.5 操作按鈕與動態標籤</a></li>
+              <li><a href="#sec-4-6" class="toc-sublink">4.6 特殊篩選與極限情境</a></li>
+              <li><a href="#sec-4-7" class="toc-sublink">4.7 篩選欄位權限隱藏機制</a></li>
+              <li><a href="#sec-4-8" class="toc-sublink">4.8 自訂篩選欄位</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-5.html" class="toc-link">
+              <span>5. 數據列表與卡片展示模塊</span>
+              <span class="toc-badge">05</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-5.html#sec-5-1" class="toc-sublink">5.1 視圖模式切換 (列表/巢狀)</a></li>
+              <li><a href="section-5.html#sec-5-2" class="toc-sublink">5.2 自訂欄位與卡片配置</a></li>
+              <li><a href="section-5.html#sec-5-3" class="toc-sublink">5.3 一級欄位定義與特殊展示</a></li>
+              <li><a href="section-5.html#sec-5-3-2" class="toc-sublink">5.3.2 列表模式展開卡片規格</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-6.html" class="toc-link">
+              <span>6. 單筆會員操作與詳情抽屜</span>
+              <span class="toc-badge">06</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-6.html#sec-6-1" class="toc-sublink">6.1 編輯用戶抽屜 (基本信息/設置)</a></li>
+              <li><a href="section-6.html#sec-6-2" class="toc-sublink">6.2 會員詳情抽屜 (4大分頁)</a></li>
+              <li><a href="section-6.html#sec-6-3" class="toc-sublink">6.3 二級抽屜互動機制 (同IP/設備)</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-7.html" class="toc-link">
+              <span>7. 介面狀態規範</span>
+              <span class="toc-badge">07</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-7.html#sec-7-1" class="toc-sublink">7.1 正常狀態 (Normal State)</a></li>
+              <li><a href="section-7.html#sec-7-2" class="toc-sublink">7.2 無數據狀態 (Empty State)</a></li>
+              <li><a href="section-7.html#sec-7-3" class="toc-sublink">7.3 極限狀態 (Edge / Extreme State)</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-8.html" class="toc-link">
+              <span>8. 附錄：欄位字典與數據定義</span>
+              <span class="toc-badge">08</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-8.html#sec-8-1" class="toc-sublink">8.1 基礎帳號與狀態 (12項)</a></li>
+              <li><a href="section-8.html#sec-8-2" class="toc-sublink">8.2 等級與額度 (7項)</a></li>
+              <li><a href="section-8.html#sec-8-3" class="toc-sublink">8.3 財務與資金流水 (13項)</a></li>
+              <li><a href="section-8.html#sec-8-4" class="toc-sublink">8.4 關係、推薦與軌跡 (8項)</a></li>
+              <li><a href="section-8.html#sec-8-5" class="toc-sublink">8.5 備註欄位 (2項)</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content-area">
+
+      <!-- Breadcrumb Bar -->
+      <div class="breadcrumb-bar">
+        <a href="index.html">首頁總覽</a>
+        <span class="breadcrumb-separator">/</span>
+        <span>PRD 模塊</span>
+        <span class="breadcrumb-separator">/</span>
+        <span style="color: var(--text-main); font-weight: 600;">4. 上方按鈕與搜尋篩選模塊</span>
+      </div>
+
+      <!-- SECTION CONTENT -->
+<section id="section-4" class="section-card">
+        <div class="section-header">
+          <div>
+            <span class="section-number">SECTION 04</span>
+            <h2 class="section-title">4. 上方按鈕與搜尋篩選模塊</h2>
+          </div>
+          <span class="section-source">對應來源：功能修改對照表 - 頂部按鈕與篩選列；權限對照表</span>
+        </div>
+
+        <!-- 模塊區域定位截圖說明 -->
+        <div style="margin-bottom: 24px;">
+          <div class="callout callout-info" style="margin-bottom: 14px; display: flex; align-items: center; gap: 12px; background: rgba(59, 130, 246, 0.06); border-left: 4px solid var(--primary); padding: 12px 16px;">
+            <span style="font-size: 20px;">📍</span>
+            <div>
+              <span style="font-weight: 700; color: var(--text-main);">模塊涵蓋範圍說明：</span>
+              <span style="color: var(--text-muted);">本章節專門規範會員管理介面最上方的<strong>「頂部功能快捷與批量按鈕區」</strong>以及下方雙排展開之<strong>「搜尋條件與進階篩選模塊」</strong>。</span>
+            </div>
+          </div>
+
+          <div style="background: var(--bg-body); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 14px; box-shadow: var(--shadow-sm);">
+            <div style="font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+              <span style="display: flex; align-items: center; gap: 6px;">
+                <span>🖼️</span>
+                <span>介面對應區域截圖 (頂部快捷按鈕列與篩選搜尋區域)</span>
+              </span>
+              <span class="badge-tag badge-primary" style="font-size: 11px;">對應介面區塊</span>
+            </div>
+            <div style="border-radius: 8px; overflow: hidden; border: 1px solid var(--border-subtle); background: #fff;">
+              <a href="button&amp;search_area_1023.png" target="_blank" title="點擊檢視原圖">
+                <img src="button&amp;search_area_1023.png" alt="上方按鈕列與篩選搜尋區域介面對照" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
+              </a>
+            </div>
+            <div style="margin-top: 8px; font-size: 12px; color: var(--text-subtle); text-align: center;">
+              🔍 點擊圖片可於新分頁展開檢視高解析度原始截圖
+            </div>
+          </div>
+        </div>
+
+        <!-- Part A: 上方功能按鈕列 -->
+        <div style="font-size: 14px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span>⚡</span><span>第一部分：頂部功能快捷與批量按鈕</span>
+        </div>
+
+        <h3 id="sec-4-1" class="sub-title">4.1 獨立快捷按鈕</h3>
+
+        <!-- 視圖模式切換按鈕 (巢狀模式 / 列表模式) -->
+        <div class="feature-box" style="margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; background: #ffffff; border: 1px solid var(--border-subtle); border-left: 4px solid var(--primary);">
+          <div style="flex: 1 1 340px;">
+            <div class="feature-box-header" style="margin-bottom: 6px;">
+              <div class="feature-icon" style="background: var(--primary-light); color: var(--primary);">🔲</div>
+              <div class="feature-title">「視圖模式切換」按鈕（頂部左側：巢狀 vs 列表）</div>
+            </div>
+            <div class="feature-desc">
+              位於頂部操作列最左側。提供操作員快速切換<strong>「巢狀樹狀模式」</strong>（點擊方格圖示）與<strong>「扁平列表模式」</strong>（點擊雙橫條圖示）。系統具備前端狀態持久化記憶，重新整理或重新登入時自動還原前次設定。
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 14px; background: var(--bg-body); border-radius: 8px; border: 1px solid var(--border-subtle);">
+            <img src="view_mode_toggle.png" alt="巢狀與列表模式切換按鈕" style="height: 44px; width: auto; display: block; border-radius: 6px;">
+            <span style="font-size: 11px; color: var(--text-subtle); font-weight: 500;">原型切換按鈕樣式</span>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="feature-box">
+            <div class="feature-box-header">
+              <div class="feature-icon" style="background: var(--primary-light); color: var(--primary);">➕</div>
+              <div class="feature-title">「新增會員」按鈕</div>
+            </div>
+            <div class="feature-desc">
+              頂部右側主按鈕。連動<strong>『新增會員』權限</strong>（無權限時按鈕隱藏）。點擊滑出「新增會員一級抽屜」，可配置代理線、帳號類型、初始等級與密碼。
+            </div>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-box-header">
+              <div class="feature-icon" style="background: var(--emerald-light); color: var(--emerald);">🛡️</div>
+              <div class="feature-title">「資料驗證」按鈕</div>
+            </div>
+            <div class="feature-desc">
+              照舊。
+            </div>
+          </div>
+        </div>
+
+        <h3 id="sec-4-2" class="sub-title">4.2 批量操作收納選單</h3>
+        <p class="paragraph">
+          舊版橫向平鋪的 5 項批量按鈕統一收納至<strong>「批量操作 ▾」下拉選單</strong>。
+        </p>
+        <div class="callout callout-info">
+          <div>💡</div>
+          <div>
+            <strong>按鈕自適應隱藏規則：</strong> 操作員對 5 項批量功能<strong>全無授權時，主「批量操作」按鈕直接隱藏</strong>；若擁有部分授權，下拉清單內僅顯示受權子項。
+          </div>
+        </div>
+
+        <h3 id="sec-4-3" class="sub-title">4.3 批量操作業務流程與權限連動</h3>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>批量功能項目</th>
+                <th>對應權限項</th>
+                <th>觸發條件與交互流程</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>批量更新用戶餘額</strong></td>
+                <td><span class="code-pill">批量修改餘額</span></td>
+                <td>勾選會員 &gt; 開啟抽屜 &gt; 選擇「加款/扣款」&gt; 輸入金額與備註</td>
+              </tr>
+              <tr>
+                <td><strong>批量更新聯繫方式</strong></td>
+                <td><span class="code-pill">批量更新聯繫方式</span></td>
+                <td>勾選會員 &gt; 統一指派客服 WhatsApp/TG 分配標籤</td>
+              </tr>
+              <tr>
+                <td><strong>批量更新用戶狀態</strong></td>
+                <td><span class="code-pill">批量修改會員狀態</span></td>
+                <td>勾選會員 &gt; 批次設為「正常 / 凍結 / 停權」</td>
+              </tr>
+              <tr>
+                <td><strong>批量代理變更</strong></td>
+                <td><span class="code-pill">批量轉移代理</span></td>
+                <td>勾選會員 &gt; 輸入目標代理帳號 &gt; 檢驗下級樹狀結構</td>
+              </tr>
+              <tr>
+                <td><strong>批量更新最大提款次數</strong></td>
+                <td><span class="code-pill">修改提款限額配置</span></td>
+                <td>勾選會員 &gt; 統一重置當日最大提款次數上限</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr style="border: none; border-top: 1px dashed var(--border-subtle); margin: 32px 0;">
+
+        <!-- Part B: 搜尋與篩選列模塊 -->
+        <div style="font-size: 14px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span>🔍</span><span>第二部分：搜尋與篩選列模塊</span>
+        </div>
+
+        <!-- 搜尋與篩選列介面截圖說明 -->
+        <div style="background: var(--bg-body); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 14px; box-shadow: var(--shadow-sm); margin-bottom: 24px;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+            <span style="display: flex; align-items: center; gap: 6px;">
+              <span>🖼️</span>
+              <span>搜尋與篩選列介面對照截圖</span>
+            </span>
+            <span class="badge-tag badge-primary" style="font-size: 11px;">篩選區域詳圖</span>
+          </div>
+          <div style="border-radius: 8px; overflow: hidden; border: 1px solid var(--border-subtle); background: #fff;">
+            <a href="search_filter_area.png" target="_blank" title="點擊檢視原圖">
+              <img src="search_filter_area.png" alt="搜尋與篩選列介面對照" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
+            </a>
+          </div>
+          <div style="margin-top: 8px; font-size: 12px; color: var(--text-subtle); text-align: center;">
+            🔍 點擊圖片可於新分頁展開檢視高解析度原始截圖
+          </div>
+        </div>
+
+        <div class="callout callout-info" style="margin-bottom: 24px;">
+          <div>💡</div>
+          <div>
+            <strong>模塊功能概述：</strong> 篩選列提供營運與客服人員透過多維度條件快速檢索會員資料的能力，支援精確搜尋、狀態過濾、各項進階查詢條件、動態標籤收摺以及極限狀態處理，以提升後台管理與營運效率。
+          </div>
+        </div>
+
+        <h3 id="sec-4-4" class="sub-title">4.4 篩選欄位字典與控制項規格</h3>
+        <p class="paragraph">
+          篩選列採用多維度彈性網格排版，依據業務查詢頻率與使用場景，共規劃 15 大篩選維度控制項。各欄位詳細規格如下表：
+        </p>
+
+        <div class="table-container" style="margin-bottom: 28px;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 16%;">篩選欄位名稱</th>
+                <th style="width: 15%;">控制項類型</th>
+                <th style="width: 13%;">預設值</th>
+                <th style="width: 26%;">選項值 / 輸入佔位符 (Placeholder)</th>
+                <th style="width: 30%;">輸入校驗與業務互動邏輯</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>帳號狀態</strong></td>
+                <td><span class="code-pill">下拉選單</span></td>
+                <td><span class="badge-tag badge-subtle">全部</span></td>
+                <td><code>全部</code>、<code>正常</code>、<code>凍結</code>、<code>停用</code></td>
+                <td>快速過濾特定生命週期狀態之會員帳號。</td>
+              </tr>
+              <tr>
+                <td><strong>用戶層級</strong></td>
+                <td><span class="code-pill">下拉選單</span></td>
+                <td><span class="badge-tag badge-subtle">全部</span></td>
+                <td>動態拉取後台已設定之用戶層級清單</td>
+                <td>依據所屬用戶層級過濾，單選切換。</td>
+              </tr>
+              <tr>
+                <td><strong>會員等級</strong></td>
+                <td><span class="code-pill">下拉選單</span></td>
+                <td><span class="badge-tag badge-subtle">請選擇</span></td>
+                <td>VIP 成長體系等級清單</td>
+                <td>依據等級升降體系查詢對應會員群。</td>
+              </tr>
+              <tr>
+                <td><strong>主錢包幣種</strong></td>
+                <td><span class="code-pill">下拉選單</span></td>
+                <td><span class="badge-tag badge-subtle">全部</span></td>
+                <td><code>全部</code>、<code>RMB</code>、<code>VND</code>、<code>MYR</code>、<code>USDT</code> 等</td>
+                <td>切換特定幣種後，下方列表數據總計列將自動加權該幣種進行匯總計算。</td>
+              </tr>
+              <tr>
+                <td><strong>用戶標籤</strong></td>
+                <td><span class="code-pill">下拉選單</span></td>
+                <td><span class="badge-tag badge-subtle">請選擇</span></td>
+                <td>標籤字典選單（支援關鍵字快搜過濾標籤）</td>
+                <td>支援標籤精準搜尋。</td>
+              </tr>
+              <tr>
+                <td><strong>排除條件</strong></td>
+                <td><span class="code-pill">標籤移除式選單</span></td>
+                <td><code>測試账号</code> <small>(預設帶入)</small></td>
+                <td><code>測試账号</code>、<code>未充值账号</code></td>
+                <td>預設排除測試會員；標籤右側附帶 <code>×</code> 圖示，點擊可快速移除該排除條件恢復檢視。</td>
+              </tr>
+              <tr>
+                <td><strong>生日月份</strong></td>
+                <td><span class="code-pill">下拉選單</span></td>
+                <td><span class="badge-tag badge-subtle">全部</span></td>
+                <td><code>全部</code>、<code>1月</code> ~ <code>12月</code></td>
+                <td>依月份篩選當月壽星（連動『查看會員生日/敏感個資』權限，無權限時隱藏）。</td>
+              </tr>
+              <tr>
+                <td><strong>綁定銀行卡</strong></td>
+                <td><span class="code-pill">單行文字輸入框</span></td>
+                <td><em>(空值)</em></td>
+                <td><code>请输入银行卡号</code></td>
+                <td>輸入銀行卡號進行快速比對（連動『修改會員/會員詳情』權限，無權限時隱藏）。</td>
+              </tr>
+              <tr>
+                <td><strong>未登入天數 (大於)</strong></td>
+                <td><span class="code-pill">數值輸入框</span></td>
+                <td><em>(空值)</em></td>
+                <td><code>请输入天数</code> <small>(後綴單位：天)</small></td>
+                <td>僅接受正整數，用於篩選沉睡或流失風險用戶以執行召回作業。</td>
+              </tr>
+              <tr>
+                <td><strong>代理 ID</strong></td>
+                <td><span class="code-pill">單行文字輸入框</span></td>
+                <td><em>(空值)</em></td>
+                <td><code>请输入代理Id</code></td>
+                <td>支援輸入直屬或上級代理 ID 檢索其所屬下線會員。</td>
+              </tr>
+              <tr>
+                <td><strong>VIP 會員等級</strong></td>
+                <td><span class="code-pill">單行文字輸入框</span></td>
+                <td><em>(空值)</em></td>
+                <td><code>请输入VIP会员等级</code></td>
+                <td>快速輸入特定 VIP 階級代碼或名稱檢索核心大客。</td>
+              </tr>
+              <tr>
+                <td><strong>登入 IP</strong></td>
+                <td><span class="code-pill">單行文字輸入框</span></td>
+                <td><em>(空值)</em></td>
+                <td><code>请输入登录IP</code></td>
+                <td>輸入 IPv4/IPv6 位址檢索同 IP 登入會員（連動『修改會員/會員詳情』權限，無權限時隱藏）。</td>
+              </tr>
+              <tr>
+                <td><strong>存款金額大於</strong></td>
+                <td><span class="code-pill">數值輸入框</span></td>
+                <td><em>(空值)</em></td>
+                <td><code>请输入金额</code></td>
+                <td>僅接受大於等於 0 之數值（支援兩位小數），快速過濾高充值資金量級用戶。</td>
+              </tr>
+              <tr>
+                <td><strong>新增時間</strong></td>
+                <td><span class="code-pill">日期時間區間選擇器</span></td>
+                <td><em>(空值 / 今日)</em></td>
+                <td><code>年 / 月 / 日 -- : -- ~ 年 / 月 / 日 -- : --</code></td>
+                <td>支援精確到「時:分」的開戶註冊起訖時間範圍，支援快捷時間點（今日、本週、近30日）。</td>
+              </tr>
+              <tr>
+                <td><strong>帳號與身分複合檢索</strong></td>
+                <td><span class="code-pill">複合控制項 (下拉選單 + 動態輸入框)</span></td>
+                <td>模式：<code>帳號 (精準匹配)</code><br><small>(輸入框預設空值)</small></td>
+                <td>預設：<code>请输入精确账号</code><br><small>(隨下拉選項即時動態切換)</small></td>
+                <td>
+                  整合帳號、身分識別、邀請碼、敏感聯絡方式、回訪備註與安全驗證之<strong>15 合 1 複合檢索控制項</strong>。<br>
+                  左側下拉選單切換檢索模式，右側輸入框動態切換佔位符與格式校驗；其中敏感通訊方式（5項）與谷歌驗證碼受後台權限管控動態顯隱（詳見下方 4.4.1 專題與 4.7 權限表）。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 4.4.1 Compound Search Dropdown Specifications -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; margin-bottom: 28px; box-shadow: var(--shadow-sm);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+            <h4 style="font-size: 15px; font-weight: 700; color: var(--text-color); margin: 0; display: flex; align-items: center; gap: 8px;">
+              <span>🔍</span>
+              <span>4.4.1 帳號與身份複合檢索選單 (15 項) 完整規格與動態佔位符字典</span>
+            </h4>
+            <span class="badge-tag badge-purple">複合搜尋核心規範</span>
+          </div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.6;">
+            本控制項為營運與客服之高頻檢索中樞，整合帳號、各類身分標識、敏感通訊社群管道、運營備註及安全驗證。點擊左側選單切換時，右側輸入框<strong>自動清除前值並即時切換對應佔位符 (Placeholder)</strong>，部分涉及敏感個資與資安維度嚴格連動權限開關：
+          </p>
+
+          <div class="table-container" style="margin-bottom: 0;">
+            <table class="data-table" style="font-size: 13px;">
+              <thead>
+                <tr>
+                  <th style="width: 50px; text-align: center;">序號</th>
+                  <th style="width: 170px;">下拉選單選項名稱</th>
+                  <th style="width: 100px;">分類維度</th>
+                  <th style="width: 220px;">輸入框動態佔位符</th>
+                  <th>檢索匹配邏輯與輸入規範</th>
+                  <th style="width: 230px;">後台權限連動規則</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align: center;">01</td>
+                  <td><strong>帳號 (精準匹配)</strong> <span class="badge-tag badge-emerald" style="font-size: 10px;">預設</span></td>
+                  <td><span class="code-pill">帳號檢索</span></td>
+                  <td><code>请输入精确账号</code></td>
+                  <td>會員登入帳號完全精確比對（大小寫敏感），預設採用以防全表遍歷降低效能。</td>
+                  <td><span class="badge-tag badge-subtle">無權限限制（常規開放）</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">02</td>
+                  <td><strong>帳號 (模糊匹配)</strong></td>
+                  <td><span class="code-pill">帳號檢索</span></td>
+                  <td><code>请输入模糊账号</code></td>
+                  <td>輸入帳號字串片段，以 <code>%keyword%</code> 進行前後模糊檢索，適用忘記完整帳號時查詢。</td>
+                  <td><span class="badge-tag badge-subtle">無權限限制（常規開放）</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">03</td>
+                  <td><strong>帳號 (多账号筛选)</strong></td>
+                  <td><span class="code-pill">帳號檢索</span></td>
+                  <td><code>请输入多个账号(空格/逗号/换行分隔)</code></td>
+                  <td>支援批量貼上多組帳號，後端自動解析空格、半/全形逗號或換行符，執行 <code>IN (...)</code> 批量檢索。</td>
+                  <td><span class="badge-tag badge-subtle">無權限限制（常規開放）</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">04</td>
+                  <td><strong>快速登录账号</strong></td>
+                  <td><span class="code-pill">登入標識</span></td>
+                  <td><code>请输入快速登录账号</code></td>
+                  <td>檢索透過第三方快捷登入（如快捷授權 UID、一鍵授權代號）之關聯快速登入帳號。</td>
+                  <td><span class="badge-tag badge-subtle">無權限限制（常規開放）</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">05</td>
+                  <td><strong>用户ID</strong></td>
+                  <td><span class="code-pill">系統唯一碼</span></td>
+                  <td><code>请输入用户ID</code></td>
+                  <td>系統唯一 User ID (純數字格式)，精確匹配定位單一用戶主鍵。</td>
+                  <td><span class="badge-tag badge-subtle">無權限限制（常規開放）</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">06</td>
+                  <td><strong>邀请码</strong></td>
+                  <td><span class="code-pill">推廣歸屬</span></td>
+                  <td><code>请输入邀请码</code></td>
+                  <td>輸入 6~8 碼推廣邀請代碼，精確檢索綁定該邀請碼之註冊會員。</td>
+                  <td><span class="badge-tag badge-subtle">無權限限制（常規開放）</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">07</td>
+                  <td><strong>用户昵称</strong></td>
+                  <td><span class="code-pill">身分資訊</span></td>
+                  <td><code>请输入用户昵称</code></td>
+                  <td>會員自訂暱稱關鍵字模糊匹配，適用社群互動客服查詢。</td>
+                  <td><span class="badge-tag badge-subtle">無權限限制（常規開放）</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">08</td>
+                  <td><strong>真实姓名</strong></td>
+                  <td><span class="code-pill">身分資訊</span></td>
+                  <td><code>请输入真实姓名</code></td>
+                  <td>已通過實名認證之會員姓名比對（精確或前綴匹配），供風控核驗。</td>
+                  <td><span class="badge-tag badge-subtle">無權限限制（常規開放）</span></td>
+                </tr>
+                <tr style="background: rgba(239, 68, 68, 0.02);">
+                  <td style="text-align: center;">09</td>
+                  <td><strong>邮箱</strong> 🔒</td>
+                  <td><span class="code-pill" style="color: #ea580c;">敏感個資</span></td>
+                  <td><code>请输入邮箱</code></td>
+                  <td>電子信箱地址完整比對檢索，快速排查同郵箱多開異常。</td>
+                  <td>連動<strong>『查看會員聯絡信息』</strong>權限，勾選會顯示；無權限時選項自下拉清單剔除隱藏。</td>
+                </tr>
+                <tr style="background: rgba(239, 68, 68, 0.02);">
+                  <td style="text-align: center;">10</td>
+                  <td><strong>手机号</strong> 🔒</td>
+                  <td><span class="code-pill" style="color: #ea580c;">敏感個資</span></td>
+                  <td><code>请输入手机号</code></td>
+                  <td>支援帶國際國碼或純手機號碼比對，排查同手機註冊之多帳號。</td>
+                  <td>連動<strong>『查看會員聯絡信息』</strong>權限，勾選會顯示；無權限時選項自下拉清單剔除隱藏。</td>
+                </tr>
+                <tr style="background: rgba(239, 68, 68, 0.02);">
+                  <td style="text-align: center;">11</td>
+                  <td><strong>Zalo</strong> 🔒</td>
+                  <td><span class="code-pill" style="color: #ea580c;">敏感個資</span></td>
+                  <td><code>请输入Zalo</code></td>
+                  <td>東南亞市場 (如越南 VND) 專用 Zalo 通訊軟體帳號/電話檢索。</td>
+                  <td>連動<strong>『查看會員聯絡信息』</strong>權限，勾選會顯示；無權限時選項自下拉清單剔除隱藏。</td>
+                </tr>
+                <tr style="background: rgba(239, 68, 68, 0.02);">
+                  <td style="text-align: center;">12</td>
+                  <td><strong>WhatsApp</strong> 🔒</td>
+                  <td><span class="code-pill" style="color: #ea580c;">敏感個資</span></td>
+                  <td><code>请输入WhatsApp</code></td>
+                  <td>WhatsApp 國際電話帳號精確搜尋，維護 VIP 客戶溝通管道。</td>
+                  <td>連動<strong>『查看會員聯絡信息』</strong>權限，勾選會顯示；無權限時選項自下拉清單剔除隱藏。</td>
+                </tr>
+                <tr style="background: rgba(239, 68, 68, 0.02);">
+                  <td style="text-align: center;">13</td>
+                  <td><strong>TG</strong> 🔒</td>
+                  <td><span class="code-pill" style="color: #ea580c;">敏感個資</span></td>
+                  <td><code>请输入TG</code></td>
+                  <td>Telegram 用戶名 (Username / <code>@xxx</code>) 檢索，排查電報社群推廣對應會員。</td>
+                  <td>連動<strong>『查看會員聯絡信息』</strong>權限，勾選會顯示；無權限時選項自下拉清單剔除隱藏。</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">14</td>
+                  <td><strong>回访备注</strong></td>
+                  <td><span class="code-pill">營運維護</span></td>
+                  <td><code>请输入回访备注</code></td>
+                  <td>電銷、客訴追蹤與回訪紀錄之歷史文字關鍵字模糊搜尋，便於回溯維護歷程。</td>
+                  <td><span class="badge-tag badge-subtle">無權限限制（常規開放）</span></td>
+                </tr>
+                <tr style="background: rgba(239, 68, 68, 0.02);">
+                  <td style="text-align: center;">15</td>
+                  <td><strong>谷歌验证码</strong> 🔒</td>
+                  <td><span class="code-pill" style="color: #7c3aed;">安全防護</span></td>
+                  <td><code>请输入谷歌验证码</code></td>
+                  <td>檢索 Google Authenticator (2FA) 驗證碼綁定狀態或金鑰比對，專供二維安全事故排查。</td>
+                  <td>連動<strong>『会员谷歌验证码查看』</strong>權限，勾選會顯示；無權限時選項自下拉清單剔除隱藏。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h3 id="sec-4-5" class="sub-title">4.5 操作按鈕、動態搜尋標籤與收摺互動</h3>
+        
+        <div class="grid-3" style="margin-bottom: 24px;">
+          <div class="feature-box">
+            <div class="feature-title">🔍 搜尋 (Search) 按鈕</div>
+            <div class="feature-desc" style="margin-top: 6px;">
+              點擊後觸發 API 請求，帶入所有已填寫或選取的篩選條件，重新載入會員列表並將<strong>分頁歸至第 1 頁</strong>。同時即時更新下方「已生效搜尋標籤列」。
+            </div>
+          </div>
+          <div class="feature-box">
+            <div class="feature-title">🔄 重置 (Reset) 按鈕</div>
+            <div class="feature-desc" style="margin-top: 6px;">
+              點擊後清空所有輸入框、下拉選單還原為初始預設值、<strong>清除所有動態產生的搜尋標籤</strong>（排除條件還原為預設），並自動重新整理列表。
+            </div>
+          </div>
+          <div class="feature-box">
+            <div class="feature-title" style="display: flex; align-items: center; gap: 8px;">
+              <img src="custom_filter_btn.png" alt="自訂篩選欄位按鈕" style="height: 18px; width: 18px; vertical-align: middle; border-radius: 4px; display: inline-block; object-fit: contain;">
+              <span>🎛️ 自訂篩選維度控制</span>
+            </div>
+            <div class="feature-desc" style="margin-top: 6px;">
+              點擊彈出「自訂篩選欄位」彈窗，用戶可勾選或隱藏次要篩選條件（例如：未登入天數、主錢包幣種、生日月份等）。收起未勾選維度以最大化表格可視空間（詳見下方 4.8 節）。
+            </div>
+          </div>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 18px; margin-bottom: 24px;">
+          <h4 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <span>🏷️</span><span>動態搜尋標籤 (Search Tags) 互動規範</span>
+          </h4>
+          <ul style="padding-left: 20px; color: var(--text-muted); display: flex; flex-direction: column; gap: 10px; margin-bottom: 0;">
+            <li><strong>標籤觸發機制</strong>：當使用者於篩選列填寫或選取條件後，點擊「搜尋」按鈕，系統會在篩選列下方即時動態生成對應的搜尋標籤（例如：<code>排除条件: 测试账号 ×</code>、<code>状态: 正常 ×</code>）。</li>
+            <li><strong>獨立標籤解除 (×)</strong>：每個產生的標籤右側均配有刪除（<code>×</code>）圖示。點擊特定標籤的刪除按鈕時，該項篩選條件會被即時解除、表單對應欄位清空還原，且列表會自動連動更新。</li>
+            <li><strong>一鍵清空所有標籤 (🗑️)</strong>：標籤列配置「清空圖示」，點擊後可一鍵移除所有生效標籤，等同於觸發重置行為。</li>
+          </ul>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 18px; margin-bottom: 24px;">
+          <h4 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <span>📐</span><span>畫面滾動與表單收摺互動 (Collapse on Scroll)</span>
+          </h4>
+          <ul style="padding-left: 20px; color: var(--text-muted); display: flex; flex-direction: column; gap: 10px; margin-bottom: 0;">
+            <li><strong>表單滾動收摺機制</strong>：當頁面往下滾動時，完整的「多欄位篩選表單」會自動向上平滑收起隱藏，僅保留「已生效的搜尋標籤列」與右側「展開/收起控制圖示」固定於畫面上方，以釋放更多檢視表格的垂直空間。</li>
+            <li><strong>手動切換控制</strong>：使用者可隨時透過標籤列右側的收摺/展開圖示（<code>︿</code> / <code>﹀</code>）手動切換進階篩選表單的顯示與隱藏。</li>
+          </ul>
+        </div>
+
+        <h3 id="sec-4-6" class="sub-title">4.6 特殊篩選條件規範與極限情境</h3>
+        
+        <div class="grid-3" style="margin-bottom: 24px;">
+          <div class="feature-box">
+            <div class="feature-title">🏷️ 用戶標籤精準搜尋</div>
+            <div class="feature-desc" style="margin-top: 6px;">
+              下拉選單支援標籤選擇，後端匹配邏輯僅支援<strong>精準搜尋</strong>。
+            </div>
+          </div>
+          <div class="feature-box">
+            <div class="feature-title">💱 主錢包幣種加權過濾</div>
+            <div class="feature-desc" style="margin-top: 6px;">
+              支援彩票多幣種帳號過濾（CNY, USDT, VND, THB 等）。預設為「全部幣種」，選擇特定幣種後，列表財務匯總將自動加權該幣種。
+            </div>
+          </div>
+          <div class="feature-box">
+            <div class="feature-title">🚫 排除條件整合</div>
+            <div class="feature-desc" style="margin-top: 6px;">
+              具備標籤移除式選單與快捷開關：<br>
+              1. <strong>排除測試帳號</strong>（預設啟用，排除白名單與內部測試帳號）<br>
+              2. <strong>排除未充值帳號</strong>（快速過濾無效幽靈用戶）
+            </div>
+          </div>
+        </div>
+
+        <div style="background: rgba(234, 88, 12, 0.05); border-left: 4px solid #ea580c; border-radius: 0 8px 8px 0; padding: 16px 20px; margin-bottom: 24px;">
+          <h4 style="font-size: 14px; font-weight: 700; color: #ea580c; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+            <span>⚡</span><span>極限情境處理機制 (Extreme Scenarios)</span>
+          </h4>
+          <ul style="padding-left: 20px; color: var(--text-muted); display: flex; flex-direction: column; gap: 8px; margin-bottom: 0;">
+            <li><strong>多條件標籤溢位處理</strong>：當使用者勾選或帶入過多篩選條件，導致產生的搜尋標籤數量超過單行顯示極限時，標籤列需支援<strong>自動換行顯示或橫向捲動（Scrollable / Wrapped）</strong>，確保所有已生效的條件皆不會被遮擋而無法檢視或移除。</li>
+            <li><strong>超長欄位內容與字串截斷</strong>：當輸入框文字過長或特定標籤文字超出版面時，前端自動進行文字截斷（Ellipsis <code>...</code>），並支援滑鼠懸停 (Tooltip) 顯示完整內容。</li>
+          </ul>
+        </div>
+
+        <h3 id="sec-4-7" class="sub-title">4.7 篩選欄位之權限連動隱藏機制</h3>
+        <div class="callout callout-warning">
+          <div>🔒</div>
+          <div>
+            <strong>隱私安全防線：</strong> 操作員未獲授權之數據權限，對應之篩選搜尋條件<strong>直接從篩選列隱藏</strong>，嚴防透過檢索反覆盲猜碰撞敏感個資。
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>篩選條件 / 下拉選項項目</th>
+                <th>舊版現況</th>
+                <th>改版後依賴之權限項目</th>
+                <th>權限判斷與前端表現</th>
+                <th>合規與業務說明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>登錄 IP 篩選輸入框</strong></td>
+                <td><span class="badge-tag badge-subtle">無權限連動</span></td>
+                <td><span class="code-pill">修改會員</span> 與 <span class="code-pill">會員詳情</span></td>
+                <td><strong>勾選具其一會顯示</strong>；兩者皆無權限時輸入框整列隱藏，不可按 IP 搜尋</td>
+                <td>風控核心維度，非審核與編輯角色不可探測同 IP 會員分佈。</td>
+              </tr>
+              <tr style="background: rgba(239, 68, 68, 0.02);">
+                <td><strong>複合檢索下拉選項：<br>『手機號，郵箱, zalo, WhatsApp, tg』</strong></td>
+                <td><span class="badge-tag badge-subtle">無權限連動</span></td>
+                <td><span class="code-pill">查看會員聯絡信息</span></td>
+                <td><strong>勾選會顯示</strong>；無權限時，此 5 項通訊方式<strong>直接從複合下拉選單中剔除隱藏</strong></td>
+                <td><strong>極高安全等級</strong>：防範外部非授權人員或一般客服透過輸入號碼盲猜碰撞會員社群敏感個資。</td>
+              </tr>
+              <tr style="background: rgba(239, 68, 68, 0.02);">
+                <td><strong>複合檢索下拉選項：<br>『谷歌驗證碼』</strong></td>
+                <td><span class="badge-tag badge-subtle">無權限連動</span></td>
+                <td><span class="code-pill">会员谷歌验证码查看</span></td>
+                <td><strong>勾選會顯示</strong>；無權限時，此選項<strong>直接從複合下拉選單中剔除隱藏</strong></td>
+                <td>二維安全防禦核心，僅主管與授權技術人員配置，避免 2FA 狀態外洩。</td>
+              </tr>
+              <tr>
+                <td><strong>生日月份篩選</strong></td>
+                <td><span class="badge-tag badge-subtle">無權限連動</span></td>
+                <td><span class="code-pill">查看會員生日 / 敏感個資</span></td>
+                <td><strong>勾選會顯示</strong>；無權限時該篩選項直接隱藏，自訂維度中置灰禁選</td>
+                <td>保護個資隱私，避免非授權批次篩選當月壽星名單進行私下行銷。</td>
+              </tr>
+              <tr>
+                <td><strong>綁定銀行卡號篩選</strong></td>
+                <td><span class="badge-tag badge-subtle">無權限連動</span></td>
+                <td><span class="code-pill">修改會員</span> 或 <span class="code-pill">會員詳情</span></td>
+                <td><strong>勾選具其一會顯示</strong>；無權限時不提供銀行卡號篩選輸入框</td>
+                <td>金融防洗錢與銀行帳戶安全隔離，防止外部探測卡號綁定關聯。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 4.8 自訂篩選欄位 -->
+        <h3 id="sec-4-8" class="sub-title">4.8 自訂篩選欄位</h3>
+
+        <!-- 1. 模組概述 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 18px 20px; margin-bottom: 22px; box-shadow: var(--shadow-sm);">
+          <div style="font-size: 14.5px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+            <span>📋</span><span>1. 模組概述</span>
+          </div>
+          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">
+            「自訂篩選欄位」允許管理員根據日常維運習慣與檢索需求，自定義頂部篩選面板中顯示的搜尋條件欄位，隱藏不常用的篩選項目以保持介面清爽，提升資料查詢效率。
+          </p>
+        </div>
+
+        <!-- 2. 介面佈局與互動元件 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 20px; margin-bottom: 22px; box-shadow: var(--shadow-sm);">
+          <div style="font-size: 14.5px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <span>⚙️</span><span>2. 介面佈局與互動元件</span>
+          </div>
+          <div style="font-size: 13.5px; color: var(--text-muted); line-height: 1.7; margin-bottom: 18px;">
+            <div style="margin-bottom: 8px;">
+              • <strong>觸發入口</strong>：點擊頂部篩選區旁的自訂按鈕（圖二：三直槓調節器圖示按鈕 <img src="custom_filter_btn.png" alt="自訂篩選欄位按鈕" style="height: 20px; vertical-align: middle; border-radius: 4px; display: inline-block; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">）開啟「自訂篩選欄位」彈窗。
+            </div>
+            <div>
+              • <strong>彈窗結構</strong>（圖一）：
+              <ul style="padding-left: 20px; margin-top: 6px; display: flex; flex-direction: column; gap: 4px;">
+                <li><strong>標題與關閉</strong>：頂部標題「自訂篩選欄位」，右上角配置關閉圖示（<code>✕</code>）。</li>
+                <li><strong>選項列表</strong>：以多選框（Checkbox）列表形式垂直呈現所有 14 項可用的篩選條件。</li>
+                <li><strong>底部操作按鈕</strong>：右下角配置 <code>[取消]</code> 與 <code>[確認]</code> 按鈕。</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 介面對照圖示區塊 (圖二按鈕 + 圖一彈窗) -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 16px; align-items: start;">
+            
+            <!-- 圖二：按鈕截圖展示卡片 -->
+            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
+              <div style="padding: 10px 14px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span class="badge-tag badge-purple" style="font-size: 11px;">圖二</span>
+                  <strong style="font-size: 13px; color: var(--text-main);">自訂篩選按鈕</strong>
+                </div>
+                <a href="custom_filter_btn.png" target="_blank" class="btn btn-sm btn-outline" style="font-size: 10.5px; padding: 2px 8px;">↗ 原圖</a>
+              </div>
+              <div style="padding: 24px 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f8fafc; min-height: 160px;">
+                <a href="custom_filter_btn.png" target="_blank" title="點擊檢視自訂篩選按鈕大圖">
+                  <img src="custom_filter_btn.png" alt="自訂篩選按鈕截圖" style="width: 72px; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                </a>
+                <span style="font-size: 11.5px; color: var(--text-muted); margin-top: 12px;">觸發入口按鈕外觀</span>
+              </div>
+              <div style="padding: 12px 14px; font-size: 12px; color: var(--text-subtle); background: #ffffff; border-top: 1px solid var(--border-subtle); line-height: 1.55;">
+                <strong>補充說明：</strong> 按鈕呈方形圓角邊框，內部配置三直槓調音器/滑桿圖示（Sliders）。點擊即刻喚出「自訂篩選欄位」多選設定彈窗。
+              </div>
+            </div>
+
+            <!-- 圖一：彈窗截圖展示卡片 -->
+            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
+              <div style="padding: 10px 14px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span class="badge-tag badge-purple" style="font-size: 11px;">圖一</span>
+                  <strong style="font-size: 13px; color: var(--text-main);">自訂篩選欄位彈窗</strong>
+                </div>
+                <a href="custom_filter_modal.png" target="_blank" class="btn btn-sm btn-outline" style="font-size: 10.5px; padding: 2px 8px;">↗ 原圖</a>
+              </div>
+              <div style="padding: 16px; background: #f8fafc; display: flex; justify-content: center; align-items: center;">
+                <a href="custom_filter_modal.png" target="_blank" title="點擊檢視自訂篩選欄位彈窗大圖">
+                  <img src="custom_filter_modal.png" alt="自訂篩選欄位彈窗截圖" style="max-height: 420px; width: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 6px 16px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.06); cursor: zoom-in;">
+                </a>
+              </div>
+              <div style="padding: 12px 14px; font-size: 12px; color: var(--text-subtle); background: #ffffff; border-top: 1px solid var(--border-subtle); line-height: 1.55;">
+                <strong>補充說明：</strong> 彈窗垂直列出 14 項可勾選條件，每個項目均配有勾選框（☑，勾選狀態以顏色區分）。底部右側配置「取消」與「確認」按鈕（以顏色區分主次操作）；右上角具備「✕」快速關閉。
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 3. 可勾選之篩選欄位清單 (14項) -->
+        <div style="margin-bottom: 22px;">
+          <div style="font-size: 14.5px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <span>☑️</span><span>3. 可勾選之篩選欄位清單 (共 14 項)</span>
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 70px;">項次</th>
+                  <th style="width: 180px;">可選篩選維度</th>
+                  <th style="width: 130px;">預設勾選狀態</th>
+                  <th>維運業務與篩選行為說明</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>01</td><td><strong>帳號狀態</strong></td><td><span class="badge-tag badge-emerald">預設勾選</span></td><td>依正常、凍結、停用等狀態篩選。</td></tr>
+                <tr><td>02</td><td><strong>用戶層級</strong></td><td><span class="badge-tag badge-emerald">預設勾選</span></td><td>依系統劃分的用戶層級篩選。</td></tr>
+                <tr><td>03</td><td><strong>會員等級</strong></td><td><span class="badge-tag badge-emerald">預設勾選</span></td><td>依平台 VIP 或一般等級篩選。</td></tr>
+                <tr><td>04</td><td><strong>主钱包币种</strong></td><td><span class="badge-tag badge-emerald">預設勾選</span></td><td>依 RMB、VND、USDT 等幣種篩選。</td></tr>
+                <tr><td>05</td><td><strong>用户标签</strong></td><td><span class="badge-tag badge-emerald">預設勾選</span></td><td>依自定義標籤（如大戶、測試等）篩選。</td></tr>
+                <tr><td>06</td><td><strong>排除条件</strong></td><td><span class="badge-tag badge-emerald">預設勾選</span></td><td>如排除測試帳號等。</td></tr>
+                <tr><td>07</td><td><strong>生日月份</strong></td><td><span class="badge-tag badge-subtle">自訂可勾選</span></td><td>依會員出生月份篩選。</td></tr>
+                <tr><td>08</td><td><strong>绑定银行卡</strong></td><td><span class="badge-tag badge-subtle">自訂可勾選</span></td><td>依是否綁定或特定卡號關鍵字篩選。</td></tr>
+                <tr><td>09</td><td><strong>未登入天数 (大于)</strong></td><td><span class="badge-tag badge-subtle">自訂可勾選</span></td><td>依長時間未登入天數條件篩選。</td></tr>
+                <tr><td>10</td><td><strong>代理Id</strong></td><td><span class="badge-tag badge-subtle">自訂可勾選</span></td><td>依歸屬代理編號精確篩選。</td></tr>
+                <tr><td>11</td><td><strong>VIP会员等级</strong></td><td><span class="badge-tag badge-subtle">自訂可勾選</span></td><td>依具體 VIP 級別數字篩選。</td></tr>
+                <tr><td>12</td><td><strong>登录IP</strong></td><td><span class="badge-tag badge-subtle">自訂可勾選</span></td><td>依登入來源 IP 篩選。</td></tr>
+                <tr><td>13</td><td><strong>存款金额大于</strong></td><td><span class="badge-tag badge-subtle">自訂可勾選</span></td><td>依存款門檻過濾用戶。</td></tr>
+                <tr><td>14</td><td><strong>新增时间范围</strong></td><td><span class="badge-tag badge-emerald">預設勾選</span></td><td>依帳號註冊建立的起訖時間區間篩選。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 4. 核心互動功能需求 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 18px 20px; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+          <div style="font-size: 14.5px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <span>⚡</span><span>4. 核心互動功能需求</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 14px; font-size: 13.5px; color: var(--text-muted); line-height: 1.7;">
+            <div style="border-left: 3px solid var(--primary); padding-left: 12px;">
+              <strong style="color: var(--text-main);">4.1 顯示與隱藏切換</strong><br>
+              <strong>互動行為：</strong><br>
+              • 每個篩選條件左側皆配有勾選框（Checkbox）。<br>
+              • <strong>勾選（☑）</strong>：該篩選欄位即時或確認後呈現在頂部篩選面板中。<br>
+              • <strong>取消勾選（☐）</strong>：該篩選欄位從頂部篩選面板中隱藏。
+            </div>
+
+            <div style="border-left: 3px solid var(--emerald); padding-left: 12px;">
+              <strong style="color: var(--text-main);">4.2 確認與儲存</strong><br>
+              <strong>互動行為：</strong><br>
+              • <strong>點擊 [確認]</strong>：系統儲存當前管理員的勾選偏好（透過前端 <code>LocalStorage</code> 持久化儲存），關閉彈窗，並即時動態刷新頂部篩選面板的佈局。<br>
+              • <strong>點擊 [取消] 或右上角 ✕</strong>：放棄本次變更，關閉彈窗，篩選面板保持原樣不變。
+            </div>
+          </div>
+        </div>
+      </section>
+
+        <!-- Page Navigation Buttons -->
+        <div class="page-nav-bar">
+          <a href="section-3.html" class="page-nav-btn prev">
+            <span style="font-size: 18px;">←</span>
+            <div>
+              <span class="page-nav-subtitle">上一章 (Previous)</span>
+              <span class="page-nav-title">3. 權限管控矩陣</span>
+            </div>
+          </a>
+          <a href="section-5.html" class="page-nav-btn next">
+            <div>
+              <span class="page-nav-subtitle">下一章 (Next)</span>
+              <span class="page-nav-title">5. 數據列表與卡片展示模塊</span>
+            </div>
+            <span style="font-size: 18px;">→</span>
+          </a>
+        </div>
+
+    </main>
+  </div>
+
+  <!-- Prototype Interactive Modal Preview -->
+  <div class="modal-overlay" id="prototype-modal" onclick="closePrototypeModal(event)">
+    <div class="modal-window" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 16px;">🖥️</span>
+          <span style="font-weight: 700; font-size: 14px;" id="modal-title">彩票會員管理原型預覽 (Prototype Live Preview)</span>
+          <span class="badge-tag badge-primary" id="modal-state-badge">NORMAL STATE</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <button class="btn btn-sm btn-outline" onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=normal')">🟢 正常</button>
+          <button class="btn btn-sm btn-outline" onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=nodata&mode=nested')">📭 無數據</button>
+          <button class="btn btn-sm btn-outline" onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=extreme&mode=nested')">⚡ 極限</button>
+          <a href="https://pm-doc-new-sport.pages.dev/" target="_blank" class="btn btn-sm btn-primary">在新視窗開啟 ↗</a>
+          <button class="icon-btn" onclick="closePrototypeModal()" style="width: 28px; height: 28px; font-size: 14px;">✕</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <iframe id="prototype-iframe" src="" title="Prototype Sandbox"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top Floating Button -->
+  <button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="回到頂部">
+    ↑
+  </button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

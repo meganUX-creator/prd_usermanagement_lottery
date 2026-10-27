@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《彩票後台 - 會員管理改版 PRD》- 6. 單筆會員操作與詳情抽屜</title>
+  <meta name="description" content="680px 一級詳情主抽屜（4大分頁）、560px 二級關聯抽屜（同IP/設備排查）與行操作功能選單。">
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Sticky Bar -->
+  <header class="site-header">
+    <a href="index.html" class="brand-area">
+      <div class="brand-icon">🎰</div>
+      <div class="brand-info">
+        <h1>
+          彩票後台 · 會員管理改版 PRD
+          <span class="badge-tag badge-primary">v1.2.0</span>
+          <span class="badge-tag badge-emerald">已審核通過</span>
+        </h1>
+      </div>
+    </a>
+
+    <div class="header-actions">
+      <!-- Direct Prototype Link -->
+      <a href="https://pm-doc-new-sport.pages.dev/" target="_blank" class="btn btn-primary" id="open-prototype-btn">
+        <span>🚀</span>
+        <span>開啟原型系統</span>
+      </a>
+
+      <!-- Quick Embed Preview Trigger -->
+      <button class="btn btn-outline" onclick="openPrototypeModal('https://pm-doc-new-sport.pages.dev/content.html?mock=normal')">
+        <span>👁️</span>
+        <span>即時預覽</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="app-container">
+
+    <!-- Left Sidebar: TOC -->
+    <aside class="sidebar">
+      <div class="toc-search-box">
+        <span class="toc-search-icon">🔍</span>
+        <input type="text" class="toc-search-input" id="toc-filter" placeholder="搜尋 PRD 章節或關鍵字..." oninput="filterTOC()">
+      </div>
+
+      <nav class="toc-nav">
+        <ul class="toc-list" id="toc-list">
+          <li class="toc-item">
+            <a href="section-1.html" class="toc-link">
+              <span>1. 概述與文檔資訊</span>
+              <span class="toc-badge">01</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-1.html#sec-1-1" class="toc-sublink">1.1 文檔版本紀錄</a></li>
+              <li><a href="section-1.html#sec-1-2" class="toc-sublink">1.2 需求背景與目標</a></li>
+              <li><a href="section-1.html#sec-1-3" class="toc-sublink">1.3 核心使用者角色與場景</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-2.html" class="toc-link">
+              <span>2. 全局通用設計規範</span>
+              <span class="toc-badge">02</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-2.html#sec-2-1" class="toc-sublink">2.1 交互佈局改版區塊說明</a></li>
+              <li><a href="section-2.html#sec-2-2" class="toc-sublink">2.2 交互佈局與組件規範 (抽屜模式)</a></li>
+              <li><a href="section-2.html#sec-2-3" class="toc-sublink">2.3 數據格式化與呈現規範</a></li>
+              <li><a href="section-2.html#sec-2-4" class="toc-sublink">2.4 前端狀態保存機制</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-3.html" class="toc-link">
+              <span>3. 權限管控矩陣</span>
+              <span class="toc-badge">03</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-3.html#sec-3-1" class="toc-sublink">3.1 舊有權限映射表</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-4.html" class="toc-link">
+              <span>4. 上方按鈕與搜尋篩選模塊</span>
+              <span class="toc-badge">04</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-4.html#sec-4-1" class="toc-sublink">4.1 獨立快捷按鈕</a></li>
+              <li><a href="section-4.html#sec-4-2" class="toc-sublink">4.2 批量操作收納選單</a></li>
+              <li><a href="section-4.html#sec-4-3" class="toc-sublink">4.3 批量業務流程與權限</a></li>
+              <li><a href="section-4.html#sec-4-4" class="toc-sublink">4.4 篩選欄位與控制項規格</a></li>
+              <li><a href="section-4.html#sec-4-5" class="toc-sublink">4.5 操作按鈕與動態標籤</a></li>
+              <li><a href="section-4.html#sec-4-6" class="toc-sublink">4.6 特殊篩選與極限情境</a></li>
+              <li><a href="section-4.html#sec-4-7" class="toc-sublink">4.7 篩選欄位權限隱藏機制</a></li>
+              <li><a href="section-4.html#sec-4-8" class="toc-sublink">4.8 自訂篩選欄位</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-5.html" class="toc-link">
+              <span>5. 數據列表與卡片展示模塊</span>
+              <span class="toc-badge">05</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-5.html#sec-5-1" class="toc-sublink">5.1 視圖模式切換 (列表/巢狀)</a></li>
+              <li><a href="section-5.html#sec-5-2" class="toc-sublink">5.2 自訂欄位與卡片配置</a></li>
+              <li><a href="section-5.html#sec-5-3" class="toc-sublink">5.3 一級欄位定義與特殊展示</a></li>
+              <li><a href="section-5.html#sec-5-3-2" class="toc-sublink">5.3.2 列表模式展開卡片規格</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-6.html" class="toc-link active">
+              <span>6. 單筆會員操作與詳情抽屜</span>
+              <span class="toc-badge">06</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="#sec-6-1" class="toc-sublink">6.1 編輯用戶抽屜 (基本信息/設置)</a></li>
+              <li><a href="#sec-6-2" class="toc-sublink">6.2 會員詳情抽屜 (4大分頁)</a></li>
+              <li><a href="#sec-6-3" class="toc-sublink">6.3 二級抽屜互動機制 (同IP/設備)</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-7.html" class="toc-link">
+              <span>7. 介面狀態規範</span>
+              <span class="toc-badge">07</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-7.html#sec-7-1" class="toc-sublink">7.1 正常狀態 (Normal State)</a></li>
+              <li><a href="section-7.html#sec-7-2" class="toc-sublink">7.2 無數據狀態 (Empty State)</a></li>
+              <li><a href="section-7.html#sec-7-3" class="toc-sublink">7.3 極限狀態 (Edge / Extreme State)</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-8.html" class="toc-link">
+              <span>8. 附錄：欄位字典與數據定義</span>
+              <span class="toc-badge">08</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-8.html#sec-8-1" class="toc-sublink">8.1 基礎帳號與狀態 (12項)</a></li>
+              <li><a href="section-8.html#sec-8-2" class="toc-sublink">8.2 等級與額度 (7項)</a></li>
+              <li><a href="section-8.html#sec-8-3" class="toc-sublink">8.3 財務與資金流水 (13項)</a></li>
+              <li><a href="section-8.html#sec-8-4" class="toc-sublink">8.4 關係、推薦與軌跡 (8項)</a></li>
+              <li><a href="section-8.html#sec-8-5" class="toc-sublink">8.5 備註欄位 (2項)</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content-area">
+
+      <!-- Breadcrumb Bar -->
+      <div class="breadcrumb-bar">
+        <a href="index.html">首頁總覽</a>
+        <span class="breadcrumb-separator">/</span>
+        <span>PRD 模塊</span>
+        <span class="breadcrumb-separator">/</span>
+        <span style="color: var(--text-main); font-weight: 600;">6. 單筆會員操作與詳情抽屜</span>
+      </div>
+
+      <!-- SECTION CONTENT -->
+<section id="section-6" class="section-card">
+        <div class="section-header">
+          <div>
+            <span class="section-number">SECTION 06</span>
+            <h2 class="section-title">6. 單筆會員操作與詳情抽屜</h2>
+          </div>
+          <span class="section-source">對應來源：功能修改對照表 - 操作功能列；權限對照表</span>
+        </div>
+
+        <h3 id="sec-6-1" class="sub-title">6.1 編輯用戶抽屜 (680px)</h3>
+        <p class="paragraph">
+          管理員點擊資料列末端的行操作「編輯」按鈕時，系統自畫面右側向左平滑滑出 <strong>680px 一級抽屜容器</strong>。抽屜內提供會員個人帳號設定與營運參數調整，分設兩大核心頁籤，避免傳統多層覆蓋彈窗造成的視覺干擾。
+        </p>
+
+        <!-- 圖一：編輯用戶抽屜介面示意圖卡片 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+          <div style="padding: 12px 18px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="badge-tag badge-purple">圖一</span>
+              <strong style="font-size: 13.5px; color: var(--text-main);">編輯用戶抽屜介面示意圖 (修改用戶詳情 · 680px)</strong>
+            </div>
+            <a href="drawer_edit_user.png" target="_blank" class="btn btn-sm btn-outline" style="font-size: 11px; padding: 4px 10px;">
+              <span>↗</span><span>開新分頁檢視原圖</span>
+            </a>
+          </div>
+          <div style="padding: 16px; background: #ffffff;">
+            <a href="drawer_edit_user.png" target="_blank" title="點擊檢視編輯用戶抽屜大圖">
+              <img src="drawer_edit_user.png" alt="編輯用戶抽屜介面示意圖" style="width: 100%; height: auto; display: block; border-radius: 6px; cursor: zoom-in; border: 1px solid var(--border-subtle);">
+            </a>
+          </div>
+          <div style="font-size: 12.5px; color: var(--text-subtle); padding: 12px 18px 14px 18px; background: #fafafa; border-top: 1px solid var(--border-subtle); line-height: 1.6;">
+            <strong>截圖特徵解析：</strong> 畫面右側向左滑出 680px 寬度的「修改用戶詳情」抽屜，頂部配有 <code>[取消]</code> 與 <code>[保存修改]</code> 主按鈕、會員身分標籤與狀態燈號；內部提供 <code>基本信息</code> 與 <code>会员设置</code> 雙頁籤，下方表單依業務分類為「賬戶概況」與「聯絡方式」。
+          </div>
+        </div>
+
+        <!-- 6.1 抽屜介面佈局與元件講解 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 20px; margin-bottom: 28px;">
+          <h4 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+            <span>📐</span><span>6.1 編輯用戶抽屜介面佈局與元件詳細說明</span>
+          </h4>
+          
+          <div style="display: flex; flex-direction: column; gap: 16px; font-size: 13px; color: var(--text-muted); line-height: 1.7;">
+            <div>
+              <strong style="color: var(--text-main);">1. 頂部標頭與操作控制列</strong><br>
+              • <strong>標題與身分標識</strong>：動態呈現 <code>修改用户详情 · {會員帳號}</code>（如 <code>mingv0717001</code>），並隨附身分標籤（如 <span class="badge-tag badge-primary" style="font-size: 11px;">代理会员</span>、<span class="badge-tag badge-purple" style="font-size: 11px;">VIP会员</span>）。<br>
+              • <strong>即時狀態指示</strong>：以狀態點呈現當前運作狀態（以顏色區分：正常 / 凍結 / 停用）。<br>
+              • <strong>右側操作按鈕</strong>：
+              <ul style="padding-left: 20px; margin-top: 4px; margin-bottom: 0;">
+                <li><code>[取消]</code>：放棄本次編輯輸入，平滑關閉抽屜還原原樣。</li>
+                <li><code>[保存修改]</code>：主操作按鈕（以顏色區分主次操作），觸發資料校驗並提交後端 API，成功後即時刷新主列表並關閉抽屜。</li>
+              </ul>
+            </div>
+
+            <div>
+              <strong style="color: var(--text-main);">2. 雙核心頁籤切換 (Tabs)</strong><br>
+              • <strong style="color: var(--primary);">基本信息 (Default Tab)</strong>：涵蓋帳號核心識別身分、狀態切換與多渠道通訊方式。<br>
+              • <strong>会员设置</strong>：涵蓋金流通道指定（支付層級）、標籤多選綁定、提款黑名單限制開關、賠率與返點單獨微調（連動返點權限）。
+            </div>
+
+            <div>
+              <strong style="color: var(--text-main);">3. 「基本信息」分區欄位規格詳解</strong>
+              <div class="table-container" style="margin-top: 8px; margin-bottom: 0;">
+                <table class="data-table" style="font-size: 12.5px;">
+                  <thead>
+                    <tr>
+                      <th style="width: 140px;">分區名稱</th>
+                      <th style="width: 150px;">欄位名稱</th>
+                      <th style="width: 180px;">元件型態</th>
+                      <th>業務規範與互動邏輯</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td rowspan="8"><strong>賬戶概況</strong><br><small style="color: var(--text-subtle);">帳號、狀態、會員類型、等級</small></td>
+                      <td><strong>账号</strong></td>
+                      <td><span class="code-pill">唯讀文字框</span></td>
+                      <td>會員系統主鍵代號，不可手動修改，維持資料一致性。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>会员类型</strong></td>
+                      <td><span class="code-pill">唯讀文字框</span></td>
+                      <td>展示該會員身分屬性（如代理會員、直屬會員）。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>账户状态</strong></td>
+                      <td><span class="code-pill">三段分段按鈕 (Segmented)</span></td>
+                      <td>提供 <code>[ 正常 ]</code>、<code>[ 冻结 ]</code>、<code>[ 停用 ]</code> 快捷點選切換，選中項以顏色區分。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>用户昵称</strong></td>
+                      <td><span class="code-pill">單行輸入框</span></td>
+                      <td>支援管理員手動微調暱稱，同步更新前台展示。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>真实姓名</strong></td>
+                      <td><span class="code-pill">單行輸入框</span></td>
+                      <td>實名認證姓名；無資料時填寫顯示 <code>-</code>。需具備『修改真實姓名』權限方可解鎖編輯。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>出生年月日</strong></td>
+                      <td><span class="code-pill">日曆選擇器 (DatePicker)</span></td>
+                      <td>格式為 <code>YYYY/MM/DD</code>，支援手動輸入或點擊日曆圖示選取會員出生日期。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>用户等级</strong></td>
+                      <td><span class="code-pill">下拉選擇器</span></td>
+                      <td>支援指定特定 VIP 會員等級（如 VIP會員、一般會員）。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>支付层级</strong></td>
+                      <td><span class="code-pill">下拉選擇器</span></td>
+                      <td>指派該會員所屬之存提款金流層級（如預設層、大額VIP通道層）。</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="6"><strong>聯絡方式</strong><br><small style="color: var(--text-subtle);">敏感通訊渠道</small></td>
+                      <td><strong>电话</strong></td>
+                      <td><span class="code-pill">輸入框 + [校验] 按鈕</span></td>
+                      <td>輸入手機號碼，右側附帶 <code>[校验]</code> 按鈕供排查號碼格式與是否重複綁定。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>email</strong></td>
+                      <td><span class="code-pill">單行輸入框</span></td>
+                      <td>輸入電子郵箱，支援標準 Email 正則格式校驗。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>QQ</strong></td>
+                      <td><span class="code-pill">單行輸入框</span></td>
+                      <td>會員綁定之 QQ 號碼維護。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>微信</strong></td>
+                      <td><span class="code-pill">單行輸入框</span></td>
+                      <td>會員綁定之微信號（WeChat ID）維護。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Zalo</strong></td>
+                      <td><span class="code-pill">單行輸入框</span></td>
+                      <td>東南亞市場專用通訊帳號維護。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>WhatsApp</strong></td>
+                      <td><span class="code-pill">單行輸入框</span></td>
+                      <td>國際通訊電話號碼維護。</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 id="sec-6-2" class="sub-title">6.2 會員詳情抽屜 (680px)</h3>
+        <p class="paragraph">
+          點擊行操作「詳情」時自右側滑出 <strong>680px 完整會員檔案抽屜</strong>。詳情抽屜整合會員全生命週期數據，採用卡片式封裝，分為 4 個專業 Tab 頁籤，供管理員快速查核與風控審計。
+        </p>
+
+        <!-- 圖二：會員詳情抽屜介面示意圖卡片 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+          <div style="padding: 12px 18px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="badge-tag badge-purple">圖二</span>
+              <strong style="font-size: 13.5px; color: var(--text-main);">會員詳情抽屜介面示意圖 (查看詳情 · 680px)</strong>
+            </div>
+            <a href="drawer_detail_user.png" target="_blank" class="btn btn-sm btn-outline" style="font-size: 11px; padding: 4px 10px;">
+              <span>↗</span><span>開新分頁檢視原圖</span>
+            </a>
+          </div>
+          <div style="padding: 16px; background: #ffffff;">
+            <a href="drawer_detail_user.png" target="_blank" title="點擊檢視會員詳情抽屜大圖">
+              <img src="drawer_detail_user.png" alt="會員詳情抽屜介面示意圖" style="width: 100%; height: auto; display: block; border-radius: 6px; cursor: zoom-in; border: 1px solid var(--border-subtle);">
+            </a>
+          </div>
+          <div style="font-size: 12.5px; color: var(--text-subtle); padding: 12px 18px 14px 18px; background: #fafafa; border-top: 1px solid var(--border-subtle); line-height: 1.6;">
+            <strong>截圖特徵解析：</strong> 畫面右側滑出 680px「查看詳情」抽屜，頂部配有快速關閉 <code>✕</code> 圖示、身分標籤與狀態指示；分設 <code>会员信息</code>、<code>会员审核</code>、<code>提现信息</code>、<code>设备与IP纪录</code> 四大頁籤；內容區採卡片呈現「基本資料」與完整 8 大維度「聯絡方式」，無資料處統一規範顯示 <code>"-"</code>（以顏色區分弱化）。
+          </div>
+        </div>
+
+        <!-- 6.2 詳情抽屜介面佈局與元件講解 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 20px; margin-bottom: 28px;">
+          <h4 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+            <span>📋</span><span>6.2 會員詳情抽屜四大頁籤與卡片展示說明</span>
+          </h4>
+
+          <!-- 四大 Tab 功能盒子 -->
+          <div class="grid-4" style="margin-bottom: 20px;">
+            <div class="feature-box">
+              <div class="feature-title">👤 1. 會員信息</div>
+              <div class="feature-desc" style="font-size: 12px; margin-top: 6px;">
+                <strong>預設頁籤</strong>。頭像、身分識別、出生年月日、完整 8 大聯絡通訊矩陣、備註紀錄。
+              </div>
+            </div>
+            <div class="feature-box">
+              <div class="feature-title">📝 2. 會員審核</div>
+              <div class="feature-desc" style="font-size: 12px; margin-top: 6px;">
+                <strong>連動『会员信息审核』權限</strong>。集中審核會員申請之姓名修改、手機解綁、歷史審核日誌。
+              </div>
+            </div>
+            <div class="feature-box">
+              <div class="feature-title">💳 3. 提現信息</div>
+              <div class="feature-desc" style="font-size: 12px; margin-top: 6px;">
+                綁定銀行卡清單（增/刪/改/禁用）、USDT提現地址、累計提款次數與限額。
+              </div>
+            </div>
+            <div class="feature-box">
+              <div class="feature-title">🌐 4. 設備與IP紀錄</div>
+              <div class="feature-desc" style="font-size: 12px; margin-top: 6px;">
+                註冊/登入 IP 地理位置、UserAgent、同 IP 關聯帳號數、同設備關聯帳號數（支援穿透至二級抽屜）。
+              </div>
+            </div>
+          </div>
+
+          <!-- 詳細卡片規格解析 -->
+          <div style="display: flex; flex-direction: column; gap: 14px; font-size: 13px; color: var(--text-muted); line-height: 1.7;">
+            <div style="border-left: 3px solid var(--primary); padding-left: 12px;">
+              <strong style="color: var(--text-main);">基本資料卡片 (Basic Info Card)</strong><br>
+              • <strong>頭像展示</strong>：左側展示圓形會員頭像（未上傳時呈現預設人物頭像輪廓）。<br>
+              • <strong>雙列資訊膠囊</strong>：右側採用資訊卡片，成對呈現「用戶暱稱 / 帳號」、「真實姓名 / 出生年月日」。<br>
+              • <strong>空值展示規範</strong>：真實姓名若未綁定，一律顯性顯示 <code>"-"</code>（以顏色區分弱化），嚴禁空白留白。
+            </div>
+
+            <div style="border-left: 3px solid var(--purple); padding-left: 12px;">
+              <strong style="color: var(--text-main);">聯絡方式卡片 (Contact Methods - 8 大維度矩陣)</strong><br>
+              • <strong>涵蓋管道</strong>：雙欄網格依序陳列 <code>电话</code>、<code>Email</code>、<code>QQ</code>、<code>微信 (WeChat)</code>、<code>Zalo</code>、<code>WhatsApp</code>、<code>Telegram</code>、<code>Facebook</code>。<br>
+              • <strong>統一安全脫敏與空值表現</strong>：未填寫或無綁定數據之管道，欄位框內部統一展示 <code>"-"</code>（以顏色區分弱化），杜絕舊版粗暴留白問題；具備資料者依後台敏感資訊查看權限進行加密脫敏或明文呈現。
+            </div>
+
+            <div style="border-left: 3px solid var(--emerald); padding-left: 12px;">
+              <strong style="color: var(--text-main);">備註與營運紀錄 (Remarks)</strong><br>
+              • 展示該會員歷次電銷跟進、風控加註、客服諮詢等歷史備註文字，支援超過長度截斷與展開完整歷程。
+            </div>
+          </div>
+        </div>
+
+        <h3 id="sec-6-3" class="sub-title">6.3 二級抽屜互動機制 (560px)</h3>
+        <p class="paragraph">
+          為了解決多帳號刷水、同設備多開或同 IP 關聯群組的風控排查痛點，系統創新設計<strong>「一級抽屜 (680px) + 二級抽屜 (560px)」雙層抽屜穿透互動架構</strong>。操作員在審查特定會員時，無須關閉當前抽屜或跳轉新頁籤，即可快速深挖關聯風控大數據。
+        </p>
+
+        <!-- 圖三：二級抽屜互動機制介面示意圖卡片 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+          <div style="padding: 12px 18px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="badge-tag badge-purple">示意圖</span>
+              <strong style="font-size: 13.5px; color: var(--text-main);">二級抽屜互動機制介面示意圖 (一級詳情 680px + 二級關聯穿透 560px)</strong>
+            </div>
+            <a href="drawer_secondary_interaction.png" target="_blank" class="btn btn-sm btn-outline" style="font-size: 11px; padding: 4px 10px;">
+              <span>↗</span><span>開新分頁檢視原圖</span>
+            </a>
+          </div>
+          <div style="padding: 16px; background: #ffffff;">
+            <a href="drawer_secondary_interaction.png" target="_blank" title="點擊檢視二級抽屜互動大圖">
+              <img src="drawer_secondary_interaction.png" alt="二級抽屜互動機制介面示意圖" style="width: 100%; height: auto; display: block; border-radius: 6px; cursor: zoom-in; border: 1px solid var(--border-subtle);">
+            </a>
+          </div>
+          <div style="font-size: 12.5px; color: var(--text-subtle); padding: 12px 18px 14px 18px; background: #fafafa; border-top: 1px solid var(--border-subtle); line-height: 1.6;">
+            <strong>截圖特徵解析：</strong> 中間為 680px「查看詳情」一級抽屜，處於 <code>设备与IP纪录</code> 頁籤，卡片內列出最新登入/註冊之 IP 與設備號，並標註可點擊的「同IP人數」與「同設備人數」（以顏色區分連結樣式）；點擊後自一級抽屜右側滑出 560px「詳細內容」二級抽屜，表格逐筆列出關聯登入用戶、最後登入時間、IP 與地理定位資訊。
+          </div>
+        </div>
+
+        <div class="callout callout-success" style="margin-bottom: 22px;">
+          <div>🔍</div>
+          <div>
+            <strong>同 IP / 同設備穿透分析交互：</strong><br>
+            在詳情抽屜的「設備與IP紀錄」頁籤中，點擊 <span class="code-pill">同IP人數: 60人</span> 或 <span class="code-pill">同設備數: 28台</span> 標籤時，<strong>自一級抽屜右側滑出 560px 二級關聯抽屜</strong>，即刻展開該組 IP/設備所關聯之其他會員名單、登入時間與 IP 地理分佈，無須跳轉離開當前會員詳情。
+          </div>
+        </div>
+
+        <!-- 6.3 二級抽屜詳細機制解析 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 20px; margin-bottom: 28px;">
+          <h4 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+            <span>⚡</span><span>6.3 二級抽屜架構與互動詳細規範</span>
+          </h4>
+
+          <div style="display: flex; flex-direction: column; gap: 16px; font-size: 13px; color: var(--text-muted); line-height: 1.7;">
+            <div>
+              <strong style="color: var(--text-main);">1. 穿透觸發入口與數據分區</strong><br>
+              • <strong>觸發位置</strong>：位於一級詳情抽屜的「設備與IP紀錄」頁籤。<br>
+              • <strong>數據卡片結構</strong>：分為「最新登入紀錄」與「註冊紀錄」兩張獨立卡片，各自包含：
+              <ul style="padding-left: 20px; margin-top: 4px; margin-bottom: 0;">
+                <li><code>IP 地址</code>：展示 IP 字串（如 <code>54.150.111.152</code>）、地理歸屬（如 <code>Japan, Tokyo</code>），並配有一鍵複製按鈕與關聯圖示。</li>
+                <li><code>設備號</code>：展示設備唯一指紋代碼（UUID/Hash），配有外部跳轉/關聯圖示。</li>
+                <li><code>同IP人數 / 同設備人數</code>：以數字連結形式呈現（如 <code>60</code>、<code>28</code>、<code>18</code>，以顏色區分連結樣式）。滑鼠懸停顯示點擊提示，點擊立即喚出二級抽屜。</li>
+              </ul>
+            </div>
+
+            <div>
+              <strong style="color: var(--text-main);">2. 二級抽屜介面佈局與表格規格 (560px)</strong><br>
+              • <strong>寬度與外觀</strong>：二級抽屜固定寬度為 <strong>560px</strong>，頂部標題列（標題：<code>詳細內容</code>，以顏色區分抽屜層級），右上角配置向右收起箭頭圖示（<code>→</code>）。<br>
+              • <strong>關聯列表數據欄位</strong>：
+              <div class="table-container" style="margin-top: 8px; margin-bottom: 0;">
+                <table class="data-table" style="font-size: 12.5px;">
+                  <thead>
+                    <tr>
+                      <th style="width: 140px;">列表欄位</th>
+                      <th style="width: 110px;">資料屬性</th>
+                      <th>功能互動與業務說明</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>登录用户</strong></td>
+                      <td><span class="code-pill">會員帳號</span></td>
+                      <td>列出共享該 IP 或設備的所有會員帳號（如 <code>test_user_5</code>、<code>test_user_5_1</code> ...）。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>最后登录时间</strong></td>
+                      <td><span class="code-pill">日期時間 ⇅</span></td>
+                      <td>格式為 <code>YYYY-MM-DD HH:mm:ss</code>，表頭支援點擊依時間升序/降序排列。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>IP</strong></td>
+                      <td><span class="code-pill">網路位址</span></td>
+                      <td>顯示該用戶實際登入之 IP，右側配有一鍵複製圖示。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>IP信息</strong></td>
+                      <td><span class="code-pill">地理定位</span></td>
+                      <td>顯示國家與城市地理位置（如 <code>📍 Japan, Tokyo</code>），快速定位跨區登入風險。</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div>
+              <strong style="color: var(--text-main);">3. 層級堆疊與關閉控制邏輯</strong><br>
+              • <strong>獨立收起二級抽屜</strong>：點擊二級抽屜右上角 <code>→</code> 箭頭圖示或鍵盤按 <code>Esc</code>，僅向右滑出關閉二級抽屜，一級詳情抽屜<strong>保持原有位置與頁籤狀態不變</strong>。<br>
+              • <strong>全局快速關閉</strong>：點擊一級抽屜右上角 <code>✕</code> 或點擊左側底層遮罩區域，系統<strong>同時關閉一級與二級抽屜</strong>，一秒還原主資料列表。
+            </div>
+          </div>
+        </div>
+
+        <h3 id="sec-6-4" class="sub-title">6.4 行操作快捷功能選單</h3>
+        <p class="paragraph">
+          每列會員末端設有「編輯」、「詳情」及「更多 ▾」快捷選單。收納高頻業務：
+        </p>
+        <div class="grid-3">
+          <div class="feature-box"><div class="feature-title">📈 返點與賠率配置</div><div class="feature-desc">單獨調整該彩票用戶彩種盤口與返點比例</div></div>
+          <div class="feature-box"><div class="feature-title">🧾 資金明細與注單明細</div><div class="feature-desc">跳轉/彈層帶入該用戶ID進行充提與投注對帳</div></div>
+          <div class="feature-box"><div class="feature-title">🧹 稽核清除與強制下線</div><div class="feature-desc">連動權限，手動清除流水稽核或踢除在線 Token</div></div>
+        </div>
+      </section>
+
+        <!-- Page Navigation Buttons -->
+        <div class="page-nav-bar">
+          <a href="section-5.html" class="page-nav-btn prev">
+            <span style="font-size: 18px;">←</span>
+            <div>
+              <span class="page-nav-subtitle">上一章 (Previous)</span>
+              <span class="page-nav-title">5. 數據列表與卡片展示模塊</span>
+            </div>
+          </a>
+          <a href="section-7.html" class="page-nav-btn next">
+            <div>
+              <span class="page-nav-subtitle">下一章 (Next)</span>
+              <span class="page-nav-title">7. 介面狀態規範</span>
+            </div>
+            <span style="font-size: 18px;">→</span>
+          </a>
+        </div>
+
+    </main>
+  </div>
+
+  <!-- Prototype Interactive Modal Preview -->
+  <div class="modal-overlay" id="prototype-modal" onclick="closePrototypeModal(event)">
+    <div class="modal-window" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 16px;">🖥️</span>
+          <span style="font-weight: 700; font-size: 14px;" id="modal-title">彩票會員管理原型預覽 (Prototype Live Preview)</span>
+          <span class="badge-tag badge-primary" id="modal-state-badge">NORMAL STATE</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <button class="btn btn-sm btn-outline" onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=normal')">🟢 正常</button>
+          <button class="btn btn-sm btn-outline" onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=nodata&mode=nested')">📭 無數據</button>
+          <button class="btn btn-sm btn-outline" onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=extreme&mode=nested')">⚡ 極限</button>
+          <a href="https://pm-doc-new-sport.pages.dev/" target="_blank" class="btn btn-sm btn-primary">在新視窗開啟 ↗</a>
+          <button class="icon-btn" onclick="closePrototypeModal()" style="width: 28px; height: 28px; font-size: 14px;">✕</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <iframe id="prototype-iframe" src="" title="Prototype Sandbox"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top Floating Button -->
+  <button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="回到頂部">
+    ↑
+  </button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

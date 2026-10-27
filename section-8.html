@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《彩票後台 - 會員管理改版 PRD》- 8. 附錄：欄位字典與數據定義</title>
+  <meta name="description" content="彩票後台 42 項全欄位字典表：基礎帳號、等級信用、財務錢包、關係軌跡、備註與分類篩選。">
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Sticky Bar -->
+  <header class="site-header">
+    <a href="index.html" class="brand-area">
+      <div class="brand-icon">🎰</div>
+      <div class="brand-info">
+        <h1>
+          彩票後台 · 會員管理改版 PRD
+          <span class="badge-tag badge-primary">v1.2.0</span>
+          <span class="badge-tag badge-emerald">已審核通過</span>
+        </h1>
+      </div>
+    </a>
+
+    <div class="header-actions">
+      <!-- Direct Prototype Link -->
+      <a href="https://pm-doc-new-sport.pages.dev/" target="_blank" class="btn btn-primary" id="open-prototype-btn">
+        <span>🚀</span>
+        <span>開啟原型系統</span>
+      </a>
+
+      <!-- Quick Embed Preview Trigger -->
+      <button class="btn btn-outline" onclick="openPrototypeModal('https://pm-doc-new-sport.pages.dev/content.html?mock=normal')">
+        <span>👁️</span>
+        <span>即時預覽</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="app-container">
+
+    <!-- Left Sidebar: TOC -->
+    <aside class="sidebar">
+      <div class="toc-search-box">
+        <span class="toc-search-icon">🔍</span>
+        <input type="text" class="toc-search-input" id="toc-filter" placeholder="搜尋 PRD 章節或關鍵字..." oninput="filterTOC()">
+      </div>
+
+      <nav class="toc-nav">
+        <ul class="toc-list" id="toc-list">
+          <li class="toc-item">
+            <a href="section-1.html" class="toc-link">
+              <span>1. 概述與文檔資訊</span>
+              <span class="toc-badge">01</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-1.html#sec-1-1" class="toc-sublink">1.1 文檔版本紀錄</a></li>
+              <li><a href="section-1.html#sec-1-2" class="toc-sublink">1.2 需求背景與目標</a></li>
+              <li><a href="section-1.html#sec-1-3" class="toc-sublink">1.3 核心使用者角色與場景</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-2.html" class="toc-link">
+              <span>2. 全局通用設計規範</span>
+              <span class="toc-badge">02</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-2.html#sec-2-1" class="toc-sublink">2.1 交互佈局改版區塊說明</a></li>
+              <li><a href="section-2.html#sec-2-2" class="toc-sublink">2.2 交互佈局與組件規範 (抽屜模式)</a></li>
+              <li><a href="section-2.html#sec-2-3" class="toc-sublink">2.3 數據格式化與呈現規範</a></li>
+              <li><a href="section-2.html#sec-2-4" class="toc-sublink">2.4 前端狀態保存機制</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-3.html" class="toc-link">
+              <span>3. 權限管控矩陣</span>
+              <span class="toc-badge">03</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-3.html#sec-3-1" class="toc-sublink">3.1 舊有權限映射表</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-4.html" class="toc-link">
+              <span>4. 上方按鈕與搜尋篩選模塊</span>
+              <span class="toc-badge">04</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-4.html#sec-4-1" class="toc-sublink">4.1 獨立快捷按鈕</a></li>
+              <li><a href="section-4.html#sec-4-2" class="toc-sublink">4.2 批量操作收納選單</a></li>
+              <li><a href="section-4.html#sec-4-3" class="toc-sublink">4.3 批量業務流程與權限</a></li>
+              <li><a href="section-4.html#sec-4-4" class="toc-sublink">4.4 篩選欄位與控制項規格</a></li>
+              <li><a href="section-4.html#sec-4-5" class="toc-sublink">4.5 操作按鈕與動態標籤</a></li>
+              <li><a href="section-4.html#sec-4-6" class="toc-sublink">4.6 特殊篩選與極限情境</a></li>
+              <li><a href="section-4.html#sec-4-7" class="toc-sublink">4.7 篩選欄位權限隱藏機制</a></li>
+              <li><a href="section-4.html#sec-4-8" class="toc-sublink">4.8 自訂篩選欄位</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-5.html" class="toc-link">
+              <span>5. 數據列表與卡片展示模塊</span>
+              <span class="toc-badge">05</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-5.html#sec-5-1" class="toc-sublink">5.1 視圖模式切換 (列表/巢狀)</a></li>
+              <li><a href="section-5.html#sec-5-2" class="toc-sublink">5.2 自訂欄位與卡片配置</a></li>
+              <li><a href="section-5.html#sec-5-3" class="toc-sublink">5.3 一級欄位定義與特殊展示</a></li>
+              <li><a href="section-5.html#sec-5-3-2" class="toc-sublink">5.3.2 列表模式展開卡片規格</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-6.html" class="toc-link">
+              <span>6. 單筆會員操作與詳情抽屜</span>
+              <span class="toc-badge">06</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-6.html#sec-6-1" class="toc-sublink">6.1 編輯用戶抽屜 (基本信息/設置)</a></li>
+              <li><a href="section-6.html#sec-6-2" class="toc-sublink">6.2 會員詳情抽屜 (4大分頁)</a></li>
+              <li><a href="section-6.html#sec-6-3" class="toc-sublink">6.3 二級抽屜互動機制 (同IP/設備)</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-7.html" class="toc-link">
+              <span>7. 介面狀態規範</span>
+              <span class="toc-badge">07</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-7.html#sec-7-1" class="toc-sublink">7.1 正常狀態 (Normal State)</a></li>
+              <li><a href="section-7.html#sec-7-2" class="toc-sublink">7.2 無數據狀態 (Empty State)</a></li>
+              <li><a href="section-7.html#sec-7-3" class="toc-sublink">7.3 極限狀態 (Edge / Extreme State)</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-8.html" class="toc-link active">
+              <span>8. 附錄：欄位字典與數據定義</span>
+              <span class="toc-badge">08</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="#sec-8-1" class="toc-sublink">8.1 基礎帳號與狀態 (12項)</a></li>
+              <li><a href="#sec-8-2" class="toc-sublink">8.2 等級與額度 (7項)</a></li>
+              <li><a href="#sec-8-3" class="toc-sublink">8.3 財務與資金流水 (13項)</a></li>
+              <li><a href="#sec-8-4" class="toc-sublink">8.4 關係、推薦與軌跡 (8項)</a></li>
+              <li><a href="#sec-8-5" class="toc-sublink">8.5 備註欄位 (2項)</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content-area">
+
+      <!-- Breadcrumb Bar -->
+      <div class="breadcrumb-bar">
+        <a href="index.html">首頁總覽</a>
+        <span class="breadcrumb-separator">/</span>
+        <span>PRD 模塊</span>
+        <span class="breadcrumb-separator">/</span>
+        <span style="color: var(--text-main); font-weight: 600;">8. 附錄：欄位字典與數據定義</span>
+      </div>
+
+      <!-- SECTION CONTENT -->
+<section id="section-8" class="section-card">
+        <div class="section-header">
+          <div>
+            <span class="section-number">SECTION 08</span>
+            <h2 class="section-title">8. 附錄：欄位字典與數據定義</h2>
+          </div>
+          <span class="section-source">對應來源：彩票欄位定義 (42 個標準欄位)</span>
+        </div>
+
+        <p class="paragraph">
+          以下收錄彩票會員後台全部 42 個標準欄位之代號、類型、展示規則與權限要求，可利用下方標籤快速分類檢視：
+        </p>
+
+        <!-- Interactive Category Filter Tabs -->
+        <div class="field-filter-bar">
+          <div class="filter-tab-group" id="field-tabs">
+            <button class="filter-tab active" onclick="filterFieldTable('all')">全部欄位 (42)</button>
+            <button class="filter-tab" onclick="filterFieldTable('basic')">8.1 基礎與帳號 (12)</button>
+            <button class="filter-tab" onclick="filterFieldTable('level')">8.2 等級成長與信用 (7)</button>
+            <button class="filter-tab" onclick="filterFieldTable('finance')">8.3 財務錢包與交易 (13)</button>
+            <button class="filter-tab" onclick="filterFieldTable('relation')">8.4 關係軌跡與時間 (7)</button>
+            <button class="filter-tab" onclick="filterFieldTable('remark')">8.5 備註欄位 (2)</button>
+          </div>
+          <input type="text" class="field-search-input" id="field-keyword" placeholder="篩選欄位名稱/代號..." oninput="searchFieldTable()">
+        </div>
+
+        <div class="table-container">
+          <table class="data-table" id="field-dictionary-table">
+            <thead>
+              <tr>
+                <th>編號</th>
+                <th>分類維度</th>
+                <th>欄位名稱</th>
+                <th>欄位代號 (Key)</th>
+                <th>數據類型</th>
+                <th>展示規則與預設值</th>
+                <th>權限與編輯要求</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- 7.1 Basic (12) -->
+              <tr data-cat="basic"><td>01</td><td>基礎與帳號</td><td><strong>用户ID</strong></td><td><span class="code-pill">user_id</span></td><td>Integer</td><td>唯一鍵，不可空，點擊可複製</td><td>唯讀，系統生成</td></tr>
+              <tr data-cat="basic"><td>02</td><td>基礎與帳號</td><td><strong>会员名</strong></td><td><span class="code-pill">username</span></td><td>String</td><td>帳號唯一標識，防折行 Tooltip</td><td>唯讀，註冊後不可改</td></tr>
+              <tr data-cat="basic"><td>03</td><td>基礎與帳號</td><td><strong>在线状态</strong></td><td><span class="code-pill">is_online</span></td><td>Boolean</td><td>在線狀態指示點（以顏色區分：在線 / 離線），與頭像合併</td><td>即時心跳更新</td></tr>
+              <tr data-cat="basic"><td>04</td><td>基礎與帳號</td><td><strong>状态</strong></td><td><span class="code-pill">status</span></td><td>Enum</td><td>正常/凍結/禁用/停權徽章</td><td>連動『修改會員狀態』權限</td></tr>
+              <tr data-cat="basic"><td>05</td><td>基礎與帳號</td><td><strong>头像</strong></td><td><span class="code-pill">avatar</span></td><td>String (URL)</td><td>圓形縮圖 32x32，預設預設頭像</td><td>支援抽屜上傳替換</td></tr>
+              <tr data-cat="basic"><td>06</td><td>基礎與帳號</td><td><strong>真实姓名</strong></td><td><span class="code-pill">real_name</span></td><td>String</td><td>無數據顯示 "N/A"（以顏色區分），脫敏掩碼</td><td>連動『會員審核』解鎖置灰</td></tr>
+              <tr data-cat="basic"><td>07</td><td>基礎與帳號</td><td><strong>暱称</strong></td><td><span class="code-pill">nickname</span></td><td>String</td><td>無數據顯示 "N/A"（以顏色區分）</td><td>可直接編輯</td></tr>
+              <tr data-cat="basic"><td>08</td><td>基礎與帳號</td><td><strong>代理</strong></td><td><span class="code-pill">agent_name</span></td><td>String</td><td>所屬上級代理帳號</td><td>連動『批量/單筆轉移代理』</td></tr>
+              <tr data-cat="basic"><td>09</td><td>基礎與帳號</td><td><strong>注册模式</strong></td><td><span class="code-pill">reg_mode</span></td><td>Enum</td><td>自生註冊 / 後台代開 / 邀請碼開戶</td><td>唯讀日誌追溯</td></tr>
+              <tr data-cat="basic"><td>10</td><td>基礎與帳號</td><td><strong>帐号类型</strong></td><td><span class="code-pill">account_type</span></td><td>Enum</td><td>正式會員 / 測試帳號 / 代理帳號</td><td>連動後台權限</td></tr>
+              <tr data-cat="basic"><td>11</td><td>基礎與帳號</td><td><strong>会员类型</strong></td><td><span class="code-pill">member_type</span></td><td>Enum</td><td>普通 / VIP / 大客戶</td><td>權限控制</td></tr>
+              <tr data-cat="basic"><td>12</td><td>基礎與帳號</td><td><strong>标签</strong></td><td><span class="code-pill">tags</span></td><td>Array</td><td>Tag 標籤展示（以顏色區分），超 3 個摺疊 (+N)</td><td>連動『管理會員標籤』權限</td></tr>
+
+              <!-- 7.2 Level (7) -->
+              <tr data-cat="level"><td>13</td><td>等級與信用</td><td><strong>支付层级</strong></td><td><span class="code-pill">payment_tier</span></td><td>String</td><td>標識所屬存取款通道分流群組</td><td>連動『會員設置』權限</td></tr>
+              <tr data-cat="level"><td>14</td><td>等級與信用</td><td><strong>成长值</strong></td><td><span class="code-pill">growth_score</span></td><td>Integer</td><td>千分位展示，0顯性為 "0"</td><td>系統依流水自動計算</td></tr>
+              <tr data-cat="level"><td>15</td><td>等級與信用</td><td><strong>等级</strong></td><td><span class="code-pill">level</span></td><td>Integer</td><td>普通會員等級 Lv.1 ~ Lv.10</td><td>常態展示</td></tr>
+              <tr data-cat="level"><td>16</td><td>等級與信用</td><td><strong>VIP等级</strong></td><td><span class="code-pill">vip_level</span></td><td>String</td><td>VIP徽章 (VIP0 ~ VIP12)</td><td>連動『VIP調級』權限</td></tr>
+              <tr data-cat="level"><td>17</td><td>等級與信用</td><td><strong>VIP成长值</strong></td><td><span class="code-pill">vip_growth</span></td><td>Integer</td><td>千分位展示，0顯性展示</td><td>自動升級門檻</td></tr>
+              <tr data-cat="level"><td>18</td><td>等級與信用</td><td><strong>信用值</strong></td><td><span class="code-pill">credit_score</span></td><td>Integer</td><td>信用額度信用評分 (0~1000)</td><td>風控綜合評分</td></tr>
+              <tr data-cat="level"><td>19</td><td>等級與信用</td><td><strong>可用额度</strong></td><td><span class="code-pill">available_limit</span></td><td>Decimal</td><td>千分位金額，0顯性為 0.00</td><td>風控專屬維護</td></tr>
+
+              <!-- 7.3 Finance (13) -->
+              <tr data-cat="finance"><td>20</td><td>財務錢包</td><td><strong>佣金余额</strong></td><td><span class="code-pill">commission_bal</span></td><td>Decimal</td><td>千分位金額，0顯性為 0.00</td><td>唯讀流水核對</td></tr>
+              <tr data-cat="finance"><td>21</td><td>財務錢包</td><td><strong>余额宝</strong></td><td><span class="code-pill">yu_e_bao_bal</span></td><td>Decimal</td><td>千分位金額，理財沉澱餘額</td><td>財務帳戶</td></tr>
+              <tr data-cat="finance"><td>22</td><td>財務錢包</td><td><strong>欠款</strong></td><td><span class="code-pill">debt_amount</span></td><td>Decimal</td><td>千分位金額，大於0時醒目提示（以顏色區分）</td><td>風控欠款警報</td></tr>
+              <tr data-cat="finance"><td>23</td><td>財務錢包</td><td><strong>余额宝利息</strong></td><td><span class="code-pill">yu_e_bao_interest</span></td><td>Decimal</td><td>千分位金額，累計派息總額</td><td>財務日誌</td></tr>
+              <tr data-cat="finance"><td>24</td><td>財務錢包</td><td><strong>三方余额</strong></td><td><span class="code-pill">thirdparty_bal</span></td><td>Decimal</td><td>千分位金額，點擊喚起場館彈層</td><td>支援手動單鍵同步餘額</td></tr>
+              <tr data-cat="finance"><td>25</td><td>財務錢包</td><td><strong>会员积分</strong></td><td><span class="code-pill">points</span></td><td>Integer</td><td>千分位整數，0顯性為 0</td><td>積分商城維護</td></tr>
+              <tr data-cat="finance"><td>26</td><td>財務錢包</td><td><strong>存款总额</strong></td><td><span class="code-pill">total_deposit</span></td><td>Decimal</td><td>千分位金額，0顯性為 0.00</td><td>財務報表核心</td></tr>
+              <tr data-cat="finance"><td>27</td><td>財務錢包</td><td><strong>取款总额</strong></td><td><span class="code-pill">total_withdraw</span></td><td>Decimal</td><td>千分位金額，0顯性為 0.00</td><td>財務報表核心</td></tr>
+              <tr data-cat="finance"><td>28</td><td>財務錢包</td><td><strong>提款扣金额</strong></td><td><span class="code-pill">withdraw_deduct</span></td><td>Decimal</td><td>千分位金額，手續費扣除累計</td><td>財務審核項</td></tr>
+              <tr data-cat="finance"><td>29</td><td>財務錢包</td><td><strong>后台扣款总额</strong></td><td><span class="code-pill">manual_deduct</span></td><td>Decimal</td><td>千分位金額，後台手動扣除</td><td>需調款審計授權</td></tr>
+              <tr data-cat="finance"><td>30</td><td>財務錢包</td><td><strong>后台加款总额</strong></td><td><span class="code-pill">manual_add</span></td><td>Decimal</td><td>千分位金額，後台手動上分</td><td>需調款審計授權</td></tr>
+              <tr data-cat="finance"><td>31</td><td>財務錢包</td><td><strong>存款次数</strong></td><td><span class="code-pill">deposit_count</span></td><td>Integer</td><td>整數次數，0顯性為 0</td><td>排除未充值判斷依據</td></tr>
+              <tr data-cat="finance"><td>32</td><td>財務錢包</td><td><strong>取款次数</strong></td><td><span class="code-pill">withdraw_count</span></td><td>Integer</td><td>整數次數，0顯性為 0</td><td>提現風控計數器</td></tr>
+
+              <!-- 7.4 Relation & Trace (7) -->
+              <tr data-cat="relation"><td>33</td><td>關係與軌跡</td><td><strong>邀请码</strong></td><td><span class="code-pill">invite_code</span></td><td>String</td><td>無數據顯示 "N/A"（以顏色區分），帶一鍵複製</td><td>代理推廣鏈結</td></tr>
+              <tr data-cat="relation"><td>34</td><td>關係與軌跡</td><td><strong>邀请人</strong></td><td><span class="code-pill">inviter</span></td><td>String</td><td>無數據顯示 "N/A"（以顏色區分），點擊可下鑽</td><td>邀請關係樹狀</td></tr>
+              <tr data-cat="relation"><td>35</td><td>關係與軌跡</td><td><strong>直属下级/团队数</strong></td><td><span class="code-pill">sub_and_team_cnt</span></td><td>String</td><td>格式: <span class="code-pill">12 / 148</span></td><td>巢狀視圖下鑽標籤</td></tr>
+              <tr data-cat="relation"><td>36</td><td>關係與軌跡</td><td><strong>新增时间</strong></td><td><span class="code-pill">created_at</span></td><td>DateTime</td><td>YYYY-MM-DD HH:mm:ss</td><td>註冊時間標準格式</td></tr>
+              <tr data-cat="relation"><td>37</td><td>關係與軌跡</td><td><strong>最后登录</strong></td><td><span class="code-pill">last_login_at</span></td><td>DateTime</td><td>YYYY-MM-DD HH:mm:ss 或 "N/A"（以顏色區分）</td><td>活躍狀態判定</td></tr>
+              <tr data-cat="relation"><td>38</td><td>關係與軌跡</td><td><strong>离开天数</strong></td><td><span class="code-pill">inactive_days</span></td><td>Integer</td><td>若無登入則顯示離線天數 (天)</td><td>流失預警分析</td></tr>
+              <tr data-cat="relation"><td>39</td><td>關係與軌跡</td><td><strong>登录IP</strong></td><td><span class="code-pill">last_ip</span></td><td>String</td><td>IPv4/IPv6，點擊觸發同IP抽屜</td><td>連動敏感查看權限</td></tr>
+
+              <!-- 7.5 Remarks (2) -->
+              <tr data-cat="remark"><td>40</td><td>備註欄位</td><td><strong>备注</strong></td><td><span class="code-pill">remark</span></td><td>String</td><td>超過20字截斷省略，Hover浮窗</td><td>普通管理員備註</td></tr>
+              <tr data-cat="remark"><td>41</td><td>備註欄位</td><td><strong>回访备注</strong></td><td><span class="code-pill">follow_up_remark</span></td><td>String</td><td>超過20字截斷省略，Hover浮窗</td><td>電銷/客服專屬追蹤</td></tr>
+              <tr data-cat="remark"><td>42</td><td>備註欄位</td><td><strong>備註最後修改時間</strong></td><td><span class="code-pill">remark_updated_at</span></td><td>DateTime</td><td>紀錄誰在何時修改了備註</td><td>稽核溯源</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+        <!-- Page Navigation Buttons -->
+        <div class="page-nav-bar">
+          <a href="section-7.html" class="page-nav-btn prev">
+            <span style="font-size: 18px;">←</span>
+            <div>
+              <span class="page-nav-subtitle">上一章 (Previous)</span>
+              <span class="page-nav-title">7. 介面狀態規範</span>
+            </div>
+          </a>
+          <a href="index.html" class="page-nav-btn next">
+            <div>
+              <span class="page-nav-subtitle">返回 (Back)</span>
+              <span class="page-nav-title">首頁總覽 (Overview)</span>
+            </div>
+            <span style="font-size: 18px;">↗</span>
+          </a>
+        </div>
+
+    </main>
+  </div>
+
+  <!-- Prototype Interactive Modal Preview -->
+  <div class="modal-overlay" id="prototype-modal" onclick="closePrototypeModal(event)">
+    <div class="modal-window" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 16px;">🖥️</span>
+          <span style="font-weight: 700; font-size: 14px;" id="modal-title">彩票會員管理原型預覽 (Prototype Live Preview)</span>
+          <span class="badge-tag badge-primary" id="modal-state-badge">NORMAL STATE</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <button class="btn btn-sm btn-outline" onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=normal')">🟢 正常</button>
+          <button class="btn btn-sm btn-outline" onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=nodata&mode=nested')">📭 無數據</button>
+          <button class="btn btn-sm btn-outline" onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=extreme&mode=nested')">⚡ 極限</button>
+          <a href="https://pm-doc-new-sport.pages.dev/" target="_blank" class="btn btn-sm btn-primary">在新視窗開啟 ↗</a>
+          <button class="icon-btn" onclick="closePrototypeModal()" style="width: 28px; height: 28px; font-size: 14px;">✕</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <iframe id="prototype-iframe" src="" title="Prototype Sandbox"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top Floating Button -->
+  <button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="回到頂部">
+    ↑
+  </button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

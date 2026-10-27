@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《彩票後台 - 會員管理改版 PRD》- 5. 數據列表與卡片展示模塊</title>
+  <meta name="description" content="扁平列表與代理樹狀巢狀視圖切換、自訂欄位顯隱排序、卡片配置與特殊欄位展示。">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- Top Sticky Bar -->
+  <header class="site-header">
+    <a href="index.html" class="brand-area">
+      <div class="brand-icon">🎰</div>
+      <div class="brand-info">
+        <h1>
+          彩票後台 · 會員管理改版 PRD
+          <span class="badge-tag badge-primary">v1.2.0</span>
+          <span class="badge-tag badge-emerald">已審核通過</span>
+        </h1>
+      </div>
+    </a>
+
+    <div class="header-actions">
+      <!-- Direct Prototype Link -->
+      <a href="https://pm-doc-new-sport.pages.dev/" target="_blank" class="btn btn-primary" id="open-prototype-btn">
+        <span>🚀</span>
+        <span>開啟原型系統</span>
+      </a>
+
+      <!-- Quick Embed Preview Trigger -->
+      <button class="btn btn-outline"
+        onclick="openPrototypeModal('https://pm-doc-new-sport.pages.dev/content.html?mock=normal')">
+        <span>👁️</span>
+        <span>即時預覽</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="app-container">
+
+    <!-- Left Sidebar: TOC -->
+    <aside class="sidebar">
+      <div class="toc-search-box">
+        <span class="toc-search-icon">🔍</span>
+        <input type="text" class="toc-search-input" id="toc-filter" placeholder="搜尋 PRD 章節或關鍵字..."
+          oninput="filterTOC()">
+      </div>
+
+      <nav class="toc-nav">
+        <ul class="toc-list" id="toc-list">
+          <li class="toc-item">
+            <a href="section-1.html" class="toc-link">
+              <span>1. 概述與文檔資訊</span>
+              <span class="toc-badge">01</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-1.html#sec-1-1" class="toc-sublink">1.1 文檔版本紀錄</a></li>
+              <li><a href="section-1.html#sec-1-2" class="toc-sublink">1.2 需求背景與目標</a></li>
+              <li><a href="section-1.html#sec-1-3" class="toc-sublink">1.3 核心使用者角色與場景</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-2.html" class="toc-link">
+              <span>2. 全局通用設計規範</span>
+              <span class="toc-badge">02</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-2.html#sec-2-1" class="toc-sublink">2.1 交互佈局改版區塊說明</a></li>
+              <li><a href="section-2.html#sec-2-2" class="toc-sublink">2.2 交互佈局與組件規範 (抽屜模式)</a></li>
+              <li><a href="section-2.html#sec-2-3" class="toc-sublink">2.3 數據格式化與呈現規範</a></li>
+              <li><a href="section-2.html#sec-2-4" class="toc-sublink">2.4 前端狀態保存機制</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-3.html" class="toc-link">
+              <span>3. 權限管控矩陣</span>
+              <span class="toc-badge">03</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-3.html#sec-3-1" class="toc-sublink">3.1 舊有權限映射表</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-4.html" class="toc-link">
+              <span>4. 上方按鈕與搜尋篩選模塊</span>
+              <span class="toc-badge">04</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-4.html#sec-4-1" class="toc-sublink">4.1 獨立快捷按鈕</a></li>
+              <li><a href="section-4.html#sec-4-2" class="toc-sublink">4.2 批量操作收納選單</a></li>
+              <li><a href="section-4.html#sec-4-3" class="toc-sublink">4.3 批量業務流程與權限</a></li>
+              <li><a href="section-4.html#sec-4-4" class="toc-sublink">4.4 篩選欄位與控制項規格</a></li>
+              <li><a href="section-4.html#sec-4-5" class="toc-sublink">4.5 操作按鈕與動態標籤</a></li>
+              <li><a href="section-4.html#sec-4-6" class="toc-sublink">4.6 特殊篩選與極限情境</a></li>
+              <li><a href="section-4.html#sec-4-7" class="toc-sublink">4.7 篩選欄位權限隱藏機制</a></li>
+              <li><a href="section-4.html#sec-4-8" class="toc-sublink">4.8 自訂篩選欄位</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-5.html" class="toc-link active">
+              <span>5. 數據列表與卡片展示模塊</span>
+              <span class="toc-badge">05</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="#sec-5-1" class="toc-sublink">5.1 視圖模式切換 (列表/巢狀)</a></li>
+              <li><a href="#sec-5-2" class="toc-sublink">5.2 自訂欄位與卡片配置</a></li>
+              <li><a href="#sec-5-3" class="toc-sublink">5.3 一級欄位定義與特殊展示</a></li>
+              <li><a href="#sec-5-3-2" class="toc-sublink">5.3.2 列表模式展開卡片規格</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-6.html" class="toc-link">
+              <span>6. 單筆會員操作與詳情抽屜</span>
+              <span class="toc-badge">06</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-6.html#sec-6-1" class="toc-sublink">6.1 編輯用戶抽屜 (基本信息/設置)</a></li>
+              <li><a href="section-6.html#sec-6-2" class="toc-sublink">6.2 會員詳情抽屜 (4大分頁)</a></li>
+              <li><a href="section-6.html#sec-6-3" class="toc-sublink">6.3 二級抽屜互動機制 (同IP/設備)</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-7.html" class="toc-link">
+              <span>7. 介面狀態規範</span>
+              <span class="toc-badge">07</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-7.html#sec-7-1" class="toc-sublink">7.1 正常狀態 (Normal State)</a></li>
+              <li><a href="section-7.html#sec-7-2" class="toc-sublink">7.2 無數據狀態 (Empty State)</a></li>
+              <li><a href="section-7.html#sec-7-3" class="toc-sublink">7.3 極限狀態 (Edge / Extreme State)</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="section-8.html" class="toc-link">
+              <span>8. 附錄：欄位字典與數據定義</span>
+              <span class="toc-badge">08</span>
+            </a>
+            <ul class="toc-sublist">
+              <li><a href="section-8.html#sec-8-1" class="toc-sublink">8.1 基礎帳號與狀態 (12項)</a></li>
+              <li><a href="section-8.html#sec-8-2" class="toc-sublink">8.2 等級與額度 (7項)</a></li>
+              <li><a href="section-8.html#sec-8-3" class="toc-sublink">8.3 財務與資金流水 (13項)</a></li>
+              <li><a href="section-8.html#sec-8-4" class="toc-sublink">8.4 關係、推薦與軌跡 (8項)</a></li>
+              <li><a href="section-8.html#sec-8-5" class="toc-sublink">8.5 備註欄位 (2項)</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content-area">
+
+      <!-- Breadcrumb Bar -->
+      <div class="breadcrumb-bar">
+        <a href="index.html">首頁總覽</a>
+        <span class="breadcrumb-separator">/</span>
+        <span>PRD 模塊</span>
+        <span class="breadcrumb-separator">/</span>
+        <span style="color: var(--text-main); font-weight: 600;">5. 數據列表與卡片展示模塊</span>
+      </div>
+
+      <!-- SECTION CONTENT -->
+      <section id="section-5" class="section-card">
+        <div class="section-header">
+          <div>
+            <span class="section-number">SECTION 05</span>
+            <h2 class="section-title">5. 數據列表與卡片展示模塊</h2>
+          </div>
+          <span class="section-source">對應來源：功能修改對照表 - 資料列；彩票欄位定義表</span>
+        </div>
+
+        <h3 id="sec-5-1" class="sub-title">5.1 視圖模式切換 (列表模式 vs 巢狀樹狀模式)</h3>
+
+        <!-- Default View Highlight Callout -->
+        <div
+          style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--primary); border-radius: 0 10px 10px 0; padding: 18px 22px; margin-bottom: 24px;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+            <span style="font-size: 20px;">📌</span>
+            <span style="font-size: 15px; font-weight: 700; color: var(--primary);">
+              預設視圖規格：系統進入與載入時，<mark
+                style="background: #fef08a; color: #854d0e; padding: 2px 8px; border-radius: 4px; font-weight: 800;">默認展示為
+                “列表模式”</mark>
+            </span>
+          </div>
+          <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">
+            本次改版將二維高密度的<strong>「列表模式 (Flat List
+              View)」</strong>定為初始載入之默認視圖，核心定位為<strong>盡可能讓畫面一次展示多條數據之間的橫向比較</strong>，且點擊左側箭頭展開即可查閱更多資訊卡片；而<strong>「巢狀樹狀模式」</strong>則專注於<strong>盡可能展示單一用戶所有的相關完整資訊與代理階層</strong>。操作員切換後的偏好將自動由前端持久化記憶。
+          </p>
+        </div>
+
+
+        <!-- Interactive View Mode Preview Container -->
+        <div class="preview-mode-card"
+          style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; margin-bottom: 32px; box-shadow: var(--shadow-sm);">
+
+          <!-- Mode Switcher Toolbar -->
+          <div
+            style="padding: 14px 20px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span
+                style="font-size: 13px; font-weight: 700; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+                <span>🖥️</span><span>視圖切換即時預覽：</span>
+              </span>
+
+              <!-- Toggle Button Group -->
+              <div class="view-toggle-btns"
+                style="display: inline-flex; background: #e2e8f0; padding: 3px; border-radius: 8px; gap: 3px;">
+                <button type="button" id="btn-mode-list" class="btn-mode-switch active"
+                  onclick="switchSection5ViewMode('list')"
+                  style="padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s; background: var(--primary); color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                  <span>📋</span><span>列表模式 (圖一 · 默認)</span>
+                </button>
+                <button type="button" id="btn-mode-nested" class="btn-mode-switch"
+                  onclick="switchSection5ViewMode('nested')"
+                  style="padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s; background: transparent; color: var(--text-muted);">
+                  <span>🌲</span><span>巢狀模式 (圖二)</span>
+                </button>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span id="current-mode-status" style="font-size: 12px; color: var(--primary); font-weight: 600;">
+                當前顯示：列表模式 (圖一 · 默認展示)
+              </span>
+              <span style="color: var(--border-subtle);">|</span>
+              <span style="font-size: 12px; color: var(--text-subtle);">🔍 點擊截圖可新視窗開啟原圖</span>
+            </div>
+          </div>
+
+          <!-- Preview 1: List Mode (Default) -->
+          <div id="preview-list-container" class="view-preview-panel" style="padding: 20px; display: block;">
+            <div
+              style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="badge-tag badge-primary">圖一</span>
+                <strong style="font-size: 14px; color: var(--text-main);">列表模式介面截圖 (Flat List Table View -
+                  點擊展開卡片示範)</strong>
+                <span
+                  style="font-size: 12px; color: #854d0e; background: #fef08a; padding: 1px 6px; border-radius: 4px; font-weight: 700;">默認展示</span>
+              </div>
+              <a href="view_mode_list_expand.png" target="_blank" class="btn btn-sm btn-outline"
+                style="font-size: 11px; padding: 4px 10px;">
+                <span>↗</span><span>開新分頁檢視原圖</span>
+              </a>
+            </div>
+
+            <div
+              style="border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; background: #ffffff;">
+              <a href="view_mode_list_expand.png" target="_blank" title="點擊檢視高解析原圖 (列表模式 · 含展開卡片)">
+                <img src="view_mode_list_expand.png" alt="圖一：會員管理列表模式 (Flat List View - 含展開卡片)"
+                  style="width: 100%; height: auto; display: block; cursor: zoom-in; transition: transform 0.2s;"
+                  onmouseover="this.style.opacity='0.96'" onmouseout="this.style.opacity='1'">
+              </a>
+            </div>
+            <div
+              style="font-size: 13px; color: var(--text-muted); margin-top: 14px; line-height: 1.6; background: var(--bg-body); padding: 16px 20px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+              <div
+                style="font-weight: 700; color: var(--text-main); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 13.5px;">
+                <span>📋</span><span>列表模式核心介面特徵與交互規範：</span>
+              </div>
+              <ul style="padding-left: 20px; margin-bottom: 0; display: flex; flex-direction: column; gap: 8px;">
+                <li>
+                  <strong>1. 表頭固定吸頂 (Sticky Header)
+                    與篩選列收起</strong>：列表表頭固定在頂部。當畫面向上滑動（頁面向下瀏覽數據）時，上方多欄位篩選表單會<strong>自動向上收起隱藏</strong>（連動 4.5
+                  節規範），以最大化表格資料列的垂直檢視空間，操作員仍可持續對齊各欄位表頭。
+                </li>
+                <li>
+                  <strong>2. 列表展開按鈕與橫向滑動瀏覽</strong>：列表模式每列最前面均配有展開按鈕（<code>&gt;</code> /
+                  <code>v</code>）。點擊展開後即可看到詳細卡片（包含「基本資料」、「存取款資料」、「成長與積分」、「推薦關係」等小卡），<strong>詳細卡片支援左右滑動瀏覽 (Horizontal
+                    Scrollable)</strong>，確保在有限寬度下完整容納所有維度資訊。
+                </li>
+                <li>
+                  <strong>3. 右上角自訂欄位功能與下方抽屜</strong>：列表右上角配置自訂欄位按鈕（圖示為 <img src="custom_columns_btn.png" alt="自訂欄位按鈕"
+                    style="height: 18px; vertical-align: middle; border-radius: 3px; display: inline-block;">
+                  <code>[ ▯▯ ]</code>），點擊後由畫面底部滑出<strong>「自訂欄位設定」抽屜</strong>（抽屜高度嚴格限制<strong>不會超過表頭</strong>），可自訂顯示欄位與卡片是否呈現於一級主表或卡片內（詳見下方
+                  5.2 節專題）。
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Preview 2: Nested Mode -->
+          <div id="preview-nested-container" class="view-preview-panel" style="padding: 20px; display: none;">
+            <div
+              style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="badge-tag badge-purple">圖二</span>
+                <strong style="font-size: 14px; color: var(--text-main);">巢狀模式介面截圖 (Nested Tree / Card View)</strong>
+                <span class="badge-tag badge-subtle">代理體系卡片</span>
+              </div>
+              <a href="view_mode_nested.png" target="_blank" class="btn btn-sm btn-outline"
+                style="font-size: 11px; padding: 4px 10px;">
+                <span>↗</span><span>開新分頁檢視原圖</span>
+              </a>
+            </div>
+
+            <div
+              style="border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; background: #ffffff;">
+              <a href="view_mode_nested.png" target="_blank" title="點擊檢視高解析原圖 (巢狀模式)">
+                <img src="view_mode_nested.png" alt="圖二：會員管理巢狀模式 (Nested Tree View)"
+                  style="width: 100%; height: auto; display: block; cursor: zoom-in; transition: transform 0.2s;"
+                  onmouseover="this.style.opacity='0.96'" onmouseout="this.style.opacity='1'">
+              </a>
+            </div>
+            <div style="font-size: 12px; color: var(--text-subtle); margin-top: 10px; line-height: 1.5;">
+              <strong>介面特徵說明：</strong>
+              專為<strong>盡可能展示一個用戶所有相關信息</strong>而設計之大卡片樹狀模式。各卡片完整平鋪單一用戶所有身分資料、代理團隊數（支援下鑽穿透）、主錢包額度、存取款明細、所有標籤群（超額自動摺疊，以顏色區分）、狀態標籤與多筆快捷行操作入口。
+            </div>
+          </div>
+
+        </div>
+
+        <h3 id="sec-5-2" class="sub-title">5.2 自訂欄位與卡片配置</h3>
+
+        <!-- Callout Banner -->
+        <div
+          style="background: rgba(124, 58, 237, 0.05); border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; padding: 16px 20px; margin-bottom: 22px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+            <span style="font-size: 18px;">⚙️</span>
+            <span style="font-size: 15px; font-weight: 700; color: var(--accent);">自訂欄位與卡片抽屜架構</span>
+          </div>
+          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">
+            操作員點擊列表右上角之 <img src="custom_columns_btn.png" alt="自訂欄位按鈕"
+              style="height: 18px; vertical-align: middle; border-radius: 3px; display: inline-block;">
+            <strong>自訂欄位按鈕</strong> 後，系統由畫面下方平滑滑出「自訂欄位設定」抽屜。抽屜向上展開之<strong>最大高度嚴格限制不會超過表頭</strong>，維持背景列表的清晰可視性與操作上下文。
+          </p>
+        </div>
+
+        <!-- Custom Columns Screenshot Showcase -->
+        <div
+          style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+          <div
+            style="padding: 12px 18px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="badge-tag badge-purple">抽屜介面對照截圖</span>
+              <strong style="font-size: 13.5px; color: var(--text-main);">自訂欄位設定：主表欄位與展開卡片雙欄設定抽屜</strong>
+            </div>
+            <a href="custom_columns_drawer.png" target="_blank" class="btn btn-sm btn-outline"
+              style="font-size: 11px; padding: 4px 10px;">
+              <span>↗</span><span>開新分頁檢視原圖</span>
+            </a>
+          </div>
+          <div style="padding: 16px; background: #ffffff;">
+            <a href="custom_columns_drawer.png" target="_blank" title="點擊檢視自訂欄位抽屜大圖">
+              <img src="custom_columns_drawer.png" alt="自訂欄位設定下方抽屜介面截圖"
+                style="width: 100%; height: auto; display: block; border-radius: 6px; cursor: zoom-in; border: 1px solid var(--border-subtle);">
+            </a>
+          </div>
+          <div
+            style="font-size: 12px; color: var(--text-subtle); padding: 10px 18px 14px 18px; background: #fafafa; border-top: 1px solid var(--border-subtle); line-height: 1.5;">
+            <strong>截圖特徵解析：</strong>
+            左側為「主表欄位（上方表格列）」，配置在線、用戶ID、會員名等欄位群組；右側為「展開卡片（列表底展開內容）」，配置基本資料、額度、信貸等卡片；右上角附有「重置」、「向上延伸按鈕 (↕)」與「關閉 (×)」按鈕。
+          </div>
+        </div>
+
+        <!-- Core Functional Specifications & Credit Card Rule -->
+        <div class="table-container" style="margin-bottom: 28px;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 180px;">配置區域 / 互動功能項</th>
+                <th style="width: 200px;">控制項與交互元件</th>
+                <th>業務規格與詳細互動行為規則</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>主表欄位<br><small>(上方表格列)</small></strong></td>
+                <td>
+                  <span class="code-pill">左側主欄位控制</span><br>
+                  包含帳號信息、等級等分類。支援拖曳排序與點擊眼睛圖示切換顯隱。
+                </td>
+                <td>
+                  系統核心關鍵欄位標註為 🔒
+                  <strong>鎖定</strong>（如：<code>在線</code>、<code>用戶ID</code>、<code>會員名</code>、<code>代理</code>、<code>狀態</code>、<code>VIP等級</code>），預設固定在主表格列，不可隨意隱藏，防範操作員檢索定位遺失。
+                </td>
+              </tr>
+              <tr>
+                <td><strong>展開卡片<br><small>(列表底展開內容)</small></strong></td>
+                <td>
+                  <span class="code-pill">右側卡片與欄位歸屬</span><br>
+                  包含基本資料、額度、信貸、成長與積分、推薦關係等多個資訊卡片。
+                </td>
+                <td>
+                  可以自訂顯示字段卡片是否顯示，以及自訂該欄位是要呈現在<strong>「一級主表欄位」</strong>（標示 <code>已在主表</code>）或<strong>「卡片內」</strong>（標示
+                  <code>+</code> 號加入卡片），提供高度彈性之個人化排版。
+                </td>
+              </tr>
+              <tr style="background: rgba(234, 88, 12, 0.04);">
+                <td><strong>信貸卡片特殊規範<br><small>(核心業務防線)</small></strong></td>
+                <td>
+                  <span class="badge-tag badge-amber" style="font-weight: 700;">重要預設規則</span>
+                </td>
+                <td>
+                  <strong>信貸卡片的內容限制：</strong><br>
+                  <mark
+                    style="background: #fef08a; color: #854d0e; padding: 2px 8px; border-radius: 4px; font-weight: 800;">欠款
+                    (Debt) 跟 信用值 (Credit Score) 字段默認不顯示</mark>。<br>
+                  考量到信貸敏感資訊與一般客服作業介面乾淨度，系統預設關閉該兩項欄位展示；僅在具備相關信貸權限且操作員主動進入自訂抽屜勾選開啟時，始於展開卡片中呈現。
+                </td>
+              </tr>
+              <tr>
+                <td><strong>抽屜高度限制與重置記憶</strong></td>
+                <td>
+                  <span class="code-pill">邊界與狀態保存</span><br>
+                  抽屜右上角配置「重置」、「向上延伸按鈕 (↕)」與「關閉 (×)」按鈕。
+                </td>
+                <td>
+                  1. <strong>高度限制與向上延伸按鈕</strong>：抽屜由畫面下方向上彈出，右上角配置「向上延伸按鈕
+                  (↕)」供操作員展開獲取更多可視操作區塊。<strong>無論是預設展開狀態或點擊向上延伸按鈕，抽屜延伸之高度均嚴格限制「都不會超過表頭的高度」</strong>，確保主表格頂部之固定表頭始終清晰可見，絕不覆蓋遮蔽關鍵表頭資訊。<br>
+                  2. <strong>重置機制</strong>：點擊「重置」一鍵將所有主表欄位與展開卡片顯隱順序還原為預設狀態。<br>
+                  3. <strong>本地記憶</strong>：所有調整即時寫入 <code>LocalStorage</code> 持久化保存，頁面重整或切換後自動還原。
+                </td>
+              </tr>
+              <!-- 核心互動功能需求分隔列 -->
+              <tr style="background: rgba(124, 58, 237, 0.06); border-top: 2px solid var(--accent);">
+                <td colspan="3" style="font-weight: 700; color: var(--accent); padding: 10px 16px;">
+                  ⚡ 核心互動功能需求
+                </td>
+              </tr>
+              <tr>
+                <td><strong>3.1 欄位顯示/隱藏切換</strong></td>
+                <td>
+                  <span class="code-pill">眼睛圖示 👁 / 關閉斜線 👁‍🗨</span><br>
+                  每個欄位標籤旁配有可視狀態切換按鈕（如附有眼睛圖示或 ◎ 的按鈕）。
+                </td>
+                <td>
+                  <strong>互動行為：</strong><br>
+                  • <strong>顯示狀態</strong>：圖示呈現點亮/啟用狀態，表示該欄位目前會顯示在對應的表格或卡片中。<br>
+                  • <strong>隱藏狀態</strong>：點擊後圖示切換為關閉/斜線狀態，該欄位將從對應的介面中隱藏。<br>
+                  • <strong>系統回饋</strong>：當欄位被隱藏或顯示時，畫面上對應的視覺標籤應即時切換樣式（例如呈現半透明或加上刪除線，或直接從預覽中移除）。
+                </td>
+              </tr>
+              <tr>
+                <td><strong>3.2 拖曳排序</strong></td>
+                <td>
+                  <span class="code-pill">拖曳手柄 ⠿ (六點陣列)</span><br>
+                  區塊或欄位項目最左側配有拖曳手柄。
+                </td>
+                <td>
+                  <strong>互動行為：</strong><br>
+                  • 區塊或欄位項目最左側配有拖曳手柄（六點陣列圖示 ⠿）。<br>
+                  • 管理員按住拖曳手柄上下拖動時，項目應可即時跟隨游標移動，並在其他項目間產生推擠動畫（Placeholder），指示釋放後的落點位置。<br>
+                  <strong>限制條件：</strong><br>
+                  • 僅允許在同一群組或指定的容器範圍內進行排序。
+                </td>
+              </tr>
+              <tr>
+                <td><strong>3.3 欄位跨區移動 / 新增與移除</strong></td>
+                <td>
+                  <span class="code-pill">狀態標籤 <code>[已在主表]</code></span><br>
+                  <span class="code-pill">快捷鍵 <code>[+]</code> / <code>[-]</code></span>
+                </td>
+                <td>
+                  <strong>互動行為：</strong><br>
+                  • <strong>跨區流轉</strong>：部分欄位支援在「主表欄位」與「展開卡片」之間進行流轉。<br>
+                  • <strong>防重引導</strong>：若某欄位已被放置於主表中，其在展開卡片設定區會標註為 <code>[已在主表]</code>，防止重複顯示或提供一鍵移回/引導。<br>
+                  • <strong>模組增刪</strong>：每個區塊內支援透過帶有加號（+）或減號（-）的按鈕來快速新增或移除特定欄位模組（例如信貸、使用者標籤、備註等）。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="sec-5-3" class="sub-title">5.3 一級欄位定義與特殊展示邏輯</h3>
+
+        <!-- Universal Column Features Callout Banner -->
+        <div
+          style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--primary); border-radius: 0 8px 8px 0; padding: 16px 20px; margin-bottom: 22px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+            <span style="font-size: 18px;">📌</span>
+            <span style="font-size: 15px; font-weight: 700; color: var(--primary);">一級主表欄位通用功能規範</span>
+          </div>
+          <div style="font-size: 13.5px; color: var(--text-muted); line-height: 1.7;">
+            <div style="margin-bottom: 6px;">
+              • <strong>全欄位固定功能 <span class="badge-tag badge-subtle" style="font-weight: 700; color: #2563eb;">📌
+                  支援固定</span></strong>：<strong>每一個一級欄位均配有「固定功能
+                (Pin/Freeze)」</strong>。操作員可視審核習慣將特定欄位鎖定於表格左側，橫向水平捲動時該欄位始終保持凍結可視，防範寬表格檢視時脫焦。
+            </div>
+            <div>
+              • <strong>金額排序功能 <span class="badge-tag badge-emerald" style="font-weight: 700;">⇅
+                  支援排序</span></strong>：<strong>所有與「金額相關」之一級欄位均配有「排序功能 (Sort)」</strong>（如：可用額度、三方餘額、主錢包存取款、USDT
+              存取款總額等）。表頭附帶 <code>⇅</code> 排序圖標，點擊即可切換「降冪 (▼) / 升冪 (▲) / 預設」，方便財務與風控人員快速篩選高資產或大額充提會員。
+            </div>
+          </div>
+        </div>
+
+        <!-- 5.3.1 一級欄位詳細定義表 -->
+        <h4
+          style="font-size: 15px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span
+            style="background: var(--primary-light); color: var(--primary); padding: 2px 8px; border-radius: 4px; font-size: 12px;">5.3.1</span>
+          主表一級欄位默認定義清單
+        </h4>
+        <div class="table-container" style="margin-bottom: 28px;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 130px;">一級分組</th>
+                <th style="width: 180px;">欄位名稱</th>
+                <th style="min-width: 190px;">欄位功能圖標</th>
+                <th>業務定義與展示規範</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- 1. 帳號信息 -->
+              <tr>
+                <td rowspan="5" style="vertical-align: top; font-weight: 700; background: #fafafa;">1. 帳號信息</td>
+                <td><strong>線上</strong></td>
+                <td>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                    <span class="badge-tag badge-subtle">📌 支援固定</span>
+                  </div>
+                </td>
+                <td>顯示會員當前的登入或連線狀態（狀態指示點以顏色區分：在線 / 離線 / 閒置）。</td>
+              </tr>
+              <tr>
+                <td><strong>用戶ID</strong></td>
+                <td>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                    <span class="badge-tag badge-subtle">📌 支援固定</span>
+                    <span class="badge-tag badge-purple">🔒 核心鎖定</span>
+                  </div>
+                </td>
+                <td>系統為每位會員派發的唯一識別編號（如 <code>1239361225</code>）。</td>
+              </tr>
+              <tr>
+                <td><strong>會員名</strong></td>
+                <td>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                    <span class="badge-tag badge-subtle">📌 支援固定</span>
+                    <span class="badge-tag badge-purple">🔒 核心鎖定</span>
+                  </div>
+                </td>
+                <td>會員登入或顯示使用的帳號名稱（如 <code>mingv0717001</code>）。</td>
+              </tr>
+              <tr>
+                <td><strong>代理</strong></td>
+                <td>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                    <span class="badge-tag badge-subtle">📌 支援固定</span>
+                  </div>
+                </td>
+                <td>該會員所歸屬的上級代理商代號（如 <code>dl</code>）。</td>
+              </tr>
+              <tr>
+                <td><strong>狀態</strong></td>
+                <td>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                    <span class="badge-tag badge-subtle">📌 支援固定</span>
+                  </div>
+                </td>
+                <td>帳戶目前的運作狀態（如正常、凍結、停用）。</td>
+              </tr>
+
+              <!-- 2. 等級 -->
+              <tr>
+                <td rowspan="2" style="vertical-align: top; font-weight: 700; background: #fafafa;">2. 等級</td>
+                <td><strong>VIP等級</strong></td>
+                <td>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                    <span class="badge-tag badge-subtle">📌 支援固定</span>
+                  </div>
+                </td>
+                <td>會員在平台中所處的 VIP 級別（如 <code>VIP 1</code> 或數字級別）。</td>
+              </tr>
+              <tr>
+                <td><strong>支付層級</strong></td>
+                <td>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                    <span class="badge-tag badge-subtle">📌 支援固定</span>
+                  </div>
+                </td>
+                <td>會員被分配到的金流/支付層級配置（如預設層）。</td>
+              </tr>
+
+              <!-- 3. 額度 -->
+              <tr>
+                <td rowspan="3" style="vertical-align: top; font-weight: 700; background: #fafafa;">3. 額度</td>
+                <td><strong>主錢包幣種</strong></td>
+                <td>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                    <span class="badge-tag badge-subtle">📌 支援固定</span>
+                  </div>
+                </td>
+                <td>會員主錢包所使用的結算貨幣單位（如 RMB、VND、USDT 等）。</td>
+              </tr>
+              <tr style="background: rgba(5, 150, 105, 0.03);">
+                <td><strong>可用額度</strong></td>
+                <td>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                    <span class="badge-tag badge-subtle">📌 支援固定</span>
+                    <span class="badge-tag badge-emerald" style="font-weight: 700;">⇅ 支援排序</span>
+                  </div>
+                </td>
+                <td>主錢包中目前可供玩家自由使用或投注的餘額。<strong>金額相關欄位，支援點擊表頭排序。</strong></td>
+              </tr>
+              <tr style="background: rgba(5, 150, 105, 0.03);">
+                <td><strong>三方餘額</strong></td>
+                <td>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                    <span class="badge-tag badge-subtle">📌 支援固定</span>
+                    <span class="badge-tag badge-emerald" style="font-weight: 700;">⇅ 支援排序</span>
+                  </div>
+                </td>
+                <td>綁定或轉入第三方遊戲平台中的總餘額。<strong>金額相關欄位，支援點擊表頭排序。</strong></td>
+              </tr>
+
+              <!-- 4. 存取款資料 -->
+              <tr style="background: rgba(5, 150, 105, 0.03);">
+                <td rowspan="2" style="vertical-align: top; font-weight: 700; background: #fafafa;">4. 存取款資料</td>
+                <td><strong>主錢包 (取款總額)</strong></td>
+                <td>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                    <span class="badge-tag badge-subtle">📌 支援固定</span>
+                    <span class="badge-tag badge-emerald" style="font-weight: 700;">⇅ 支援排序</span>
+                  </div>
+                </td>
+                <td>自主錢包歷史累計成功提領的總金額。<strong>金額相關欄位，支援點擊表頭排序。</strong></td>
+              </tr>
+              <tr style="background: rgba(5, 150, 105, 0.03);">
+                <td><strong>主錢包 (存款總額)</strong></td>
+                <td>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                    <span class="badge-tag badge-subtle">📌 支援固定</span>
+                    <span class="badge-tag badge-emerald" style="font-weight: 700;">⇅ 支援排序</span>
+                  </div>
+                </td>
+                <td>自主錢包歷史累計成功充值的總金額。<strong>金額相關欄位，支援點擊表頭排序。</strong></td>
+              </tr>
+
+              <!-- 5. 彙總 (USDT) -->
+              <tr style="background: rgba(5, 150, 105, 0.03);">
+                <td rowspan="2" style="vertical-align: top; font-weight: 700; background: #fafafa;">5. 彙總 (USDT)</td>
+                <td><strong>彙總 (USDT) - 取款總額</strong></td>
+                <td>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                    <span class="badge-tag badge-subtle">📌 支援固定</span>
+                    <span class="badge-tag badge-emerald" style="font-weight: 700;">⇅ 支援排序</span>
+                  </div>
+                </td>
+                <td>將各幣種或帳戶資產換算為 USDT 後的累計取款總額。<strong>金額相關欄位，支援點擊表頭排序。</strong></td>
+              </tr>
+              <tr style="background: rgba(5, 150, 105, 0.03);">
+                <td><strong>彙總 (USDT) - 存款總額</strong></td>
+                <td>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                    <span class="badge-tag badge-subtle">📌 支援固定</span>
+                    <span class="badge-tag badge-emerald" style="font-weight: 700;">⇅ 支援排序</span>
+                  </div>
+                </td>
+                <td>將各幣種或帳戶資產換算為 USDT 後的累計存款總額。<strong>金額相關欄位，支援點擊表頭排序。</strong></td>
+              </tr>
+
+              <!-- 6. 日期信息 -->
+              <tr>
+                <td rowspan="3" style="vertical-align: top; font-weight: 700; background: #fafafa;">6. 日期信息</td>
+                <td><strong>登入IP</strong></td>
+                <td>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                    <span class="badge-tag badge-subtle">📌 支援固定</span>
+                  </div>
+                </td>
+                <td>會員最近一次登入系統時的來源 IP 位址。</td>
+              </tr>
+              <tr>
+                <td><strong>新增時間</strong></td>
+                <td>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                    <span class="badge-tag badge-subtle">📌 支援固定</span>
+                    <span class="badge-tag badge-subtle" style="font-weight: 600;">⇅ 時間排序</span>
+                  </div>
+                </td>
+                <td>該會員帳號建立註冊的確切時間點。</td>
+              </tr>
+              <tr>
+                <td><strong>登入時間</strong></td>
+                <td>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                    <span class="badge-tag badge-subtle">📌 支援固定</span>
+                    <span class="badge-tag badge-subtle" style="font-weight: 600;">⇅ 時間排序</span>
+                  </div>
+                </td>
+                <td>會員最近一次登入系統的時間記錄。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 5.3.2 列表模式展開卡片規格 -->
+        <h4 id="sec-5-3-2"
+          style="font-size: 15px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span
+            style="background: var(--primary-light); color: var(--primary); padding: 2px 8px; border-radius: 4px; font-size: 12px;">5.3.2</span>
+          列表模式展開卡片規格
+        </h4>
+
+        <!-- 模式適用性說明 Callout -->
+        <div
+          style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--primary); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-bottom: 20px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <span style="font-size: 18px;">💡</span>
+            <span style="font-size: 14px; font-weight: 700; color: var(--primary);">視圖模式適用性說明</span>
+          </div>
+          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">
+            本章節之「展開卡片」規格<strong>專屬於列表模式（List Mode）</strong>。操作員在二維表格中點擊每列展開按鈕時向下展開此卡片；而<strong>巢狀模式（Nested Tree
+              Mode）架構則照舊維持既有代理體系卡片樣式，僅整合「頭像與在線狀態」欄位顯示</strong>。
+          </p>
+        </div>
+
+        <!-- 1. 模組概述 -->
+        <div
+          style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 18px 20px; margin-bottom: 22px; box-shadow: var(--shadow-sm);">
+          <div
+            style="font-size: 14.5px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+            <span>📋</span><span>1. 模組概述</span>
+          </div>
+          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">
+            「展開卡片」是用於會員列表中的詳細資訊面板。當管理員點擊表格左側的展開按鈕（<code>&gt;</code> /
+            <code>▾</code>）時，該行下方會向外展開一個結構化的卡片容器，完整呈現該會員的綜合維度數據與標籤管理，方便管理員在不跳轉頁面的情況下進行快速審核與資料檢視。
+          </p>
+        </div>
+
+        <!-- 2. 介面佈局與資料分區 -->
+        <div style="margin-bottom: 24px;">
+  <div
+    style="font-size: 14.5px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+    <span>🧩</span><span>2. 介面佈局與資料分區</span>
+  </div>
+  <p style="font-size: 13.5px; color: var(--text-subtle); line-height: 1.6; margin-bottom: 14px;">
+    展開卡片內部採用多欄式區塊（Grid / Flex 佈局）進行資訊封裝，主要劃分為以下資料模組（包含 6 大常規模組與 1 個默認隱藏的信貸卡片模組）：
+  </p>
+
+  <div
+    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 20px;">
+
+    <!-- 2.1 基本資料 -->
+    <div
+      style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px; border-top: 3px solid var(--primary);">
+      <div
+        style="font-size: 13.5px; font-weight: 700; color: var(--text-main); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+        <span>👤</span><span>2.1 基本資料</span>
+      </div>
+      <div style="font-size: 12.5px; color: var(--text-subtle); line-height: 1.6; margin-bottom: 8px;">展示會員的核心身分與聯絡歸屬：
+      </div>
+      <ul style="font-size: 13px; color: var(--text-muted); padding-left: 18px; line-height: 1.7; margin-bottom: 0;">
+        <li><strong>頭像與暱稱</strong>：左側展示會員頭像與加密顯示的用戶暱稱（如 <code>mi***01</code>）。</li>
+        <li><strong>真實姓名</strong>：會員綁定的真實姓名（若未填寫則顯示 <span class="code-pill muted">-</span>）。</li>
+        <li><strong>生日</strong>：會員的出生年月日（如 <code>1986-01-08</code>）。</li>
+        <li><strong>帳號類型</strong>：如「普通帳號」。</li>
+        <li><strong>會員類型</strong>：如「代理會員」。</li>
+        <li><strong>等級</strong>：對應的 VIP 等級標示（如 <code>VIP 1</code>）。</li>
+        <li><strong>註冊模式</strong>：系統註冊管道或模式（如「一般登録」）。</li>
+        <li><strong>手機號</strong>：綁定狀態（如「已綁定」或「未綁定」）。</li>
+      </ul>
+    </div>
+
+    <!-- 2.2 存取款資料 -->
+    <div
+      style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px; border-top: 3px solid var(--emerald);">
+      <div
+        style="font-size: 13.5px; font-weight: 700; color: var(--text-main); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+        <span>💳</span><span>2.2 存取款資料</span>
+      </div>
+      <div style="font-size: 12.5px; color: var(--text-subtle); line-height: 1.6; margin-bottom: 8px;">
+        採用對比表格形式，分別呈現主錢包與匯總數據，並區分幣種單位：</div>
+      <ul style="font-size: 13px; color: var(--text-muted); padding-left: 18px; line-height: 1.7; margin-bottom: 0;">
+        <li><strong>存款總額 / 存款次數</strong>：歷史累計充值金額與成功次數。</li>
+        <li><strong>取款總額 / 取款次數</strong>：歷史累計提領金額與成功次數。</li>
+        <li><strong>提款預扣金額</strong>：因稽核或流水未達標而暫時預扣的金額。</li>
+        <li><strong>后台加款總額</strong>：由客服或管理員手動後台補入的總金額。</li>
+        <li><strong>后台扣款總額</strong>：由後台手動扣除的總金額。</li>
+      </ul>
+    </div>
+
+    <!-- 2.3 成長與積分 -->
+    <div
+      style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px; border-top: 3px solid #8b5cf6;">
+      <div
+        style="font-size: 13.5px; font-weight: 700; color: var(--text-main); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+        <span>📈</span><span>2.3 成長與積分</span>
+      </div>
+      <div style="font-size: 12.5px; color: var(--text-subtle); line-height: 1.6; margin-bottom: 8px;">
+        展示會員在平台的活躍度與成長體系數據：</div>
+      <ul style="font-size: 13px; color: var(--text-muted); padding-left: 18px; line-height: 1.7; margin-bottom: 0;">
+        <li><strong>成長值</strong>：當前累積的活躍成長點數。</li>
+        <li><strong>VIP成長值</strong>：推動 VIP 升級專用的成長累積值。</li>
+        <li><strong>會員積分</strong>：可用於商城或活動兌換的積分餘額。</li>
+      </ul>
+    </div>
+
+    <!-- 2.4 推薦關係 -->
+    <div
+      style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px; border-top: 3px solid var(--amber);">
+      <div
+        style="font-size: 13.5px; font-weight: 700; color: var(--text-main); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+        <span>🤝</span><span>2.4 推薦關係</span>
+      </div>
+      <div style="font-size: 12.5px; color: var(--text-subtle); line-height: 1.6; margin-bottom: 8px;">展示下線與推廣分潤關係：
+      </div>
+      <ul style="font-size: 13px; color: var(--text-muted); padding-left: 18px; line-height: 1.7; margin-bottom: 0;">
+        <li><strong>幣種單位</strong>：明確標示當前計算的幣種（如 <code>單位: RMB</code> 或 <code>VND</code>）。</li>
+        <li><strong>邀請人 / 邀請碼</strong>：上級推薦人的帳號與綁定代碼。</li>
+        <li><strong>下級/團隊</strong>：直屬下線與團隊總人數統計（如 <code>0/0</code>）。</li>
+        <li><strong>佣金余额</strong>：透過推薦返利累積可提領的佣金金額。</li>
+      </ul>
+    </div>
+
+    <!-- 2.5 餘額寶 -->
+    <div
+      style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px; border-top: 3px solid #06b6d4;">
+      <div
+        style="font-size: 13.5px; font-weight: 700; color: var(--text-main); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+        <span>💰</span><span>2.5 餘額寶</span>
+      </div>
+      <div style="font-size: 12.5px; color: var(--text-subtle); line-height: 1.6; margin-bottom: 8px;">展示理財或增值帳戶相關數據：
+      </div>
+      <ul style="font-size: 13px; color: var(--text-muted); padding-left: 18px; line-height: 1.7; margin-bottom: 0;">
+        <li><strong>幣種單位</strong>：對應的結算貨幣。</li>
+        <li><strong>餘額</strong>：存入理財帳戶中的本金總額。</li>
+        <li><strong>利息</strong>：已產生或累計派發的收益利息。</li>
+      </ul>
+    </div>
+
+    <!-- 2.6 用戶標籤與備註 -->
+    <div
+      style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px; border-top: 3px solid #ec4899;">
+      <div
+        style="font-size: 13.5px; font-weight: 700; color: var(--text-main); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+        <span>🏷️</span><span>2.6 用戶標籤與備註</span>
+      </div>
+      <div style="font-size: 12.5px; color: var(--text-subtle); line-height: 1.6; margin-bottom: 8px;">提供維運標記與聯絡備忘：
+      </div>
+      <ul style="font-size: 13px; color: var(--text-muted); padding-left: 18px; line-height: 1.7; margin-bottom: 0;">
+        <li><strong>用戶標籤</strong>：動態展示多個維運標籤（如 <code>VIP 客戶</code>、<code>高頻交易</code>、<code>大戶</code>、<code>新註冊</code>
+          等）。</li>
+        <li><strong>備註</strong>：管理員手動填寫的長期備註（支援長文本截斷與檢視）。</li>
+        <li><strong>回访备注</strong>：客服或電銷團隊的回訪紀錄備忘。</li>
+      </ul>
+    </div>
+
+    <!-- 2.7 信貸 (默認隱藏) -->
+    <div
+      style="background: var(--bg-card); border: 1px solid rgba(234, 88, 12, 0.3); border-radius: 8px; padding: 16px; border-top: 3px solid #ea580c; background-color: rgba(234, 88, 12, 0.02);">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+        <div
+          style="font-size: 13.5px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px;">
+          <span>💳</span><span>2.7 信貸</span>
+        </div>
+        <span class="badge-tag badge-amber" style="font-weight: 700;">⚠️ 默認隱藏</span>
+      </div>
+      <div style="font-size: 12.5px; color: var(--text-subtle); line-height: 1.6; margin-bottom: 8px;">
+        展示會員授信借貸與信用評級數據。<strong>考量敏感風控資產安全，本卡片及內部字段系統預設隱藏</strong>，需具權限者於自訂抽屜主動勾選開啟：
+      </div>
+      <ul style="font-size: 13px; color: var(--text-muted); padding-left: 18px; line-height: 1.7; margin-bottom: 0;">
+        <li><strong>借貸金額 (欠款)</strong>：<span class="code-pill"
+            style="color: #ea580c; background: rgba(234, 88, 12, 0.1);">默認不顯示</span> 會員目前累計借貸尚未還款之本金總額（欠款數值，如
+          <code>50,000.00</code>），支援借款流水追溯。</li>
+        <li><strong>信用值</strong>：<span class="code-pill"
+            style="color: #ea580c; background: rgba(234, 88, 12, 0.1);">默認不顯示</span> 會員在平台內部評定之信用評分或信貸額度指標（如信用分數
+          <code>85</code> 分或信用評級）。</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- 3. 互動行為與需求 -->
+<div
+  style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 18px 20px; margin-bottom: 28px; box-shadow: var(--shadow-sm);">
+  <div
+    style="font-size: 14.5px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+    <span>⚡</span><span>3. 互動行為與需求</span>
+  </div>
+
+  <div
+    style="display: flex; flex-direction: column; gap: 12px; font-size: 13.5px; color: var(--text-muted); line-height: 1.7;">
+    <div>
+      <strong>• 收合與展開控制：</strong><br>
+      點擊表格最左側的展開列圖示（<code>&gt;</code> / <code>▾</code>），觸發向下展開動畫；再次點擊則收合卡片。系統支援「單行展開」或「多行同時展開」，預設允許多個會員卡片同時展開以方便跨用戶比對數據。
+    </div>
+    <div>
+      <strong>• 數據快捷連結：</strong><br>
+      卡片中的金額數字（如存款總額、佣金餘額等）若帶有底線或互動樣式，點擊後應可直接導向對應的明細報表或流水紀錄頁面，縮短操作路徑。
+    </div>
+    <div>
+      <strong>• 文本溢出處理：</strong><br>
+      針對「備註」等可能出現極長字串的欄位，介面需支援自動斷行、CSS 省略號（<code>Ellipsis</code>）顯示，或滑鼠懸停（Hover）時透過 Tooltip 浮層顯示完整文字內容，避免版面變形。
+    </div>
+  </div>
+</div>
+
+<!-- 5.3.3 欄位特殊合併與彈層展示邏輯 -->
+<h4 id="sec-5-3-3"
+  style="font-size: 15px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+  <span
+    style="background: var(--primary-light); color: var(--primary); padding: 2px 8px; border-radius: 4px; font-size: 12px;">5.3.3</span>
+  特殊欄位合併與彈層展示邏輯
+</h4>
+<div class="table-container">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 220px;">特殊欄位設計</th>
+        <th>整合呈現規則</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>在線狀態與頭像合併</strong></td>
+        <td>在會員頭像右下角疊加狀態圓點（以顏色區分：在線 / 離線 / 閒置），Hover 顯示「最後活動於 5分鐘前」。</td>
+      </tr>
+      <tr>
+        <td><strong>主錢包幣種與存取款匯總</strong></td>
+        <td>存款總額與取款總額垂直並列於同一單元格，下方標示主幣種與「淨充值 (存 - 取)」區塊（以顏色區分正負值）。</td>
+      </tr>
+      <tr>
+        <td><strong>多錢包彈層</strong></td>
+        <td>單擊「三方餘額」數值，即時展開小浮層展示各場館錢包明細（真人、體育、電子、彩票場館與餘額寶）。</td>
+      </tr>
+      <tr>
+        <td><strong>邀請人與邀請碼規則</strong></td>
+        <td><strong>一律顯示字段</strong>。無數據時一律統一顯示為 <span class="code-pill muted">-</span>（以顏色區分弱化）；有數據時正常帶入數值並附帶「一鍵複製
+          📋」圖標。</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<!-- Page Navigation Buttons -->
+<div class="page-nav-bar">
+  <a href="section-4.html" class="page-nav-btn prev">
+    <span style="font-size: 18px;">←</span>
+    <div>
+      <span class="page-nav-subtitle">上一章 (Previous)</span>
+      <span class="page-nav-title">4. 上方按鈕與搜尋篩選模塊</span>
+    </div>
+  </a>
+  <a href="section-6.html" class="page-nav-btn next">
+    <div>
+      <span class="page-nav-subtitle">下一章 (Next)</span>
+      <span class="page-nav-title">6. 單筆會員操作與詳情抽屜</span>
+    </div>
+    <span style="font-size: 18px;">→</span>
+  </a>
+</div>
+
+</main>
+</div>
+
+<!-- Prototype Interactive Modal Preview -->
+<div class="modal-overlay" id="prototype-modal" onclick="closePrototypeModal(event)">
+  <div class="modal-window" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 16px;">🖥️</span>
+        <span style="font-weight: 700; font-size: 14px;" id="modal-title">彩票會員管理原型預覽 (Prototype Live Preview)</span>
+        <span class="badge-tag badge-primary" id="modal-state-badge">NORMAL STATE</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <button class="btn btn-sm btn-outline"
+          onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=normal')">🟢 正常</button>
+        <button class="btn btn-sm btn-outline"
+          onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=nodata&mode=nested')">📭
+          無數據</button>
+        <button class="btn btn-sm btn-outline"
+          onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=extreme&mode=nested')">⚡
+          極限</button>
+        <a href="https://pm-doc-new-sport.pages.dev/" target="_blank" class="btn btn-sm btn-primary">在新視窗開啟 ↗</a>
+        <button class="icon-btn" onclick="closePrototypeModal()"
+          style="width: 28px; height: 28px; font-size: 14px;">✕</button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <iframe id="prototype-iframe" src="" title="Prototype Sandbox"></iframe>
+    </div>
+  </div>
+</div>
+
+  <!-- Back to Top Floating Button -->
+  <button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="回到頂部">
+    ↑
+  </button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
