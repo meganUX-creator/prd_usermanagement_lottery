@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>《彩票後台 - 會員管理改版 PRD》產品需求文檔總覽</title>
   <meta name="description" content="彩票會員管理後台改版產品需求文檔 (PRD)，涵蓋抽屜式交互佈局、權限連動矩陣、42項欄位字典、批量作業機制與原型系統整合。">
-  
+
   <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
   <!-- Top Sticky Bar -->
@@ -20,11 +24,7 @@
     <a href="index.html" class="brand-area">
       <div class="brand-icon">🎰</div>
       <div class="brand-info">
-        <h1>
-          彩票後台 · 會員管理改版 PRD
-          <span class="badge-tag badge-primary">v1.2.0</span>
-          <span class="badge-tag badge-emerald">已審核通過</span>
-        </h1>
+        <h1>彩票後台 · 會員管理改版 PRD</h1>
       </div>
     </a>
 
@@ -34,48 +34,8 @@
         <span>🚀</span>
         <span>開啟原型系統</span>
       </a>
-
-      <!-- Quick Embed Preview Trigger -->
-      <button class="btn btn-outline" onclick="openPrototypeModal('https://pm-doc-new-sport.pages.dev/content.html?mock=normal')">
-        <span>👁️</span>
-        <span>即時預覽</span>
-      </button>
     </div>
   </header>
-
-  <!-- Prototype Hero Showcase Banner -->
-  <section class="prototype-hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <div class="hero-title">彩票業務專屬 · 會員管理交互與架構全面升級</div>
-        <div class="hero-subtitle">
-          依據產品規劃大綱《prdoutline.md》全面落地，專注解決舊版彈窗過多、資訊層級模糊、缺乏批量處置工具與敏感權限脫節等痛點。全面改版為<strong>右側多層級抽屜（Drawer）</strong>、個人化記憶視圖與嚴密權限閉環。
-        </div>
-      </div>
-
-      <div class="hero-prototype-card">
-        <div class="prototype-card-header">
-          <span>🎯 原型系統快速導航 (線上原型: pages.dev)</span>
-          <span class="badge-tag badge-purple">LIVE PROTOTYPE</span>
-        </div>
-        <div class="prototype-card-actions">
-          <a href="https://pm-doc-new-sport.pages.dev/" target="_blank" class="btn btn-sm btn-primary">
-            🖥️ 進入原型首頁 (index)
-          </a>
-          <a href="https://pm-doc-new-sport.pages.dev/content.html" target="_blank" class="btn btn-sm btn-outline">
-            📄 進入內容視圖 (content)
-          </a>
-        </div>
-        <div class="scenario-pills">
-          <span>情境切換：</span>
-          <a href="https://pm-doc-new-sport.pages.dev/content.html?mock=normal" target="_blank" class="pill-link">🟢 正常數據</a>
-          <a href="https://pm-doc-new-sport.pages.dev/content.html?mock=nodata&mode=nested" target="_blank" class="pill-link">📭 無數據狀態</a>
-          <a href="https://pm-doc-new-sport.pages.dev/content.html?mock=extreme&mode=nested" target="_blank" class="pill-link">⚡ 極限邊界</a>
-          <a href="https://pm-doc-new-sport.pages.dev/content.html?mode=nested" target="_blank" class="pill-link">🌲 巢狀模式</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Main Container -->
   <div class="app-container">
@@ -84,11 +44,12 @@
     <aside class="sidebar">
       <div class="toc-search-box">
         <span class="toc-search-icon">🔍</span>
-        <input type="text" class="toc-search-input" id="toc-filter" placeholder="搜尋 PRD 章節或關鍵字..." oninput="filterTOC()">
+        <input type="text" class="toc-search-input" id="toc-filter" placeholder="搜尋 PRD 章節或關鍵字..."
+          oninput="filterTOC()">
       </div>
 
       <nav class="toc-nav">
-                                <ul class="toc-list" id="toc-list">
+        <ul class="toc-list" id="toc-list">
           <li class="toc-item">
             <a href="section-1.html" class="toc-link active">
               <span>1. 概述與文檔資訊</span>
@@ -107,7 +68,7 @@
             </a>
             <ul class="toc-sublist">
               <li><a href="section-2.html#sec-2-1" class="toc-sublink">2.1 交互佈局改版區塊說明</a></li>
-              <li><a href="section-2.html#sec-2-2" class="toc-sublink">2.2 交互佈局與組件規範 (抽屜模式)</a></li>
+              <li><a href="section-2.html#sec-2-2" class="toc-sublink">2.2 交互佈局與組件規範</a></li>
               <li><a href="section-2.html#sec-2-3" class="toc-sublink">2.3 數據格式化與呈現規範</a></li>
               <li><a href="section-2.html#sec-2-4" class="toc-sublink">2.4 前端狀態保存機制</a></li>
             </ul>
@@ -143,7 +104,7 @@
               <span class="toc-badge">05</span>
             </a>
             <ul class="toc-sublist">
-              <li><a href="section-5.html#sec-5-1" class="toc-sublink">5.1 視圖模式切換 (列表/巢狀)</a></li>
+              <li><a href="section-5.html#sec-5-1" class="toc-sublink">5.1 視圖模式切換</a></li>
               <li><a href="section-5.html#sec-5-2" class="toc-sublink">5.2 自訂欄位與卡片配置</a></li>
               <li><a href="section-5.html#sec-5-3" class="toc-sublink">5.3 一級欄位定義與特殊展示</a></li>
               <li><a href="section-5.html#sec-5-3-2" class="toc-sublink">5.3.2 列表模式展開卡片規格</a></li>
@@ -155,9 +116,9 @@
               <span class="toc-badge">06</span>
             </a>
             <ul class="toc-sublist">
-              <li><a href="section-6.html#sec-6-1" class="toc-sublink">6.1 編輯用戶抽屜 (基本信息/設置)</a></li>
-              <li><a href="section-6.html#sec-6-2" class="toc-sublink">6.2 會員詳情抽屜 (4大分頁)</a></li>
-              <li><a href="section-6.html#sec-6-3" class="toc-sublink">6.3 二級抽屜互動機制 (同IP/設備)</a></li>
+              <li><a href="section-6.html#sec-6-1" class="toc-sublink">6.1 編輯用戶抽屜</a></li>
+              <li><a href="section-6.html#sec-6-2" class="toc-sublink">6.2 會員詳情抽屜</a></li>
+              <li><a href="section-6.html#sec-6-3" class="toc-sublink">6.3 二級抽屜互動機制</a></li>
             </ul>
           </li>
           <li class="toc-item">
@@ -166,9 +127,9 @@
               <span class="toc-badge">07</span>
             </a>
             <ul class="toc-sublist">
-              <li><a href="section-7.html#sec-7-1" class="toc-sublink">7.1 正常狀態 (Normal State)</a></li>
-              <li><a href="section-7.html#sec-7-2" class="toc-sublink">7.2 無數據狀態 (Empty State)</a></li>
-              <li><a href="section-7.html#sec-7-3" class="toc-sublink">7.3 極限狀態 (Edge / Extreme State)</a></li>
+              <li><a href="section-7.html#sec-7-1" class="toc-sublink">7.1 正常狀態</a></li>
+              <li><a href="section-7.html#sec-7-2" class="toc-sublink">7.2 無數據狀態</a></li>
+              <li><a href="section-7.html#sec-7-3" class="toc-sublink">7.3 極限狀態</a></li>
             </ul>
           </li>
           <li class="toc-item">
@@ -177,11 +138,11 @@
               <span class="toc-badge">08</span>
             </a>
             <ul class="toc-sublist">
-              <li><a href="section-8.html#sec-8-1" class="toc-sublink">8.1 基礎帳號與狀態 (12項)</a></li>
-              <li><a href="section-8.html#sec-8-2" class="toc-sublink">8.2 等級與額度 (7項)</a></li>
-              <li><a href="section-8.html#sec-8-3" class="toc-sublink">8.3 財務與資金流水 (13項)</a></li>
-              <li><a href="section-8.html#sec-8-4" class="toc-sublink">8.4 關係、推薦與軌跡 (8項)</a></li>
-              <li><a href="section-8.html#sec-8-5" class="toc-sublink">8.5 備註欄位 (2項)</a></li>
+              <li><a href="section-8.html#sec-8-1" class="toc-sublink">8.1 基礎帳號與狀態</a></li>
+              <li><a href="section-8.html#sec-8-2" class="toc-sublink">8.2 等級與額度</a></li>
+              <li><a href="section-8.html#sec-8-3" class="toc-sublink">8.3 財務與資金流水</a></li>
+              <li><a href="section-8.html#sec-8-4" class="toc-sublink">8.4 關係、推薦與軌跡</a></li>
+              <li><a href="section-8.html#sec-8-5" class="toc-sublink">8.5 備註欄位</a></li>
             </ul>
           </li>
         </ul>
@@ -191,130 +152,168 @@
     <!-- Main Content Area -->
     <main class="content-area">
 
+      <!-- Prototype Hero Showcase Banner -->
+      <section class="prototype-hero">
+        <div class="hero-content">
+          <div class="hero-text">
+            <div class="hero-title">彩票業務專屬 · 會員管理交互與架構全面升級</div>
+            <div class="hero-subtitle">
+              依據產品規劃大綱《prdoutline.md》全面落地，專注解決舊版彈窗過多、資訊層級模糊、缺乏批量處置工具與敏感權限脫節等痛點。全面改版為<strong>右側多層級抽屜（Drawer）</strong>、個人化記憶視圖與嚴密權限閉環。
+            </div>
+          </div>
+
+          <div class="hero-prototype-card">
+            <div class="prototype-card-header">
+              <span>🎯 原型系統快速導航 (線上原型: pages.dev)</span>
+              <span class="badge-tag badge-purple">LIVE PROTOTYPE</span>
+            </div>
+            <div class="prototype-card-actions">
+              <a href="https://pm-doc-new-sport.pages.dev/" target="_blank" class="btn btn-sm btn-primary">
+                🖥️ 進入原型首頁 (index)
+              </a>
+              <a href="https://pm-doc-new-sport.pages.dev/content.html" target="_blank" class="btn btn-sm btn-outline">
+                📄 進入內容視圖 (content)
+              </a>
+            </div>
+            <div class="scenario-pills">
+              <span>情境切換：</span>
+              <a href="https://pm-doc-new-sport.pages.dev/content.html?mock=normal" target="_blank" class="pill-link">🟢
+                正常數據</a>
+              <a href="https://pm-doc-new-sport.pages.dev/content.html?mock=nodata&mode=nested" target="_blank"
+                class="pill-link">📭 無數據狀態</a>
+              <a href="https://pm-doc-new-sport.pages.dev/content.html?mock=extreme&mode=nested" target="_blank"
+                class="pill-link">⚡ 極限邊界</a>
+              <a href="https://pm-doc-new-sport.pages.dev/content.html?mode=nested" target="_blank" class="pill-link">🌲
+                巢狀模式</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Architecture Overview Cards -->
       <div class="section-card" style="margin-bottom: 24px;">
         <div class="section-header">
           <div>
             <span class="section-number">ARCHITECTURE MAP</span>
-            <h2 class="section-title">PRD 模塊全景導覽 (8 大核心章節)</h2>
+            <h2 class="section-title">PRD 模塊全景導覽</h2>
           </div>
           <span class="section-source">對應文檔大綱：prdoutline.md</span>
         </div>
         <p class="paragraph">點擊下方各模塊卡片或左側目錄，即可深入查閱獨立章節的詳細功能規格、交互流程與邊界規則：</p>
-        
+
         <div class="module-overview-grid">
-        <a href="section-1.html" class="module-card">
-          <div>
-            <div class="module-card-header">
-              <span class="module-card-num">SECTION 01</span>
-              <span class="module-card-icon">📋</span>
+          <a href="section-1.html" class="module-card">
+            <div>
+              <div class="module-card-header">
+                <span class="module-card-num">SECTION 01</span>
+                <span class="module-card-icon">📋</span>
+              </div>
+              <div class="module-card-title">1. 概述與文檔資訊</div>
+              <div class="module-card-desc">文檔版本修訂歷史、舊版痛點（多層彈窗、無數據未定義、個資粗暴留白）與改版目標。</div>
             </div>
-            <div class="module-card-title">1. 概述與文檔資訊</div>
-            <div class="module-card-desc">文檔版本修訂歷史、舊版痛點（多層彈窗、無數據未定義、個資粗暴留白）與改版目標。</div>
-          </div>
-          <div class="module-card-footer">
-            <span>查閱完整章節</span>
-            <span>→</span>
-          </div>
-        </a>
-        <a href="section-2.html" class="module-card">
-          <div>
-            <div class="module-card-header">
-              <span class="module-card-num">SECTION 02</span>
-              <span class="module-card-icon">📐</span>
+            <div class="module-card-footer">
+              <span>查閱完整章節</span>
+              <span>→</span>
             </div>
-            <div class="module-card-title">2. 全局通用設計規範</div>
-            <div class="module-card-desc">抽屜式交互標準（680px主抽屜/560px二級抽屜）、數值千分位、空值顯性標記（以顏色區分）、零值顯性展示與畫面設定自動還原。</div>
-          </div>
-          <div class="module-card-footer">
-            <span>查閱完整章節</span>
-            <span>→</span>
-          </div>
-        </a>
-        <a href="section-3.html" class="module-card">
-          <div>
-            <div class="module-card-header">
-              <span class="module-card-num">SECTION 03</span>
-              <span class="module-card-icon">🔒</span>
+          </a>
+          <a href="section-2.html" class="module-card">
+            <div>
+              <div class="module-card-header">
+                <span class="module-card-num">SECTION 02</span>
+                <span class="module-card-icon">📐</span>
+              </div>
+              <div class="module-card-title">2. 全局通用設計規範</div>
+              <div class="module-card-desc">抽屜式交互標準（680px主抽屜/560px二級抽屜）、數值千分位、空值顯性標記（以顏色區分）、零值顯性展示與畫面設定自動還原。</div>
             </div>
-            <div class="module-card-title">3. 權限管控矩陣</div>
-            <div class="module-card-desc">後台權限位置配置（系統管理 &gt; 權限管理 &gt; 編輯彈窗 &gt; 用戶管理 &gt; 會員）與舊版 49 項權限詳細對照表。</div>
-          </div>
-          <div class="module-card-footer">
-            <span>查閱完整章節</span>
-            <span>→</span>
-          </div>
-        </a>
-                        <a href="section-4.html" class="module-card">
-          <div>
-            <div class="module-card-header">
-              <span class="module-card-num">SECTION 04</span>
-              <span class="module-card-icon">⚡</span>
+            <div class="module-card-footer">
+              <span>查閱完整章節</span>
+              <span>→</span>
             </div>
-            <div class="module-card-title">4. 上方按鈕與搜尋篩選模塊</div>
-            <div class="module-card-desc">獨立快捷按鈕、批量操作收納、篩選維度控制、標籤精準匹配、主幣種與權限動態隱藏。</div>
-          </div>
-          <div class="module-card-footer">
-            <span>查閱完整章節</span>
-            <span>→</span>
-          </div>
-        </a>
-        <a href="section-5.html" class="module-card">
-          <div>
-            <div class="module-card-header">
-              <span class="module-card-num">SECTION 05</span>
-              <span class="module-card-icon">📊</span>
+          </a>
+          <a href="section-3.html" class="module-card">
+            <div>
+              <div class="module-card-header">
+                <span class="module-card-num">SECTION 03</span>
+                <span class="module-card-icon">🔒</span>
+              </div>
+              <div class="module-card-title">3. 權限管控矩陣</div>
+              <div class="module-card-desc">後台權限位置配置（系統管理 &gt; 權限管理 &gt; 編輯彈窗 &gt; 用戶管理 &gt; 會員）與舊版 49 項權限詳細對照表。</div>
             </div>
-            <div class="module-card-title">5. 數據列表與卡片展示模塊</div>
-            <div class="module-card-desc">雙視圖切換（扁平列表/代理樹狀巢狀模式）、自訂欄位排序顯隱、多錢包浮層與邀請碼規則。</div>
-          </div>
-          <div class="module-card-footer">
-            <span>查閱完整章節</span>
-            <span>→</span>
-          </div>
-        </a>
-        <a href="section-6.html" class="module-card">
-          <div>
-            <div class="module-card-header">
-              <span class="module-card-num">SECTION 06</span>
-              <span class="module-card-icon">🚪</span>
+            <div class="module-card-footer">
+              <span>查閱完整章節</span>
+              <span>→</span>
             </div>
-            <div class="module-card-title">6. 單筆會員操作與詳情抽屜</div>
-            <div class="module-card-desc">680px 一級詳情主抽屜（4大分頁）、560px 二級關聯抽屜（同IP/設備排查）與行操作功能選單。</div>
-          </div>
-          <div class="module-card-footer">
-            <span>查閱完整章節</span>
-            <span>→</span>
-          </div>
-        </a>
-        <a href="section-7.html" class="module-card">
-          <div>
-            <div class="module-card-header">
-              <span class="module-card-num">SECTION 07</span>
-              <span class="module-card-icon">🎨</span>
+          </a>
+          <a href="section-4.html" class="module-card">
+            <div>
+              <div class="module-card-header">
+                <span class="module-card-num">SECTION 04</span>
+                <span class="module-card-icon">⚡</span>
+              </div>
+              <div class="module-card-title">4. 上方按鈕與搜尋篩選模塊</div>
+              <div class="module-card-desc">獨立快捷按鈕、批量操作收納、篩選維度控制、標籤精準匹配、主幣種與權限動態隱藏。</div>
             </div>
-            <div class="module-card-title">7. 介面狀態規範</div>
-            <div class="module-card-desc">正常數據狀態、無數據狀態（數值 - / 字符 N/A / 數據 0 顯示 0，以顏色區分）、億級金額防護與長文字截斷。</div>
-          </div>
-          <div class="module-card-footer">
-            <span>查閱完整章節</span>
-            <span>→</span>
-          </div>
-        </a>
-        <a href="section-8.html" class="module-card">
-          <div>
-            <div class="module-card-header">
-              <span class="module-card-num">SECTION 08</span>
-              <span class="module-card-icon">📖</span>
+            <div class="module-card-footer">
+              <span>查閱完整章節</span>
+              <span>→</span>
             </div>
-            <div class="module-card-title">8. 附錄：欄位字典與數據定義</div>
-            <div class="module-card-desc">彩票後台 42 項全欄位字典表：基礎帳號、等級信用、財務錢包、關係軌跡、備註與分類篩選。</div>
-          </div>
-          <div class="module-card-footer">
-            <span>查閱完整章節</span>
-            <span>→</span>
-          </div>
-        </a>
+          </a>
+          <a href="section-5.html" class="module-card">
+            <div>
+              <div class="module-card-header">
+                <span class="module-card-num">SECTION 05</span>
+                <span class="module-card-icon">📊</span>
+              </div>
+              <div class="module-card-title">5. 數據列表與卡片展示模塊</div>
+              <div class="module-card-desc">雙視圖切換（扁平列表/代理樹狀巢狀模式）、自訂欄位排序顯隱、多錢包浮層與邀請碼規則。</div>
+            </div>
+            <div class="module-card-footer">
+              <span>查閱完整章節</span>
+              <span>→</span>
+            </div>
+          </a>
+          <a href="section-6.html" class="module-card">
+            <div>
+              <div class="module-card-header">
+                <span class="module-card-num">SECTION 06</span>
+                <span class="module-card-icon">🚪</span>
+              </div>
+              <div class="module-card-title">6. 單筆會員操作與詳情抽屜</div>
+              <div class="module-card-desc">680px 一級詳情主抽屜（4大分頁）、560px 二級關聯抽屜（同IP/設備排查）與行操作功能選單。</div>
+            </div>
+            <div class="module-card-footer">
+              <span>查閱完整章節</span>
+              <span>→</span>
+            </div>
+          </a>
+          <a href="section-7.html" class="module-card">
+            <div>
+              <div class="module-card-header">
+                <span class="module-card-num">SECTION 07</span>
+                <span class="module-card-icon">🎨</span>
+              </div>
+              <div class="module-card-title">7. 介面狀態規範</div>
+              <div class="module-card-desc">正常數據狀態、無數據狀態（數值 - / 字符 N/A / 數據 0 顯示 0，以顏色區分）、億級金額防護與長文字截斷。</div>
+            </div>
+            <div class="module-card-footer">
+              <span>查閱完整章節</span>
+              <span>→</span>
+            </div>
+          </a>
+          <a href="section-8.html" class="module-card">
+            <div>
+              <div class="module-card-header">
+                <span class="module-card-num">SECTION 08</span>
+                <span class="module-card-icon">📖</span>
+              </div>
+              <div class="module-card-title">8. 附錄：欄位字典與數據定義</div>
+              <div class="module-card-desc">彩票後台 42 項全欄位字典表：基礎帳號、等級信用、財務錢包、關係軌跡、備註與分類篩選。</div>
+            </div>
+            <div class="module-card-footer">
+              <span>查閱完整章節</span>
+              <span>→</span>
+            </div>
+          </a>
         </div>
       </div>
 
@@ -330,26 +329,34 @@
         </div>
 
         <!-- Jira Issue Link Banner -->
-        <div class="callout callout-info" style="margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; background: rgba(0, 82, 204, 0.05); border-left: 4px solid #0052CC; padding: 14px 18px;">
+        <div class="callout callout-info"
+          style="margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; background: rgba(0, 82, 204, 0.05); border-left: 4px solid #0052CC; padding: 14px 18px;">
           <div style="display: flex; align-items: center; gap: 14px;">
-            <div style="width: 40px; height: 40px; border-radius: 8px; background: #0052CC; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 20px; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0, 82, 204, 0.25);">
+            <div
+              style="width: 40px; height: 40px; border-radius: 8px; background: #0052CC; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 20px; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0, 82, 204, 0.25);">
               🎫
             </div>
             <div>
-              <div style="font-size: 11px; font-weight: 700; color: #0052CC; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px;">
+              <div
+                style="font-size: 11px; font-weight: 700; color: #0052CC; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px;">
                 Jira 需求追蹤單
               </div>
               <div style="font-size: 15px; font-weight: 600; color: var(--text-main);">
-                需求單號：<a href="https://cat-teams.atlassian.net/browse/PRJ-693" target="_blank" rel="noopener noreferrer" style="color: #0052CC; font-weight: 700; text-decoration: underline;">PRJ-693</a>
-                <span style="color: var(--text-muted); font-weight: 400; font-size: 13px; margin-left: 6px;">(彩票會員管理改版需求)</span>
+                需求單號：<a href="https://cat-teams.atlassian.net/browse/PRJ-693" target="_blank" rel="noopener noreferrer"
+                  style="color: #0052CC; font-weight: 700; text-decoration: underline;">PRJ-693</a>
+                <span
+                  style="color: var(--text-muted); font-weight: 400; font-size: 13px; margin-left: 6px;">(彩票會員管理改版需求)</span>
               </div>
               <div style="font-size: 12px; color: var(--text-subtle); margin-top: 3px; font-family: var(--font-mono);">
-                <a href="https://cat-teams.atlassian.net/browse/PRJ-693" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">https://cat-teams.atlassian.net/browse/PRJ-693</a>
+                <a href="https://cat-teams.atlassian.net/browse/PRJ-693" target="_blank" rel="noopener noreferrer"
+                  style="color: inherit; text-decoration: none;">https://cat-teams.atlassian.net/browse/PRJ-693</a>
               </div>
             </div>
           </div>
           <div>
-            <a href="https://cat-teams.atlassian.net/browse/PRJ-693" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background: #0052CC; border-color: #0052CC; padding: 7px 18px; font-size: 13px; font-weight: 600; text-decoration: none; border-radius: 6px; box-shadow: 0 2px 4px rgba(0, 82, 204, 0.2); display: inline-flex; align-items: center; gap: 6px;">
+            <a href="https://cat-teams.atlassian.net/browse/PRJ-693" target="_blank" rel="noopener noreferrer"
+              class="btn btn-primary"
+              style="background: #0052CC; border-color: #0052CC; padding: 7px 18px; font-size: 13px; font-weight: 600; text-decoration: none; border-radius: 6px; box-shadow: 0 2px 4px rgba(0, 82, 204, 0.2); display: inline-flex; align-items: center; gap: 6px;">
               <span>開啟 Jira 單</span>
               <span style="font-size: 14px;">↗</span>
             </a>
@@ -404,7 +411,8 @@
               <div class="feature-title">舊版痛點</div>
             </div>
             <div class="feature-desc">
-              <ul style="padding-left: 18px; margin-top: 6px; display: flex; flex-direction: column; gap: 10px; color: var(--text-main, #0f172a); font-weight: 600; font-size: 13.5px;">
+              <ul
+                style="padding-left: 18px; margin-top: 6px; display: flex; flex-direction: column; gap: 10px; color: var(--text-main, #0f172a); font-weight: 600; font-size: 13.5px;">
                 <li>搜尋列無隨權限控制</li>
                 <li>介面適配不良且難擴展</li>
                 <li>未定義無數據與極限狀態</li>
@@ -422,7 +430,8 @@
               <div class="feature-title">改版核心目標 (Key Objectives)</div>
             </div>
             <div class="feature-desc">
-              <ul style="padding-left: 18px; margin-top: 6px; display: flex; flex-direction: column; gap: 10px; color: var(--text-main, #0f172a); font-weight: 600; font-size: 13.5px;">
+              <ul
+                style="padding-left: 18px; margin-top: 6px; display: flex; flex-direction: column; gap: 10px; color: var(--text-main, #0f172a); font-weight: 600; font-size: 13.5px;">
                 <li>搜尋條件隨權限動態控制</li>
                 <li>會員數據高效比對與選取</li>
                 <li>響應式適配與邊界狀態規範</li>
@@ -437,7 +446,8 @@
 
         <!-- Legacy Interface Screenshot Reference -->
         <div class="feature-box" style="margin-top: 18px; padding: 20px;">
-          <div class="feature-box-header" style="justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <div class="feature-box-header"
+            style="justify-content: space-between; align-items: center; margin-bottom: 12px;">
             <div style="display: flex; align-items: center; gap: 8px;">
               <div class="feature-icon" style="background: rgba(148, 163, 184, 0.15); color: #475569;">🖼️</div>
               <div class="feature-title">舊版介面截圖對照 (Legacy Interface Reference)</div>
@@ -450,13 +460,16 @@
 
           <!-- 1. 主列表介面 -->
           <div style="margin-bottom: 16px;">
-            <div style="font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+            <div
+              style="font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
               <span>📑 1. 舊版會員列表主介面</span>
               <span class="badge-tag" style="background: #f1f5f9; color: #64748b; font-size: 11px;">時間：20261023</span>
             </div>
-            <div style="border-radius: 10px; overflow: hidden; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm); background: #f8fafc;">
+            <div
+              style="border-radius: 10px; overflow: hidden; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm); background: #f8fafc;">
               <a href="lottery_usermagement_1023.png" target="_blank" title="點擊檢視原圖">
-                <img src="lottery_usermagement_1023.png" alt="舊版彩票會員管理介面截圖 20261023" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
+                <img src="lottery_usermagement_1023.png" alt="舊版彩票會員管理介面截圖 20261023"
+                  style="width: 100%; height: auto; display: block; cursor: zoom-in;">
               </a>
             </div>
           </div>
@@ -464,14 +477,18 @@
           <!-- 2. 用戶詳情與編輯用戶 2-Column Grid -->
           <div class="grid-2" style="margin-top: 14px; gap: 16px;">
             <!-- 用戶詳情 -->
-            <div style="background: var(--bg-body); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 12px;">
-              <div style="font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+            <div
+              style="background: var(--bg-body); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 12px;">
+              <div
+                style="font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
                 <span>🔍 2. 舊版用戶詳情 (User Details)</span>
                 <span class="badge-tag badge-amber" style="font-size: 11px;">時間：20261023</span>
               </div>
-              <div style="border-radius: 8px; overflow: hidden; border: 1px solid var(--border-subtle); background: #fff;">
+              <div
+                style="border-radius: 8px; overflow: hidden; border: 1px solid var(--border-subtle); background: #fff;">
                 <a href="lottery_usermagement_1023_detail.png" target="_blank" title="點擊檢視用戶詳情原圖">
-                  <img src="lottery_usermagement_1023_detail.png" alt="舊版彩票會員用戶詳情截圖 20261023" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
+                  <img src="lottery_usermagement_1023_detail.png" alt="舊版彩票會員用戶詳情截圖 20261023"
+                    style="width: 100%; height: auto; display: block; cursor: zoom-in;">
                 </a>
               </div>
               <div style="margin-top: 6px; font-size: 11.5px; color: var(--text-subtle); text-align: center;">
@@ -480,14 +497,18 @@
             </div>
 
             <!-- 編輯用戶 -->
-            <div style="background: var(--bg-body); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 12px;">
-              <div style="font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+            <div
+              style="background: var(--bg-body); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 12px;">
+              <div
+                style="font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
                 <span>✏️ 3. 舊版編輯用戶 (Edit User)</span>
                 <span class="badge-tag badge-amber" style="font-size: 11px;">時間：20261023</span>
               </div>
-              <div style="border-radius: 8px; overflow: hidden; border: 1px solid var(--border-subtle); background: #fff;">
+              <div
+                style="border-radius: 8px; overflow: hidden; border: 1px solid var(--border-subtle); background: #fff;">
                 <a href="lottery_usermagement_1023_edit.png" target="_blank" title="點擊檢視編輯用戶原圖">
-                  <img src="lottery_usermagement_1023_edit.png" alt="舊版彩票會員編輯用戶截圖 20261023" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
+                  <img src="lottery_usermagement_1023_edit.png" alt="舊版彩票會員編輯用戶截圖 20261023"
+                    style="width: 100%; height: auto; display: block; cursor: zoom-in;">
                 </a>
               </div>
               <div style="margin-top: 6px; font-size: 11.5px; color: var(--text-subtle); text-align: center;">
@@ -534,17 +555,17 @@
         </div>
       </section>
 
-        <!-- Page Navigation Buttons -->
-        <div class="page-nav-bar">
+      <!-- Page Navigation Buttons -->
+      <div class="page-nav-bar">
 
-          <a href="section-2.html" class="page-nav-btn next">
-            <div>
-              <span class="page-nav-subtitle">下一章 (Next)</span>
-              <span class="page-nav-title">2. 全局通用設計規範</span>
-            </div>
-            <span style="font-size: 18px;">→</span>
-          </a>
-        </div>
+        <a href="section-2.html" class="page-nav-btn next">
+          <div>
+            <span class="page-nav-subtitle">下一章 (Next)</span>
+            <span class="page-nav-title">2. 全局通用設計規範</span>
+          </div>
+          <span style="font-size: 18px;">→</span>
+        </a>
+      </div>
 
     </main>
   </div>
@@ -559,11 +580,17 @@
           <span class="badge-tag badge-primary" id="modal-state-badge">NORMAL STATE</span>
         </div>
         <div style="display: flex; align-items: center; gap: 8px;">
-          <button class="btn btn-sm btn-outline" onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=normal')">🟢 正常</button>
-          <button class="btn btn-sm btn-outline" onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=nodata&mode=nested')">📭 無數據</button>
-          <button class="btn btn-sm btn-outline" onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=extreme&mode=nested')">⚡ 極限</button>
+          <button class="btn btn-sm btn-outline"
+            onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=normal')">🟢 正常</button>
+          <button class="btn btn-sm btn-outline"
+            onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=nodata&mode=nested')">📭
+            無數據</button>
+          <button class="btn btn-sm btn-outline"
+            onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=extreme&mode=nested')">⚡
+            極限</button>
           <a href="https://pm-doc-new-sport.pages.dev/" target="_blank" class="btn btn-sm btn-primary">在新視窗開啟 ↗</a>
-          <button class="icon-btn" onclick="closePrototypeModal()" style="width: 28px; height: 28px; font-size: 14px;">✕</button>
+          <button class="icon-btn" onclick="closePrototypeModal()"
+            style="width: 28px; height: 28px; font-size: 14px;">✕</button>
         </div>
       </div>
       <div class="modal-body">
@@ -579,4 +606,5 @@
 
   <script src="js/main.js"></script>
 </body>
+
 </html>
