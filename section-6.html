@@ -213,7 +213,7 @@
             <div>
               <strong style="color: var(--text-main);">2. 雙核心頁籤切換 (Tabs)</strong><br>
               • <strong style="color: var(--primary);">基本信息 (Default Tab)</strong>：涵蓋帳號核心識別身分、狀態切換與多渠道通訊方式。<br>
-              • <strong>会员设置</strong>：涵蓋金流通道指定（支付層級）、標籤多選綁定、提款黑名單限制開關、賠率與返點單獨微調（連動返點權限）。
+              • <strong>会员设置</strong>：涵蓋「费率与备注」（提现费率、备注）、「权限与限制」（第三方/彩票返水、转入限制、邀请码注册等 6 大開關，切換彈出二次確認視窗）以及「每日次数限制」（提现與充值返利次數上限）。
             </div>
 
             <div>
@@ -300,6 +300,133 @@
                       <td><strong>WhatsApp</strong></td>
                       <td><span class="code-pill">單行輸入框</span></td>
                       <td>國際通訊電話號碼維護。</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div>
+              <strong style="color: var(--text-main);">4. 「會員設置」分區欄位規格詳解與二次確認機制</strong>
+
+              <!-- 示意圖卡片容器：會員設置與二次確認視窗 -->
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 10px; margin-bottom: 16px;">
+                <!-- 圖一-B：會員設置頁籤介面截圖 -->
+                <div style="background: var(--bg-body); border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-sm);">
+                  <div style="padding: 10px 14px; background: #ffffff; border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between;">
+                    <span style="font-size: 12px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px;">
+                      <span>⚙️</span><span>會員設置抽屜介面截圖 (修改用戶詳情 · 會員設置)</span>
+                    </span>
+                    <a href="drawer_edit_user_settings.png" target="_blank" class="btn btn-sm btn-outline" style="font-size: 10.5px; padding: 2px 8px;">
+                      <span>↗ 開新視窗</span>
+                    </a>
+                  </div>
+                  <div style="padding: 12px; background: #ffffff; text-align: center;">
+                    <a href="drawer_edit_user_settings.png" target="_blank" title="點擊檢視會員設置介面大圖">
+                      <img src="drawer_edit_user_settings.png" alt="會員設置抽屜介面截圖" style="width: 100%; height: auto; display: block; border-radius: 4px; border: 1px solid var(--border-subtle); cursor: zoom-in;">
+                    </a>
+                  </div>
+                  <div style="padding: 8px 14px; font-size: 11.5px; color: var(--text-subtle); background: #fafafa; border-top: 1px solid var(--border-subtle); line-height: 1.5;">
+                    涵蓋「費率與備註」、「權限與限制」、「每日次數限制」三大核心控制區塊。
+                  </div>
+                </div>
+
+                <!-- 圖一-C：二次確定視窗 -->
+                <div style="background: var(--bg-body); border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-sm);">
+                  <div style="padding: 10px 14px; background: #ffffff; border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between;">
+                    <span style="font-size: 12px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px;">
+                      <span>⚠️</span><span>修改「權限與限制」二次確定視窗</span>
+                    </span>
+                    <a href="drawer_edit_confirm_modal.png" target="_blank" class="btn btn-sm btn-outline" style="font-size: 10.5px; padding: 2px 8px;">
+                      <span>↗ 開新視窗</span>
+                    </a>
+                  </div>
+                  <div style="padding: 12px; background: #ffffff; text-align: center;">
+                    <a href="drawer_edit_confirm_modal.png" target="_blank" title="點擊檢視二次確定視窗大圖">
+                      <img src="drawer_edit_confirm_modal.png" alt="修改權限與限制之二次確定視窗" style="width: 100%; height: auto; display: block; border-radius: 4px; border: 1px solid var(--border-subtle); cursor: zoom-in;">
+                    </a>
+                  </div>
+                  <div style="padding: 8px 14px; font-size: 11.5px; color: var(--text-subtle); background: #fafafa; border-top: 1px solid var(--border-subtle); line-height: 1.5;">
+                    切換開關時系統跳出 <code>你确定要提交吗？</code> 彈窗提示，需點擊 [確定] 方變更開關。
+                  </div>
+                </div>
+              </div>
+
+              <!-- 核心互動與保存生效警示框 -->
+              <div style="background: rgba(37, 99, 235, 0.04); border-left: 4px solid var(--primary); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-bottom: 14px;">
+                <div style="font-size: 13.5px; font-weight: 700; color: var(--primary); margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                  <span>💡</span><span>「權限與限制」切換防誤觸與提交生效規則：</span>
+                </div>
+                <ul style="padding-left: 18px; margin-bottom: 0; font-size: 12.5px; color: var(--text-muted); display: flex; flex-direction: column; gap: 5px;">
+                  <li><strong>二次確定防護機制</strong>：修改「<strong>權限與限制</strong>」區塊中的任一開關設置時（如停止第三方返水、限制轉入第三方、停止彩票返水、邀請碼註冊、停止成長值和等級更新、能否修改下級賠率），系統均會<strong>立即彈出二次確定對話框（<code>你确定要提交吗？</code>）</strong>，以防風控與返水參數遭誤觸。點擊 <code>[取消]</code> 保持原開關狀態，點擊 <code>[確定]</code> 方完成開關切換。</li>
+                  <li><strong>右上角按鈕最終生效機制</strong>：開關切換經二次確認後僅屬於前端編輯狀態，所有抽屜內的變更<strong>必須按下右上角的 <code>[保存修改]</code> 主按鈕</strong>後，系統方會統一發送 API 請求持久化並正式生效；若點擊 <code>[取消]</code> 則放棄本次所有變更並關閉抽屜。</li>
+                </ul>
+              </div>
+
+              <!-- 會員設置詳細規格表 -->
+              <div class="table-container" style="margin-top: 8px; margin-bottom: 0;">
+                <table class="data-table" style="font-size: 12.5px;">
+                  <thead>
+                    <tr>
+                      <th style="width: 140px;">分區名稱</th>
+                      <th style="width: 160px;">欄位名稱</th>
+                      <th style="width: 180px;">元件型態</th>
+                      <th>業務規範與互動邏輯</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td rowspan="2"><strong>費率與備註</strong><br><small style="color: var(--text-subtle);">费率与备注</small></td>
+                      <td><strong>提現費率</strong><br><small style="color: var(--text-subtle);">提现费率</small></td>
+                      <td><span class="code-pill">單行數值輸入框</span></td>
+                      <td>自訂該會員專屬提現手續費率。佔位文字提示：<code>例如 : 0.015 (支持三位小数)</code>。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>備註</strong><br><small style="color: var(--text-subtle);">备注</small></td>
+                      <td><span class="code-pill">多行文字框 (Textarea)</span></td>
+                      <td>內部管理與風控審計備註說明；無資料時預設顯示 <code>-</code>。</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="6"><strong>權限與限制</strong><br><small style="color: var(--text-subtle);">权限与限制<br><span style="color: #ea580c; font-weight: 600;">⚠️ 切換具二次確認</span></small></td>
+                      <td><strong>停止第三方返水</strong></td>
+                      <td><span class="code-pill">切換開關 (Switch)</span></td>
+                      <td>預設關閉。開啟時停止發放該會員各第三方遊戲之投注返水。切換時觸發二次確認彈窗。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>限制轉入第三方</strong></td>
+                      <td><span class="code-pill">切換開關 (Switch)</span></td>
+                      <td>預設關閉。開啟時禁止該會員將主錢包資金轉入任何第三方遊戲錢包。切換時觸發二次確認彈窗。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>停止彩票返水</strong></td>
+                      <td><span class="code-pill">切換開關 (Switch)</span></td>
+                      <td>預設關閉。開啟時凍結該會員之彩票自營遊戲投注返水計算。切換時觸發二次確認彈窗。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>邀請碼註冊</strong></td>
+                      <td><span class="code-pill">開關 + 說明圖示 (❔)</span></td>
+                      <td>控制該用戶是否允許使用邀請碼推薦下級註冊。懸停 <code>❔</code> 顯示說明。切換時觸發二次確認彈窗。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>停止成長值和等級更新</strong></td>
+                      <td><span class="code-pill">切換開關 (Switch)</span></td>
+                      <td>預設關閉。開啟時凍結該會員之 VIP 經驗值成長與等級晉升資格。切換時觸發二次確認彈窗。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>能否修改下級賠率</strong></td>
+                      <td><span class="code-pill">切換開關 (Switch)</span></td>
+                      <td>預設關閉。控制該代理用戶是否具備在前台/後台微調其下線會員遊戲賠率之權限。切換時觸發二次確認彈窗。</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="2"><strong>每日次數限制</strong><br><small style="color: var(--text-subtle);">每日次数限制</small></td>
+                      <td><strong>當天最大提現次數</strong></td>
+                      <td><span class="code-pill">整數輸入框</span></td>
+                      <td>單日發起提現次數上限。佔位文字提示：<code>未设置即不限制</code>；留空代表無次數上限。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>當天最大充值返利次數</strong></td>
+                      <td><span class="code-pill">整數輸入框</span></td>
+                      <td>單日享受充值返利活動之次數上限。佔位文字提示：<code>未设置即不限制</code>；留空代表無上限。</td>
                     </tr>
                   </tbody>
                 </table>
