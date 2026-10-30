@@ -107,7 +107,10 @@
               <li><a href="#sec-5-1" class="toc-sublink">5.1 視圖模式切換</a></li>
               <li><a href="#sec-5-2" class="toc-sublink">5.2 自訂欄位與卡片配置</a></li>
               <li><a href="#sec-5-3" class="toc-sublink">5.3 一級欄位定義與特殊展示</a></li>
-              <li><a href="#sec-5-3-2" class="toc-sublink">5.3.2 列表模式展開卡片規格</a></li>
+              <li><a href="#sec-5-3-1" class="toc-sublink">5.3.1 表頭金額排序與釘選固定交互</a></li>
+              <li><a href="#sec-5-3-2-list" class="toc-sublink">5.3.2 主表一級欄位定義清單</a></li>
+              <li><a href="#sec-5-3-2" class="toc-sublink">5.3.3 列表模式展開卡片規格</a></li>
+              <li><a href="#sec-5-3-3" class="toc-sublink">5.3.4 特殊欄位合併與彈層邏輯</a></li>
             </ul>
           </li>
           <li class="toc-item">
@@ -276,6 +279,12 @@
                     style="height: 18px; vertical-align: middle; border-radius: 3px; display: inline-block;">
                   <code>[ ▯▯ ]</code>），點擊後由畫面底部滑出<strong>「自訂欄位設定」抽屜</strong>（抽屜高度嚴格限制<strong>不會超過表頭</strong>），可自訂顯示欄位與卡片是否呈現於一級主表或卡片內（詳見下方
                   5.2 節專題）。
+                </li>
+                <li>
+                  <strong>4. 金額表頭排序功能 (Amount Header Sorting)</strong>：所有金額與餘額相關之一級表頭（如可用額度、存款總額、取款總額、三方餘額等）均內建排序功能（參照圖三：<code>存款总额 ▲ 📌</code>）。點擊表頭切換「降序 (▼) / 升序 (▲) / 預設 (無排序)」三態循環，啟動時箭頭高亮顯示，並自動重置至第 1 頁發送查詢（詳見 5.3.1 節）。
+                </li>
+                <li>
+                  <strong>5. 欄位釘選固定在最前面 (Freeze/Pin Column to Front 📌)</strong>：每個表頭右側均配有釘選圖示按鈕（<code>📌</code>）。點擊後該欄位即時「固定在最前面」（凍結於表格左側，接續在展開列與勾選列後方，參照圖四：<code>用户ID 📌</code> 與 <code>可用额度 📌</code>），並在右邊界呈現立體垂直分隔線；當右側其餘欄位進行橫向水平滾動時，已固定欄位始終吸附在左側保持可視，再次點擊即可解鎖還原原位（詳見 5.3.1 節）。
                 </li>
               </ul>
             </div>
@@ -487,11 +496,268 @@
           </div>
         </div>
 
-        <!-- 5.3.1 一級欄位詳細定義表 -->
-        <h4
-          style="font-size: 15px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+        <!-- 5.3.1 表頭金額排序與欄位固定在最前前端交互規格 -->
+        <h4 id="sec-5-3-1"
+          style="font-size: 15px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
           <span
             style="background: var(--primary-light); color: var(--primary); padding: 2px 8px; border-radius: 4px; font-size: 12px;">5.3.1</span>
+          表頭金額排序與欄位固定在最前前端交互規格 (Header Sorting & Freeze Columns Interaction)
+        </h4>
+
+        <!-- Prototype Screenshot Showcase Card -->
+        <div
+          style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+          <div
+            style="padding: 12px 18px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="badge-tag badge-primary">原型對照截圖</span>
+              <strong style="font-size: 13.5px; color: var(--text-main);">金額排序指示器 (▲/▼) 與欄位釘選固定在最前面 (📌) 效果對照</strong>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <a href="header_sort_pin.png" target="_blank" class="btn btn-sm btn-outline"
+                style="font-size: 11px; padding: 4px 10px;">
+                <span>↗</span><span>檢視圖三 (表頭特寫)</span>
+              </a>
+              <a href="table_pinned_columns.png" target="_blank" class="btn btn-sm btn-outline"
+                style="font-size: 11px; padding: 4px 10px;">
+                <span>↗</span><span>檢視圖四 (表格固定效果)</span>
+              </a>
+            </div>
+          </div>
+
+          <div style="padding: 18px; background: #ffffff;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+
+              <!-- Left: Image 1 Sort & Pin Header Close-up -->
+              <div
+                style="border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; background: #fafafa; display: flex; flex-direction: column;">
+                <div
+                  style="padding: 10px 14px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between;">
+                  <span style="font-size: 12.5px; font-weight: 700; color: var(--text-main);">圖三：金額表頭排序狀態 (▲) 與釘選按鈕 (📌)</span>
+                  <span class="badge-tag badge-emerald" style="font-size: 11px;">表頭局部特寫</span>
+                </div>
+                <div
+                  style="padding: 20px; display: flex; align-items: center; justify-content: center; background: #f8fafc; flex: 1; min-height: 110px;">
+                  <a href="header_sort_pin.png" target="_blank" title="點擊檢視高解析原圖 (金額表頭排序與釘選)">
+                    <img src="header_sort_pin.png" alt="圖三：存款總額金額表頭升序排序指示器與釘選按鈕"
+                      style="max-width: 100%; height: auto; display: block; border-radius: 6px; box-shadow: var(--shadow-sm); cursor: zoom-in; transition: transform 0.2s;"
+                      onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                  </a>
+                </div>
+                <div
+                  style="padding: 10px 14px; font-size: 12px; color: var(--text-subtle); line-height: 1.5; background: #ffffff; border-top: 1px solid var(--border-subtle);">
+                  <strong>視覺標示：</strong> 表頭名稱（如 <code>存款总额</code>）後方配備排序三角指示器（當前為升序 <code>▲</code>）與釘選按鈕（<code>📌</code>）。
+                </div>
+              </div>
+
+              <!-- Right: Image 2 Table Pinned Columns Overview -->
+              <div
+                style="border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; background: #fafafa; display: flex; flex-direction: column;">
+                <div
+                  style="padding: 10px 14px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between;">
+                  <span style="font-size: 12.5px; font-weight: 700; color: var(--text-main);">圖四：固定在最前面表格橫向滾動效果</span>
+                  <span class="badge-tag badge-primary" style="font-size: 11px;">左側凍結 + 右側水平捲動</span>
+                </div>
+                <div
+                  style="padding: 8px; background: #ffffff; display: flex; align-items: center; justify-content: center; flex: 1;">
+                  <a href="table_pinned_columns.png" target="_blank" title="點擊檢視高解析原圖 (固定在最前面表格效果)">
+                    <img src="table_pinned_columns.png" alt="圖四：用戶ID與可用額度釘選固定在最前面，右側欄位橫向滾動"
+                      style="width: 100%; height: auto; display: block; border-radius: 6px; border: 1px solid var(--border-subtle); cursor: zoom-in; transition: transform 0.2s;"
+                      onmouseover="this.style.opacity='0.96'" onmouseout="this.style.opacity='1'">
+                  </a>
+                </div>
+                <div
+                  style="padding: 10px 14px; font-size: 12px; color: var(--text-subtle); line-height: 1.5; background: #ffffff; border-top: 1px solid var(--border-subtle);">
+                  <strong>佈局特徵：</strong> <code>用户ID 📌</code> 與 <code>可用额度 📌</code> 被鎖定固定在最左側（接在展開按鈕與勾選列後）；右側呈現立體垂直分隔線，其餘欄位（在線、會員名、代理、狀態等）橫向滾動穿透。
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Detailed Feature Cards Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 18px; margin-bottom: 24px;">
+
+          <!-- Card 1: Amount Header Sorting -->
+          <div
+            style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 18px 20px; border-top: 3px solid var(--emerald); box-shadow: var(--shadow-sm);">
+            <div
+              style="font-size: 14.5px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <span>📈</span><span>1. 金額表頭排序功能前端交互規範</span>
+            </div>
+            <div style="font-size: 13.5px; color: var(--text-muted); line-height: 1.7; display: flex; flex-direction: column; gap: 10px;">
+              <div>
+                <strong>• 適用欄位範圍：</strong><br>
+                所有涉及「金額」、「資金」與「餘額」之一級主表欄位，包含：<code>可用額度</code>、<code>三方餘額</code>、<code>主錢包 (存款總額)</code>、<code>主錢包 (取款總額)</code>、<code>彙總 (USDT) - 存款總額</code>、<code>彙總 (USDT) - 取款總額</code>。
+              </div>
+              <div>
+                <strong>• 三態循環切換機制 (Three-way Cycle Toggle)：</strong><br>
+                操作員點擊表頭單元格或排序箭頭區域，依序在以下三種狀態間循環切換：
+                <ul style="padding-left: 18px; margin-top: 4px; margin-bottom: 0;">
+                  <li><strong>狀態 1 · 預設 (Default / Unsorted)</strong>：未啟動排序，圖示顯示為淡灰色雙向箭頭 <code>⇅</code> 或隱藏，Hover 提示「點擊進行排序」。</li>
+                  <li><strong>狀態 2 · 降序 (Descending ▼)</strong>：第 1 次點擊進入降序，表頭顯示高亮向下箭頭 <code>▼</code>，數據由大至小排列（滿足高資產大戶、大額充提優先稽核的高頻場景）。</li>
+                  <li><strong>狀態 3 · 升序 (Ascending ▲)</strong>：第 2 次點擊切換為升序，表頭顯示高亮向上箭頭 <code>▲</code>（參照圖三），數據由小至大排列。</li>
+                  <li><strong>狀態 4 · 取消還原</strong>：第 3 次點擊取消排序，恢復系統預設排序邏輯（如依註冊日期或會員 ID 自然排序）。</li>
+                </ul>
+              </div>
+              <div>
+                <strong>• 單列互斥排他原則 (Single Column Sort Exclusion)：</strong><br>
+                全表格同時僅允許<strong>單一欄位</strong>處於排序啟動狀態。若當前正在按「可用額度」排序，當點擊「存款總額」排序時，「可用額度」的排序狀態自動取消並還原為預設箭頭，由「存款總額」接管排序。
+              </div>
+              <div>
+                <strong>• 分頁重置與篩選參數連動：</strong><br>
+                觸發排序時，前端自動將分頁頁碼重置為 <strong>第 1 頁 (Page = 1)</strong>，避免後續分頁數據錯位；同時完整保留目前已選取的頂部篩選條件，將 <code>sort_field</code> 與 <code>sort_direction</code>（<code>asc</code> / <code>desc</code>）寫入 API 參數發送請求。
+              </div>
+              <div>
+                <strong>• 加載過渡與排序列高亮：</strong><br>
+                排序發起時列表數據區呈現輕量骨架加載遮罩；加載完成後，該排序列之整欄單元格背景呈現微淺主題色著色（如 <code>rgba(5, 150, 105, 0.03)</code>），強化操作員視覺對齊效率。
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Freeze Column to Front -->
+          <div
+            style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 18px 20px; border-top: 3px solid var(--primary); box-shadow: var(--shadow-sm);">
+            <div
+              style="font-size: 14.5px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <span>📌</span><span>2. 欄位釘選固定在最前面交互規範</span>
+            </div>
+            <div style="font-size: 13.5px; color: var(--text-muted); line-height: 1.7; display: flex; flex-direction: column; gap: 10px;">
+              <div>
+                <strong>• 釘選按鈕與觸發入口：</strong><br>
+                所有一級表頭右側均配備釘選圖示按鈕（<code>📌</code>，Pin Icon）。未釘選時呈現半透明弱化輪廓，Hover 提示「固定在最前面」；已釘選時呈現實心高亮樣式，Hover 提示「取消固定」。
+              </div>
+              <div>
+                <strong>• 固定在最前面之定位佈局 (Freeze to Front Layout)：</strong><br>
+                點擊表頭 <code>📌</code> 按鈕後，該欄位即時被<strong>「固定在表格最前面」</strong>，接續在最左側的固有系統控制列之後。如圖四示範，表格最左側列依序排列：
+                <ul style="padding-left: 18px; margin-top: 4px; margin-bottom: 0;">
+                  <li>1. 行展開列（寬度 48px，<code>position: sticky; left: 0px;</code>）</li>
+                  <li>2. 複選勾選列（寬度 48px，<code>position: sticky; left: 48px;</code>）</li>
+                  <li>3. 釘選欄位 1：<code>用户ID 📌</code>（寬度 120px，<code>position: sticky; left: 96px;</code>）</li>
+                  <li>4. 釘選欄位 2：<code>可用额度 📌</code>（寬度 130px，<code>position: sticky; left: 216px;</code>）</li>
+                </ul>
+              </div>
+              <div>
+                <strong>• 右側立體垂直分隔線 (Vertical Divider & Shadow)：</strong><br>
+                系統自動為<strong>最後一個被釘選固定的欄位</strong>（如圖四中的 <code>可用额度</code> 列）右側邊界添加實體分隔線與向右投射的立體陰影（<code>box-shadow: 4px 0 8px -2px rgba(0, 0, 0, 0.08);</code>），明確界定「左側固定區域」與「右側滾動數據區域」。
+              </div>
+              <div>
+                <strong>• 水平橫向滾動穿透機制 (Horizontal Scroll Underneath)：</strong><br>
+                當表格出現大量一級欄位產生水平橫向滾動軸（<code>overflow-x: auto</code>）時，右側非固定欄位（在線、會員名、代理、狀態、VIP等級、支付層級等）向左平滑穿入固定欄位的下方；已固定的欄位與表頭始終牢牢吸附在最左側保持 100% 可視，操作員橫向瀏覽遠端欄位時絕不失去核心身分與金額對齊基準。
+              </div>
+              <div>
+                <strong>• 解鎖取消固定與順序還原：</strong><br>
+                再次點擊已固定欄位的 <code>📌</code> 按鈕，該欄位立即解除固定，平滑回歸到其在資料列中的原生排列位置；立體陰影分隔線自動重新動態計算並賦予新的最後一個固定欄位。
+              </div>
+              <div>
+                <strong>• 多欄位固定上限與 LocalStorage 持久化：</strong><br>
+                系統支援同時釘選多個核心欄位，建議上限為 3 欄以保留足夠的可滾動可視空間。操作員的釘選偏好即時同步寫入瀏覽器 <code>LocalStorage</code>，頁面重新整理或切換視圖模式後自動記憶還原，並與 5.2 節自訂抽屜狀態雙向同步。
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Core Interactive Behavior Specifications Table -->
+        <div class="table-container" style="margin-bottom: 28px;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 170px;">交互功能項</th>
+                <th style="width: 150px;">介面觸發與熱區</th>
+                <th style="width: 220px;">視覺狀態反饋</th>
+                <th>表格佈局與數據連動邏輯</th>
+                <th style="width: 190px;">邊界防護與防錯機制</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>金額表頭排序<br><small>(Amount Sorting)</small></strong></td>
+                <td>
+                  <span class="code-pill">表頭單元格點擊</span><br>
+                  <span class="code-pill">排序三角箭頭 <code>▲ / ▼</code></span>
+                </td>
+                <td>
+                  • 預設無排序：顯示 <code>⇅</code><br>
+                  • 降序：顯示高亮向下箭頭 <code>▼</code><br>
+                  • 升序：顯示高亮向上箭頭 <code>▲</code>（圖三）<br>
+                  • 當前排序列背景帶有微淺著色高亮
+                </td>
+                <td>
+                  • <strong>三態循環</strong>：無排序 → 降序 ▼ → 升序 ▲ → 還原無排序。<br>
+                  • <strong>分頁連動</strong>：觸發排序時自動重置頁碼至 <code>page = 1</code>。<br>
+                  • <strong>條件繼承</strong>：保留頂部所有複合搜尋篩選條件發送 API。<br>
+                  • <strong>數據刷新</strong>：觸發加載骨架遮罩，後端回傳後平滑淡入渲染。
+                </td>
+                <td>
+                  • <strong>排他性限制</strong>：全表單一排序列，點擊新欄位自動重置舊排序列。<br>
+                  • <strong>快速連點防抖</strong>：內建 300ms 防抖 (Debounce)，防止頻繁請求。
+                </td>
+              </tr>
+              <tr>
+                <td><strong>欄位固定在最前面<br><small>(Freeze Column 📌)</small></strong></td>
+                <td>
+                  <span class="code-pill">表頭圖示按鈕 <code>📌</code></span><br>
+                  （自訂欄位抽屜亦支援勾選）
+                </td>
+                <td>
+                  • 未固定：半透明弱化圖標 <code>📌</code>，Hover 提示「固定在最前面」<br>
+                  • 已固定：實心高亮 <code>📌</code>，Hover 提示「取消固定」<br>
+                  • 右側邊界呈現垂直實體分隔線與向右立體投影（<code>box-shadow</code>）
+                </td>
+                <td>
+                  • <strong>固定在最前</strong>：緊跟在「行展開列 (48px)」與「勾選列 (48px)」之後。<br>
+                  • <strong>Sticky 偏移計算</strong>：依序累加前置欄位寬度計算 <code>left: offset</code>。<br>
+                  • <strong>水平穿透</strong>：右側欄位水平滾動時穿入固定列底層，固定列 100% 保持可視。<br>
+                  • <strong>取消還原</strong>：再次點擊即刻釋放，平滑歸位回主表原生次序。
+                </td>
+                <td>
+                  • <strong>固定數量上限</strong>：最多允許自訂固定 3 欄，避免壓迫滾動可視區。<br>
+                  • <strong>記憶持久化</strong>：寫入 <code>LocalStorage</code>，頁面重整自動還原。<br>
+                  • <strong>抽屜雙向連動</strong>：與 5.2 抽屜勾選狀態保持實時同步。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Technical Implementation Reference Box -->
+        <div
+          style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px 20px; margin-bottom: 30px; box-shadow: var(--shadow-sm);">
+          <div
+            style="font-size: 13.5px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+            <span>💻</span><span>前端技術實作參考指引 (CSS Sticky & Z-Index Stratification)</span>
+          </div>
+          <div style="font-size: 12.5px; color: var(--text-subtle); line-height: 1.6; margin-bottom: 10px;">
+            為確保表格橫向滾動穿透、表頭垂直吸頂與固定列交會處無遮蔽異常，前端工程師建議遵循以下 CSS 分層規則：
+          </div>
+          <div
+            style="background: #0f172a; color: #f8fafc; padding: 14px 16px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.6; overflow-x: auto;">
+/* 表頭吸頂與左側固定層級配置 */
+thead th.sticky-header { position: sticky; top: 0; z-index: 20; background: var(--bg-surface); }
+thead th.sticky-pinned { position: sticky; top: 0; z-index: 30; background: var(--bg-surface); } /* 表頭與固定列交會處最高層級 */
+tbody td.sticky-pinned { position: sticky; z-index: 10; background: var(--bg-surface); }        /* 固定數據列單元格 */
+
+/* 水平偏移量計算示例 */
+.col-expand    { left: 0px; width: 48px; }
+.col-checkbox  { left: 48px; width: 48px; }
+.col-pinned-1  { left: 96px; min-width: 120px; }   /* 如：用戶ID 📌 */
+.col-pinned-2  { left: 216px; min-width: 130px; }  /* 如：可用額度 📌 */
+
+/* 最後一個固定欄位之立體分隔陰影 */
+.col-pinned-last {
+  box-shadow: 4px 0 8px -2px rgba(0, 0, 0, 0.08);
+  border-right: 1px solid var(--border-subtle);
+}
+          </div>
+        </div>
+
+        <!-- 5.3.2 一級欄位詳細定義表 -->
+        <h4 id="sec-5-3-2-list"
+          style="font-size: 15px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span
+            style="background: var(--primary-light); color: var(--primary); padding: 2px 8px; border-radius: 4px; font-size: 12px;">5.3.2</span>
           主表一級欄位默認定義清單
         </h4>
         <div class="table-container" style="margin-bottom: 28px;">
@@ -689,11 +955,12 @@
           </table>
         </div>
 
-        <!-- 5.3.2 列表模式展開卡片規格 -->
-        <h4 id="sec-5-3-2"
+        <!-- 5.3.3 列表模式展開卡片規格 -->
+        <h4 id="sec-5-3-3"
           style="font-size: 15px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <a id="sec-5-3-2"></a>
           <span
-            style="background: var(--primary-light); color: var(--primary); padding: 2px 8px; border-radius: 4px; font-size: 12px;">5.3.2</span>
+            style="background: var(--primary-light); color: var(--primary); padding: 2px 8px; border-radius: 4px; font-size: 12px;">5.3.3</span>
           列表模式展開卡片規格
         </h4>
 
@@ -892,11 +1159,12 @@
   </div>
 </div>
 
-<!-- 5.3.3 欄位特殊合併與彈層展示邏輯 -->
-<h4 id="sec-5-3-3"
+<!-- 5.3.4 欄位特殊合併與彈層展示邏輯 -->
+<h4 id="sec-5-3-4"
   style="font-size: 15px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+  <a id="sec-5-3-3"></a>
   <span
-    style="background: var(--primary-light); color: var(--primary); padding: 2px 8px; border-radius: 4px; font-size: 12px;">5.3.3</span>
+    style="background: var(--primary-light); color: var(--primary); padding: 2px 8px; border-radius: 4px; font-size: 12px;">5.3.4</span>
   特殊欄位合併與彈層展示邏輯
 </h4>
 <div class="table-container">
