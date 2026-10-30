@@ -496,24 +496,200 @@
           </div>
 
           <!-- 詳細卡片規格解析 -->
-          <div style="display: flex; flex-direction: column; gap: 14px; font-size: 13px; color: var(--text-muted); line-height: 1.7;">
-            <div style="border-left: 3px solid var(--primary); padding-left: 12px;">
-              <strong style="color: var(--text-main);">基本資料卡片 (Basic Info Card)</strong><br>
-              • <strong>頭像展示</strong>：左側展示圓形會員頭像（未上傳時呈現預設人物頭像輪廓）。<br>
-              • <strong>雙列資訊膠囊</strong>：右側採用資訊卡片，成對呈現「用戶暱稱 / 帳號」、「真實姓名 / 出生年月日」。<br>
-              • <strong>空值展示規範</strong>：真實姓名若未綁定，一律顯性顯示 <code>"-"</code>（以顏色區分弱化），嚴禁空白留白。
+          <div style="display: flex; flex-direction: column; gap: 20px; font-size: 13px; color: var(--text-muted); line-height: 1.7;">
+            
+            <!-- 頁籤一：會員信息 -->
+            <div style="border-left: 3px solid var(--primary); padding-left: 14px;">
+              <strong style="color: var(--text-main); font-size: 14px;">👤 頁籤一：會員信息 (Default Tab - 基本資料與通訊矩陣)</strong>
+              <div style="margin-top: 8px; display: flex; flex-direction: column; gap: 10px;">
+                <div>
+                  <strong>• 基本資料卡片 (Basic Info Card)</strong>：<br>
+                  - <strong>頭像展示</strong>：左側展示圓形會員頭像（未上傳時呈現預設人物頭像輪廓）。<br>
+                  - <strong>雙列資訊膠囊</strong>：右側採用資訊卡片，成對呈現「用戶暱稱 / 帳號」、「真實姓名 / 出生年月日」。<br>
+                  - <strong>空值展示規範</strong>：真實姓名若未綁定，一律顯性顯示 <code>"-"</code>（以顏色區分弱化），嚴禁空白留白。
+                </div>
+                <div>
+                  <strong>• 聯絡方式卡片 (Contact Methods - 8 大維度矩陣)</strong>：<br>
+                  - <strong>涵蓋管道</strong>：雙欄網格依序陳列 <code>电话</code>、<code>Email</code>、<code>QQ</code>、<code>微信 (WeChat)</code>、<code>Zalo</code>、<code>WhatsApp</code>、<code>Telegram</code>、<code>Facebook</code>。<br>
+                  - <strong>統一安全脫敏與空值表現</strong>：未填寫或無綁定數據之管道，欄位框內部統一展示 <code>"-"</code>（以顏色區分弱化），杜絕舊版粗暴留白問題；具備資料者依後台敏感資訊查看權限進行加密脫敏或明文呈現。
+                </div>
+                <div>
+                  <strong>• 備註與營運紀錄 (Remarks)</strong>：<br>
+                  - 展示該會員歷次電銷跟進、風控加註、客服諮詢等歷史備註文字，支援超過長度截斷與展開完整歷程。
+                </div>
+              </div>
             </div>
 
-            <div style="border-left: 3px solid var(--purple); padding-left: 12px;">
-              <strong style="color: var(--text-main);">聯絡方式卡片 (Contact Methods - 8 大維度矩陣)</strong><br>
-              • <strong>涵蓋管道</strong>：雙欄網格依序陳列 <code>电话</code>、<code>Email</code>、<code>QQ</code>、<code>微信 (WeChat)</code>、<code>Zalo</code>、<code>WhatsApp</code>、<code>Telegram</code>、<code>Facebook</code>。<br>
-              • <strong>統一安全脫敏與空值表現</strong>：未填寫或無綁定數據之管道，欄位框內部統一展示 <code>"-"</code>（以顏色區分弱化），杜絕舊版粗暴留白問題；具備資料者依後台敏感資訊查看權限進行加密脫敏或明文呈現。
+            <!-- 頁籤二：會員審核 -->
+            <div style="border-left: 3px solid var(--purple); padding-left: 14px;">
+              <strong style="color: var(--text-main); font-size: 14px;">📝 頁籤二：會員審核 (連動『會員信息審核』權限)</strong>
+              <p style="margin-top: 6px; margin-bottom: 10px;">
+                集中審核該會員申請變更之敏感個資（如真實姓名認證、手機號碼解綁或變更等）。審核管理員可查閱修改前後對照與精確申請時間，並依審查結果進行通過、拒絕或重置操作。
+              </p>
+
+              <!-- 示意圖卡片：會員審核介面截圖 -->
+              <div style="background: var(--bg-body); border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; margin-bottom: 12px; box-shadow: var(--shadow-sm);">
+                <div style="padding: 10px 14px; background: #ffffff; border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between;">
+                  <span style="font-size: 12px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px;">
+                    <span>📝</span><span>會員審核介面截圖 (查看詳情 · 會員審核)</span>
+                  </span>
+                  <a href="drawer_detail_tab_audit.png" target="_blank" class="btn btn-sm btn-outline" style="font-size: 10.5px; padding: 2px 8px;">
+                    <span>↗ 開新視窗</span>
+                  </a>
+                </div>
+                <div style="padding: 12px; background: #ffffff; text-align: center;">
+                  <a href="drawer_detail_tab_audit.png" target="_blank" title="點擊檢視會員審核介面大圖">
+                    <img src="drawer_detail_tab_audit.png" alt="會員審核介面截圖" style="width: 100%; height: auto; display: block; border-radius: 4px; border: 1px solid var(--border-subtle); cursor: zoom-in;">
+                  </a>
+                </div>
+                <div style="padding: 8px 14px; font-size: 11.5px; color: var(--text-subtle); background: #fafafa; border-top: 1px solid var(--border-subtle); line-height: 1.5;">
+                  列表呈現變更項目、修改前、修改後、申請時間，並配有 [通过]、[拒绝] 與 [重置] 審核按鈕。
+                </div>
+              </div>
+
+              <!-- 會員審核列表欄位規格表 -->
+              <div class="table-container" style="margin-top: 6px; margin-bottom: 0;">
+                <table class="data-table" style="font-size: 12.5px;">
+                  <thead>
+                    <tr>
+                      <th style="width: 130px;">欄位名稱</th>
+                      <th style="width: 140px;">介面展示值</th>
+                      <th style="width: 140px;">元件型態</th>
+                      <th>業務規範與審核互動邏輯</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>變更項目</strong></td>
+                      <td><code>真实姓名</code> / <code>电话</code></td>
+                      <td><span class="code-pill">文字標籤</span></td>
+                      <td>申請變更之會員個資維度，涵蓋真實姓名、電話綁定等關鍵身分欄位。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>修改前</strong></td>
+                      <td><code>未填写</code> / <code>0912345678</code></td>
+                      <td><span class="code-pill">唯讀文字</span></td>
+                      <td>變更前的原始資料；若原無綁定則顯性標示 <code>未填写</code>。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>修改後</strong></td>
+                      <td><code>王*明</code> / <code>-</code></td>
+                      <td><span class="code-pill">脫敏文字</span></td>
+                      <td>會員申請修改之目標內容；姓名採隱私脫敏遮罩處理（例如 <code>王*明</code>），解除綁定申請則顯示 <code>-</code>。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>申請時間</strong></td>
+                      <td><code>2026-07-28 16:30:42</code></td>
+                      <td><span class="code-pill">時間戳記</span></td>
+                      <td>會員在前台或客服通道發起資料修改申請之精確系統時間戳（<code>YYYY-MM-DD HH:mm:ss</code>）。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>操作按鈕</strong></td>
+                      <td>
+                        <span style="background: #10b981; color: #fff; padding: 2px 7px; border-radius: 4px; font-weight: 700; font-size: 11px;">通过</span>
+                        <span style="background: #ef4444; color: #fff; padding: 2px 7px; border-radius: 4px; font-weight: 700; font-size: 11px;">拒绝</span>
+                        <span style="background: #64748b; color: #fff; padding: 2px 7px; border-radius: 4px; font-weight: 700; font-size: 11px;">重置</span>
+                      </td>
+                      <td><span class="code-pill">操作按鈕組</span></td>
+                      <td>
+                        • <strong>[通过]</strong>（綠色）：審核同意該變更，系統即時將「修改後」資料覆蓋寫入會員檔案主資料庫。<br>
+                        • <strong>[拒绝]</strong>（紅色）：駁回本次變更申請，維持原始資料不變並將審核失敗日誌歸檔。<br>
+                        • <strong>[重置]</strong>（灰色）：針對手機等特定維度提供一鍵重置清空解綁，重置後恢復為未綁定狀態。
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
-            <div style="border-left: 3px solid var(--emerald); padding-left: 12px;">
-              <strong style="color: var(--text-main);">備註與營運紀錄 (Remarks)</strong><br>
-              • 展示該會員歷次電銷跟進、風控加註、客服諮詢等歷史備註文字，支援超過長度截斷與展開完整歷程。
+            <!-- 頁籤三：提現信息 -->
+            <div style="border-left: 3px solid var(--emerald); padding-left: 14px;">
+              <strong style="color: var(--text-main); font-size: 14px;">💳 頁籤三：提現信息 (出款帳號與通道狀態管理)</strong>
+              <p style="margin-top: 6px; margin-bottom: 10px;">
+                集中管理與審查該會員名下所有已綁定之出款通道，支援傳統法幣銀行卡與區塊鏈虛擬貨幣錢包（USDT TRC20 等），提供卡號掩碼脫敏防護與「啟用/停用」風控狀態管控。
+              </p>
+
+              <!-- 示意圖卡片：提現信息介面截圖 -->
+              <div style="background: var(--bg-body); border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; margin-bottom: 12px; box-shadow: var(--shadow-sm);">
+                <div style="padding: 10px 14px; background: #ffffff; border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between;">
+                  <span style="font-size: 12px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px;">
+                    <span>💳</span><span>提現信息介面截圖 (查看詳情 · 提現信息)</span>
+                  </span>
+                  <a href="drawer_detail_tab_withdraw.png" target="_blank" class="btn btn-sm btn-outline" style="font-size: 10.5px; padding: 2px 8px;">
+                    <span>↗ 開新視窗</span>
+                  </a>
+                </div>
+                <div style="padding: 12px; background: #ffffff; text-align: center;">
+                  <a href="drawer_detail_tab_withdraw.png" target="_blank" title="點擊檢視提現信息介面大圖">
+                    <img src="drawer_detail_tab_withdraw.png" alt="提現信息介面截圖" style="width: 100%; height: auto; display: block; border-radius: 4px; border: 1px solid var(--border-subtle); cursor: zoom-in;">
+                  </a>
+                </div>
+                <div style="padding: 8px 14px; font-size: 11.5px; color: var(--text-subtle); background: #fafafa; border-top: 1px solid var(--border-subtle); line-height: 1.5;">
+                  多出款類型（銀行卡、虛擬貨幣 TRC20 等）帳號列表管理，提供卡號脫敏遮罩與「啟用/停用」狀態膠囊標籤。
+                </div>
+              </div>
+
+              <!-- 提現信息列表欄位規格表 -->
+              <div class="table-container" style="margin-top: 6px; margin-bottom: 0;">
+                <table class="data-table" style="font-size: 12.5px;">
+                  <thead>
+                    <tr>
+                      <th style="width: 130px;">欄位名稱</th>
+                      <th style="width: 170px;">介面展示值</th>
+                      <th style="width: 130px;">元件型態</th>
+                      <th>業務規範與風控管控邏輯</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>出款類型</strong></td>
+                      <td><code>银行卡</code> / <code>虚拟货币</code></td>
+                      <td><span class="code-pill">文字標籤</span></td>
+                      <td>出款渠道類別，區分傳統法定貨幣金融卡（銀行卡）與 Web3 加密區塊鏈出金地址（虛擬貨幣）。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>卡號 / 錢包 / 支付寶賬號</strong></td>
+                      <td><code>622202******1234</code><br><code>TR7NHq******e1Rj</code></td>
+                      <td><span class="code-pill">脫敏文字</span></td>
+                      <td>會員已綁定之出款帳號。依合規脫敏規範：銀行卡保留前 6 後 4 碼、USDT 地址保留前 5 後 4 碼，中間以 <code>******</code> 掩碼呈現，防止個資外洩。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>銀行 / 幣種</strong></td>
+                      <td><code>中国工商银行 / CNY</code><br><code>USDT (TRC20)</code></td>
+                      <td><span class="code-pill">複合標籤</span></td>
+                      <td>所屬發卡機構名稱與結算結算幣種（如人民幣 CNY、泰銖 THB）或加密公鏈協議（如 TRC20 網絡）。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>銀行地址 / 備註</strong></td>
+                      <td><code>北京朝阳分行</code> / <code>-</code></td>
+                      <td><span class="code-pill">唯讀文字</span></td>
+                      <td>銀行開戶所屬分行支行名稱或特定鏈上備註；無資料者顯性統一標示為 <code>"-"</code>。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>狀態</strong></td>
+                      <td>
+                        <span style="background: #d1fae5; color: #065f46; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 11px;">启用</span>
+                        <span style="background: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 11px;">停用</span>
+                      </td>
+                      <td><span class="code-pill">狀態膠囊標籤</span></td>
+                      <td>
+                        • <strong>啟用 (綠色)</strong>：出款通道正常，會員發起提現審批時允許指定此通道出金。<br>
+                        • <strong>停用 (紅色)</strong>：出款通道凍結或已拉黑，前台限制選擇該卡號提現，防範風險資金外流。
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
+
+            <!-- 頁籤四：設備與IP紀錄 -->
+            <div style="border-left: 3px solid var(--amber); padding-left: 14px;">
+              <strong style="color: var(--text-main); font-size: 14px;">🌐 頁籤四：設備與IP紀錄 (風控關聯與二級抽屜穿透)</strong>
+              <p style="margin-top: 6px; margin-bottom: 0;">
+                展示該會員註冊與歷次登入之 IP 地址、地理位置定位、設備指紋與 UserAgent。其中的「同 IP 人數」與「同設備人數」提供點擊穿透鏈接，可向右展開 560px 二級抽屜進行群組同源排查（詳見下方 <strong>6.3 節專題</strong>）。
+              </p>
+            </div>
+
           </div>
         </div>
 
