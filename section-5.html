@@ -576,88 +576,7 @@
           </div>
         </div>
 
-        <!-- Detailed Feature Cards Grid -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 18px; margin-bottom: 24px;">
 
-          <!-- Card 1: Amount Header Sorting -->
-          <div
-            style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 18px 20px; border-top: 3px solid var(--emerald); box-shadow: var(--shadow-sm);">
-            <div
-              style="font-size: 14.5px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-              <span>📈</span><span>1. 金額表頭排序功能前端交互規範</span>
-            </div>
-            <div style="font-size: 13.5px; color: var(--text-muted); line-height: 1.7; display: flex; flex-direction: column; gap: 10px;">
-              <div>
-                <strong>• 適用欄位範圍：</strong><br>
-                所有涉及「金額」、「資金」與「餘額」之一級主表欄位，包含：<code>可用額度</code>、<code>三方餘額</code>、<code>主錢包 (存款總額)</code>、<code>主錢包 (取款總額)</code>、<code>彙總 (USDT) - 存款總額</code>、<code>彙總 (USDT) - 取款總額</code>。
-              </div>
-              <div>
-                <strong>• 三態循環切換機制 (Three-way Cycle Toggle)：</strong><br>
-                操作員點擊表頭單元格或排序箭頭區域，依序在以下三種狀態間循環切換：
-                <ul style="padding-left: 18px; margin-top: 4px; margin-bottom: 0;">
-                  <li><strong>狀態 1 · 預設 (Default / Unsorted)</strong>：未啟動排序，圖示顯示為淡灰色雙向箭頭 <code>⇅</code> 或隱藏，Hover 提示「點擊進行排序」。</li>
-                  <li><strong>狀態 2 · 降序 (Descending ▼)</strong>：第 1 次點擊進入降序，表頭顯示高亮向下箭頭 <code>▼</code>，數據由大至小排列（滿足高資產大戶、大額充提優先稽核的高頻場景）。</li>
-                  <li><strong>狀態 3 · 升序 (Ascending ▲)</strong>：第 2 次點擊切換為升序，表頭顯示高亮向上箭頭 <code>▲</code>（參照圖三），數據由小至大排列。</li>
-                  <li><strong>狀態 4 · 取消還原</strong>：第 3 次點擊取消排序，恢復系統預設排序邏輯（如依註冊日期或會員 ID 自然排序）。</li>
-                </ul>
-              </div>
-              <div>
-                <strong>• 單列互斥排他原則 (Single Column Sort Exclusion)：</strong><br>
-                全表格同時僅允許<strong>單一欄位</strong>處於排序啟動狀態。若當前正在按「可用額度」排序，當點擊「存款總額」排序時，「可用額度」的排序狀態自動取消並還原為預設箭頭，由「存款總額」接管排序。
-              </div>
-              <div>
-                <strong>• 分頁重置與篩選參數連動：</strong><br>
-                觸發排序時，前端自動將分頁頁碼重置為 <strong>第 1 頁 (Page = 1)</strong>，避免後續分頁數據錯位；同時完整保留目前已選取的頂部篩選條件，將 <code>sort_field</code> 與 <code>sort_direction</code>（<code>asc</code> / <code>desc</code>）寫入 API 參數發送請求。
-              </div>
-              <div>
-                <strong>• 加載過渡與排序列高亮：</strong><br>
-                排序發起時列表數據區呈現輕量骨架加載遮罩；加載完成後，該排序列之整欄單元格背景呈現微淺主題色著色（如 <code>rgba(5, 150, 105, 0.03)</code>），強化操作員視覺對齊效率。
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 2: Freeze Column to Front -->
-          <div
-            style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 18px 20px; border-top: 3px solid var(--primary); box-shadow: var(--shadow-sm);">
-            <div
-              style="font-size: 14.5px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-              <span>📌</span><span>2. 欄位釘選固定在最前面交互規範</span>
-            </div>
-            <div style="font-size: 13.5px; color: var(--text-muted); line-height: 1.7; display: flex; flex-direction: column; gap: 10px;">
-              <div>
-                <strong>• 釘選按鈕與觸發入口：</strong><br>
-                所有一級表頭右側均配備釘選圖示按鈕（<code>📌</code>，Pin Icon）。未釘選時呈現半透明弱化輪廓，Hover 提示「固定在最前面」；已釘選時呈現實心高亮樣式，Hover 提示「取消固定」。
-              </div>
-              <div>
-                <strong>• 固定在最前面之定位佈局 (Freeze to Front Layout)：</strong><br>
-                點擊表頭 <code>📌</code> 按鈕後，該欄位即時被<strong>「固定在表格最前面」</strong>，接續在最左側的固有系統控制列之後。如圖四示範，表格最左側列依序排列：
-                <ul style="padding-left: 18px; margin-top: 4px; margin-bottom: 0;">
-                  <li>1. 行展開列（寬度 48px，<code>position: sticky; left: 0px;</code>）</li>
-                  <li>2. 複選勾選列（寬度 48px，<code>position: sticky; left: 48px;</code>）</li>
-                  <li>3. 釘選欄位 1：<code>用户ID 📌</code>（寬度 120px，<code>position: sticky; left: 96px;</code>）</li>
-                  <li>4. 釘選欄位 2：<code>可用额度 📌</code>（寬度 130px，<code>position: sticky; left: 216px;</code>）</li>
-                </ul>
-              </div>
-              <div>
-                <strong>• 右側立體垂直分隔線 (Vertical Divider & Shadow)：</strong><br>
-                系統自動為<strong>最後一個被釘選固定的欄位</strong>（如圖四中的 <code>可用额度</code> 列）右側邊界添加實體分隔線與向右投射的立體陰影（<code>box-shadow: 4px 0 8px -2px rgba(0, 0, 0, 0.08);</code>），明確界定「左側固定區域」與「右側滾動數據區域」。
-              </div>
-              <div>
-                <strong>• 水平橫向滾動穿透機制 (Horizontal Scroll Underneath)：</strong><br>
-                當表格出現大量一級欄位產生水平橫向滾動軸（<code>overflow-x: auto</code>）時，右側非固定欄位（在線、會員名、代理、狀態、VIP等級、支付層級等）向左平滑穿入固定欄位的下方；已固定的欄位與表頭始終牢牢吸附在最左側保持 100% 可視，操作員橫向瀏覽遠端欄位時絕不失去核心身分與金額對齊基準。
-              </div>
-              <div>
-                <strong>• 解鎖取消固定與順序還原：</strong><br>
-                再次點擊已固定欄位的 <code>📌</code> 按鈕，該欄位立即解除固定，平滑回歸到其在資料列中的原生排列位置；立體陰影分隔線自動重新動態計算並賦予新的最後一個固定欄位。
-              </div>
-              <div>
-                <strong>• 多欄位固定上限與 LocalStorage 持久化：</strong><br>
-                系統支援同時釘選多個核心欄位，建議上限為 3 欄以保留足夠的可滾動可視空間。操作員的釘選偏好即時同步寫入瀏覽器 <code>LocalStorage</code>，頁面重新整理或切換視圖模式後自動記憶還原，並與 5.2 節自訂抽屜狀態雙向同步。
-              </div>
-            </div>
-          </div>
-
-        </div>
 
         <!-- Core Interactive Behavior Specifications Table -->
         <div class="table-container" style="margin-bottom: 28px;">
@@ -722,36 +641,7 @@
           </table>
         </div>
 
-        <!-- Technical Implementation Reference Box -->
-        <div
-          style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px 20px; margin-bottom: 30px; box-shadow: var(--shadow-sm);">
-          <div
-            style="font-size: 13.5px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-            <span>💻</span><span>前端技術實作參考指引 (CSS Sticky & Z-Index Stratification)</span>
-          </div>
-          <div style="font-size: 12.5px; color: var(--text-subtle); line-height: 1.6; margin-bottom: 10px;">
-            為確保表格橫向滾動穿透、表頭垂直吸頂與固定列交會處無遮蔽異常，前端工程師建議遵循以下 CSS 分層規則：
-          </div>
-          <div
-            style="background: #0f172a; color: #f8fafc; padding: 14px 16px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.6; overflow-x: auto;">
-/* 表頭吸頂與左側固定層級配置 */
-thead th.sticky-header { position: sticky; top: 0; z-index: 20; background: var(--bg-surface); }
-thead th.sticky-pinned { position: sticky; top: 0; z-index: 30; background: var(--bg-surface); } /* 表頭與固定列交會處最高層級 */
-tbody td.sticky-pinned { position: sticky; z-index: 10; background: var(--bg-surface); }        /* 固定數據列單元格 */
 
-/* 水平偏移量計算示例 */
-.col-expand    { left: 0px; width: 48px; }
-.col-checkbox  { left: 48px; width: 48px; }
-.col-pinned-1  { left: 96px; min-width: 120px; }   /* 如：用戶ID 📌 */
-.col-pinned-2  { left: 216px; min-width: 130px; }  /* 如：可用額度 📌 */
-
-/* 最後一個固定欄位之立體分隔陰影 */
-.col-pinned-last {
-  box-shadow: 4px 0 8px -2px rgba(0, 0, 0, 0.08);
-  border-right: 1px solid var(--border-subtle);
-}
-          </div>
-        </div>
 
         <!-- 5.3.2 一級欄位詳細定義表 -->
         <h4 id="sec-5-3-2-list"
