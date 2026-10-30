@@ -149,7 +149,7 @@ function switchSection5ViewMode(mode) {
       btnNested.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
     }
     if (statusText) {
-      statusText.innerText = '當前顯示：巢狀模式 (圖二 · 代理體系卡片)';
+      statusText.innerText = '當前：巢狀模式';
       statusText.style.color = 'var(--accent)';
     }
     if (boxList) {
@@ -174,7 +174,7 @@ function switchSection5ViewMode(mode) {
       btnNested.style.boxShadow = 'none';
     }
     if (statusText) {
-      statusText.innerText = '當前顯示：列表模式 (圖一 · 默認展示)';
+      statusText.innerText = '當前：列表模式';
       statusText.style.color = 'var(--primary)';
     }
     if (boxList) {
