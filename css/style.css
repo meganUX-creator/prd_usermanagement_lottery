@@ -642,12 +642,42 @@
       color: #0284c7;
       display: inline-block;
       font-weight: 500;
+      white-space: nowrap;
+      word-break: keep-all;
     }
     .code-pill.muted {
       color: #64748b;
       background: #f1f5f9;
       border-color: #cbd5e1;
     }
+
+    /* Global Anti-Truncation & Button Pill Classes */
+    .btn-pill, .badge-pill, .status-pill, .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      word-break: keep-all;
+      flex-shrink: 0;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.4;
+      text-decoration: none;
+    }
+    .btn-pill-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      flex-wrap: nowrap;
+    }
+    .btn-pill-success { background: #10b981; color: #ffffff; }
+    .btn-pill-danger { background: #ef4444; color: #ffffff; }
+    .btn-pill-secondary { background: #64748b; color: #ffffff; }
+    .status-pill-success { background: #d1fae5; color: #065f46; }
+    .status-pill-danger { background: #fee2e2; color: #991b1b; }
 
     /* Alert / Callout Boxes */
     .callout {
