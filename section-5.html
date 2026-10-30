@@ -364,6 +364,81 @@
           </div>
         </div>
 
+        <!-- Custom Column Interaction Components Showcase -->
+        <div
+          style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+          <div
+            style="padding: 12px 18px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="badge-tag badge-purple">細部操作元件對照</span>
+              <strong style="font-size: 13.5px; color: var(--text-main);">自訂欄位與卡片配置：核心操作按鈕與階層控制項示意</strong>
+            </div>
+            <span style="font-size: 12px; color: var(--text-subtle);">包含欄位微調、快捷新增、預設隱藏啟用與次分組收合</span>
+          </div>
+
+          <div style="padding: 16px; background: #ffffff;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
+
+              <!-- Item 1: Pill Controls -->
+              <div
+                style="border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px; background: #fafafa; display: flex; flex-direction: column;">
+                <div style="font-size: 12.5px; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">圖 A：欄位控制膠囊（微調排序與移除）</div>
+                <div
+                  style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px; display: flex; align-items: center; justify-content: center; flex: 1; min-height: 52px;">
+                  <img src="custom_col_pill_controls.png" alt="欄位控制膠囊：拖曳手柄、眼睛顯隱、左右位移箭頭、移除按鈕"
+                    style="max-width: 100%; height: auto; display: block; border-radius: 4px;">
+                </div>
+                <div style="font-size: 11.5px; color: var(--text-subtle); margin-top: 8px; line-height: 1.5;">
+                  <strong>功能說明：</strong> 包含 <code>::</code> 拖曳手柄、<code>👁</code> 顯隱開關、<code>&lt; &gt;</code> 左右位移微調箭頭（首末位自動禁用）與 <code>✕</code> 移除按鈕。
+                </div>
+              </div>
+
+              <!-- Item 2: Pill Add -->
+              <div
+                style="border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px; background: #fafafa; display: flex; flex-direction: column;">
+                <div style="font-size: 12.5px; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">圖 B：常規待選欄位新增</div>
+                <div
+                  style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px; display: flex; align-items: center; justify-content: center; flex: 1; min-height: 52px;">
+                  <img src="custom_col_pill_add.png" alt="常規待選欄位新增按鈕"
+                    style="max-width: 100%; height: auto; display: block; border-radius: 4px;">
+                </div>
+                <div style="font-size: 11.5px; color: var(--text-subtle); margin-top: 8px; line-height: 1.5;">
+                  <strong>功能說明：</strong> 待選池常態欄位（如 <code>用户标签</code>），點擊 <code>+</code> 按鈕一鍵加入當前展示卡片或主表。
+                </div>
+              </div>
+
+              <!-- Item 3: Pill Hidden Add -->
+              <div
+                style="border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px; background: #fafafa; display: flex; flex-direction: column;">
+                <div style="font-size: 12.5px; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">圖 C：預設隱藏欄位啟用</div>
+                <div
+                  style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px; display: flex; align-items: center; justify-content: center; flex: 1; min-height: 52px;">
+                  <img src="custom_col_pill_hidden_add.png" alt="預設隱藏敏感欄位啟用按鈕"
+                    style="max-width: 100%; height: auto; display: block; border-radius: 4px;">
+                </div>
+                <div style="font-size: 11.5px; color: var(--text-subtle); margin-top: 8px; line-height: 1.5;">
+                  <strong>功能說明：</strong> 預設隱藏欄位（如 <code>欠款</code>、<code>信用值</code>）以斜線眼睛 <code>👁‍🗨</code> 呈現，點擊 <code>+</code> 啟用點亮並加入卡片。
+                </div>
+              </div>
+
+              <!-- Item 4: Group Card -->
+              <div
+                style="border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px; background: #fafafa; display: flex; flex-direction: column;">
+                <div style="font-size: 12.5px; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">圖 D：模組卡片與次分組階層管理</div>
+                <div
+                  style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px; display: flex; align-items: center; justify-content: center; flex: 1; min-height: 52px;">
+                  <img src="custom_col_group_card.png" alt="模組卡片整組拖曳、鎖定圖示與次分組收合展開"
+                    style="max-width: 100%; height: auto; display: block; border-radius: 4px;">
+                </div>
+                <div style="font-size: 11.5px; color: var(--text-subtle); margin-top: 8px; line-height: 1.5;">
+                  <strong>功能說明：</strong> 卡片整組拖曳手柄 <code>::</code>、核心模組鎖定 <code>🔒</code>、次分組（主錢包/USDT）與 <code>^ v</code> 獨立收合展開箭頭。
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
         <!-- Core Functional Specifications & Credit Card Rule -->
         <div class="table-container" style="margin-bottom: 28px;">
           <table class="data-table">
@@ -430,40 +505,70 @@
                 </td>
               </tr>
               <tr>
-                <td><strong>3.1 欄位顯示/隱藏切換</strong></td>
+                <td><strong>3.1 欄位膠囊控制項與微調排序<br><small>(圖 A 示範)</small></strong></td>
                 <td>
-                  <span class="code-pill">眼睛圖示 👁 / 關閉斜線 👁‍🗨</span><br>
-                  每個欄位標籤旁配有可視狀態切換按鈕（如附有眼睛圖示或 ◎ 的按鈕）。
+                  <span class="code-pill">六點手柄 <code>::</code></span><br>
+                  <span class="code-pill">眼睛切換 <code>👁 / 👁‍🗨</code></span><br>
+                  <span class="code-pill">位移微調 <code>&lt;</code> / <code>&gt;</code></span><br>
+                  <span class="badge-tag badge-rose" style="font-size: 11px;">移除 <code>✕</code></span>
                 </td>
                 <td>
-                  <strong>互動行為：</strong><br>
-                  • <strong>顯示狀態</strong>：圖示呈現點亮/啟用狀態，表示該欄位目前會顯示在對應的表格或卡片中。<br>
-                  • <strong>隱藏狀態</strong>：點擊後圖示切換為關閉/斜線狀態，該欄位將從對應的介面中隱藏。<br>
-                  • <strong>系統回饋</strong>：當欄位被隱藏或顯示時，畫面上對應的視覺標籤應即時切換樣式（例如呈現半透明或加上刪除線，或直接從預覽中移除）。
-                </td>
-              </tr>
-              <tr>
-                <td><strong>3.2 拖曳排序</strong></td>
-                <td>
-                  <span class="code-pill">拖曳手柄 ⠿ (六點陣列)</span><br>
-                  區塊或欄位項目最左側配有拖曳手柄。
-                </td>
-                <td>
-                  <strong>互動行為：</strong><br>
-                  • 區塊或欄位項目最左側配有拖曳手柄（六點陣列圖示 ⠿）。<br>
-                  • 管理員按住拖曳手柄上下拖動時，項目應可即時跟隨游標移動，並在其他項目間產生推擠動畫（Placeholder），指示釋放後的落點位置。<br>
-                  <strong>限制條件：</strong><br>
-                  • 僅允許在同一群組或指定的容器範圍內進行排序。
+                  <strong>互動邏輯與功能說明：</strong><br>
+                  • <strong>拖曳排序 (Drag & Drop)</strong>：按住最左側六點手柄（<code>::</code>）可在同一群組容器內自由拖動，即時產生佔位預覽推擠效果。<br>
+                  • <strong>步進微調排序 (Step Left / Right)</strong>：膠囊內配備 <code>&lt;</code>（向左移動一位）與 <code>&gt;</code>（向右移動一位）微調按鈕。針對不便進行滑鼠長距離拖曳的操作員，提供精準步進位移；<strong>邊界防呆機制</strong>：當欄位處於首位時 <code>&lt;</code> 自動置灰禁用（如圖 A 中 <code>存款总额</code>），處於末位時 <code>&gt;</code> 自動置灰禁用。<br>
+                  • <strong>可視切換 (Visibility)</strong>：點擊眼睛 <code>👁</code> 即刻切換為隱藏 <code>👁‍🗨</code>，主表或卡片同步隱藏。<br>
+                  • <strong>快速移除 (Remove)</strong>：點擊淡紅色背景之 <code>✕</code> 按鈕，即刻將該欄位自當前配置區域中移除，並歸還至待選欄位庫。<br>
+                  • <strong>常態與懸停反饋</strong>：未懸停時維持簡潔膠囊樣式（如圖 A 右側 <code>👁 取款总额</code>）；滑鼠懸停 (Hover) 時平滑展開位移微調與移除按鈕組。
                 </td>
               </tr>
               <tr>
-                <td><strong>3.3 欄位跨區移動 / 新增與移除</strong></td>
+                <td><strong>3.2 待選欄位快捷新增<br><small>(圖 B 示範)</small></strong></td>
+                <td>
+                  <span class="code-pill">待選欄位膠囊</span><br>
+                  <span class="code-pill">新增按鈕 <code>[+]</code></span>
+                </td>
+                <td>
+                  <strong>互動邏輯與功能說明：</strong><br>
+                  • <strong>常規待選池欄位</strong>：庫中尚未配置之常態可用欄位（如圖 B <code>用户标签</code>）右側配備 <code>+</code> 按鈕。<br>
+                  • <strong>一鍵快捷加入</strong>：點擊 <code>+</code> 按鈕後，系統自動將該欄位加入至目標展示區塊（主表或卡片內部末位），該按鈕即時變更為已加入狀態或轉入已啟用容器中。
+                </td>
+              </tr>
+              <tr>
+                <td><strong>3.3 預設隱藏敏感欄位啟用<br><small>(圖 C 示範)</small></strong></td>
+                <td>
+                  <span class="code-pill">斜線眼睛 <code>👁‍🗨</code> (隱藏態)</span><br>
+                  <span class="code-pill">啟用按鈕 <code>[+]</code></span>
+                </td>
+                <td>
+                  <strong>互動邏輯與功能說明：</strong><br>
+                  • <strong>預設隱藏保護</strong>：信貸卡片等敏感欄位（如圖 C <code>欠款</code>、<code>信用值</code>）預設維持不顯示狀態，圖示以斜線眼睛（<code>👁‍🗨</code>）明確標示。<br>
+                  • <strong>手動授權啟用</strong>：具備相關管理權限之操作員點擊 <code>+</code> 按鈕後，系統將該敏感欄位加入卡片，且圖示立即點亮切換為正常顯示狀態 <code>👁</code>；若後續點擊 <code>👁</code> 或 <code>✕</code> 移除，則重新還原為 <code>👁‍🗨</code> 預設隱藏狀態。
+                </td>
+              </tr>
+              <tr>
+                <td><strong>3.4 模組卡片與次分組階層收合管理<br><small>(圖 D 示範)</small></strong></td>
+                <td>
+                  <span class="code-pill">卡片拖曳手柄 <code>::</code></span><br>
+                  <span class="badge-tag badge-purple">核心鎖定 <code>🔒</code></span><br>
+                  <span class="code-pill">次分組 (Sub-group)</span><br>
+                  <span class="code-pill">收合按鈕 <code>^</code> / <code>v</code></span>
+                </td>
+                <td>
+                  <strong>互動邏輯與功能說明：</strong><br>
+                  • <strong>模組整組拖曳</strong>：卡片最左側配有六點手柄（如圖 D <code>:: 存取款资料 🔒</code>），操作員可按住手柄上下拖動，調整各模組卡片在列表展開時的先後展示順序。<br>
+                  • <strong>核心分類鎖定保護</strong>：關鍵核心業務模組標註 <code>🔒</code> 鎖定圖示，不可整組隨意刪除或關閉，保障基本帳戶數據結構健全。<br>
+                  • <strong>階層次分組結構</strong>：卡片內部支援次分組架構（如存取款資料內分設「主錢包」與「彙總 (USDT)」兩大子分組），各自收納所屬子欄位膠囊，資訊層次清晰。<br>
+                  • <strong>獨立收合與展開</strong>：大卡片頂部與各次分組右側均配置 <code>^</code>（收起）與 <code>v</code>（展開）按鈕。操作員可快速摺疊暫不調整的分組，極大縮短垂直滾動長度，提升高密度介面配置效率。
+                </td>
+              </tr>
+              <tr>
+                <td><strong>3.5 欄位跨區流轉與防重引導</strong></td>
                 <td>
                   <span class="code-pill">狀態標籤 <code>[已在主表]</code></span><br>
-                  <span class="code-pill">快捷鍵 <code>[+]</code> / <code>[-]</code></span>
+                  <span class="code-pill">雙向流轉機制</span>
                 </td>
                 <td>
-                  <strong>互動行為：</strong><br>
+                  <strong>互動邏輯與功能說明：</strong><br>
                   • <strong>跨區流轉</strong>：部分欄位支援在「主表欄位」與「展開卡片」之間進行流轉。<br>
                   • <strong>防重引導</strong>：若某欄位已被放置於主表中，其在展開卡片設定區會標註為 <code>[已在主表]</code>，防止重複顯示或提供一鍵移回/引導。<br>
                   • <strong>模組增刪</strong>：每個區塊內支援透過帶有加號（+）或減號（-）的按鈕來快速新增或移除特定欄位模組（例如信貸、使用者標籤、備註等）。
