@@ -282,7 +282,7 @@
                   5.3 節專題）。
                 </li>
                 <li>
-                  <strong>4. 金額表頭排序功能 (Amount Header Sorting)</strong>：所有金額與餘額相關之一級表頭（如可用額度、存款總額、取款總額、三方餘額等）均內建排序功能（參照圖三：<code>存款总额 ▲ 📌</code>）。點擊表頭切換「降序 (▼) / 升序 (▲) / 預設 (無排序)」三態循環，啟動時箭頭高亮顯示，並自動重置至第 1 頁發送查詢（詳見 5.2.1 節）。
+                  <strong>4. 金額表頭排序功能 (Amount Header Sorting)</strong>：所有金額與餘額相關之一級表頭（如可用額度、存款總額、取款總額、三方餘額等）均內建排序功能（參照圖三：<code>存款总额 ▲ 📌</code>）。<strong>排序圖標原本隱藏，鼠標移入表頭即出現降序指示圖示</strong>；點擊依「<strong>降序 (▼) → 升序 (▲) → 還原隱藏</strong>」順序依序切換，啟動時箭頭高亮顯示，並自動重置至第 1 頁發送查詢（詳見 5.2.1 節）。
                 </li>
                 <li>
                   <strong>5. 欄位釘選固定在最前面 (Freeze/Pin Column to Front 📌)</strong>：每個表頭右側均配有釘選圖示按鈕（<code>📌</code>）。點擊後該欄位即時「固定在最前面」（凍結於表格左側，接續在展開列與勾選列後方，參照圖四：<code>用户ID 📌</code> 與 <code>可用额度 📌</code>），並在右邊界呈現立體垂直分隔線；當右側其餘欄位進行橫向水平滾動時，已固定欄位始終吸附在左側保持可視，再次點擊即可解鎖還原原位（詳見 5.2.1 節）。
@@ -338,9 +338,9 @@
                 (Pin/Freeze)」</strong>。操作員可視審核習慣將特定欄位鎖定於表格左側，橫向水平捲動時該欄位始終保持凍結可視，防範寬表格檢視時脫焦。
             </div>
             <div>
-              • <strong>金額排序功能 <span class="badge-tag badge-emerald" style="font-weight: 700;">⇅
+              • <strong>金額排序功能 <span class="badge-tag badge-emerald" style="font-weight: 700;">▼ / ▲
                   支援排序</span></strong>：<strong>所有與「金額相關」之一級欄位均配有「排序功能 (Sort)」</strong>（如：可用額度、三方餘額、主錢包存取款、USDT
-              存取款總額等）。表頭附帶 <code>⇅</code> 排序圖標，點擊即可切換「降冪 (▼) / 升冪 (▲) / 預設」，方便財務與風控人員快速篩選高資產或大額充提會員。
+              存取款總額等）。<strong>排序圖標原本隱藏，鼠標移入表頭時即浮現降序圖示</strong>，點擊即可依「降序 (▼) → 升序 (▲) → 還原隱藏」依序切換，方便財務與風控人員快速篩選高資產或大額充提會員。
             </div>
           </div>
         </div>
@@ -443,17 +443,16 @@
                 <td><strong>金額表頭排序<br><small>(Amount Sorting)</small></strong></td>
                 <td>
                   <div style="display: flex; flex-wrap: wrap; gap: 5px; align-items: center;">
-                    <span class="code-pill"><code>⇅</code></span>
-                    <span class="code-pill"><code>▲</code> / <code>▼</code></span>
+                    <span class="code-pill"><code>▼</code> / <code>▲</code></span>
                   </div>
                 </td>
                 <td>
-                  • <code>⇅</code> 預設未排序<br>
-                  • <code>▼</code> 降序 / <code>▲</code> 升序<br>
-                  • 排序列淺色高亮
+                  • 原本隱藏：預設不顯示圖標<br>
+                  • 鼠標移入：浮現降序 <code>▼</code><br>
+                  • 點擊啟用：高亮 <code>▼</code> / <code>▲</code>，排序列淺色高亮
                 </td>
                 <td>
-                  • <strong>三態切換</strong>：預設 ⇅ → 降序 ▼ → 升序 ▲ → 還原。<br>
+                  • <strong>順序排列</strong>：原本隱藏 → 鼠標移入出現<strong>降序 ▼</strong>（點擊啟用）→ 再次點擊切換為<strong>升序 ▲</strong> → 再次點擊<strong>還原隱藏</strong>。<br>
                   • <strong>分頁與條件</strong>：重置為第 1 頁，保留現有搜尋條件發送請求。<br>
                   • <strong>骨架過渡</strong>：觸發骨架屏載入（5.2.5），數據回傳後原地淡入。<br>
                   • <strong>排他與防抖</strong>：點擊新欄位自動重置舊排序列；內建 300ms 連點防抖。
