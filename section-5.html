@@ -432,11 +432,10 @@
           <table class="data-table">
             <thead>
               <tr>
-                <th style="width: 140px;">交互功能項</th>
-                <th style="width: 110px;">控制圖標</th>
-                <th style="width: 160px;">視覺反饋</th>
+                <th style="width: 150px;">交互功能項</th>
+                <th style="width: 120px;">控制圖標</th>
+                <th style="width: 180px;">視覺反饋</th>
                 <th>交互與數據連動邏輯</th>
-                <th style="width: 160px;">防護機制</th>
               </tr>
             </thead>
             <tbody>
@@ -456,11 +455,8 @@
                 <td>
                   • <strong>三態切換</strong>：預設 ⇅ → 降序 ▼ → 升序 ▲ → 還原。<br>
                   • <strong>分頁與條件</strong>：重置為第 1 頁，保留現有搜尋條件發送請求。<br>
-                  • <strong>骨架過渡</strong>：觸發骨架屏載入（5.2.5），數據回傳後原地淡入。
-                </td>
-                <td>
-                  • <strong>單列排他</strong>：點擊新欄位自動重置舊排序列。<br>
-                  • <strong>連點防抖</strong>：內建 300ms 防抖。
+                  • <strong>骨架過渡</strong>：觸發骨架屏載入（5.2.5），數據回傳後原地淡入。<br>
+                  • <strong>排他與防抖</strong>：點擊新欄位自動重置舊排序列；內建 300ms 連點防抖。
                 </td>
               </tr>
               <tr>
@@ -476,14 +472,9 @@
                   • 右側邊界帶垂直投影線
                 </td>
                 <td>
-                  • <strong>吸附凍結</strong>：緊跟展開列與勾選列後方（<code>sticky</code> 凍結）。<br>
+                  • <strong>吸附凍結</strong>：緊跟展開列與勾選列後方（<code>sticky</code> 凍結，最多 3 欄）。<br>
                   • <strong>橫向穿透</strong>：右側其餘欄位橫向滾動穿透，固定列始終可視。<br>
-                  • <strong>一鍵釋放</strong>：再次點擊即取消固定並歸回原位。
-                </td>
-                <td>
-                  • <strong>數量上限</strong>：最多允許自訂固定 3 欄。<br>
-                  • <strong>狀態記憶</strong>：<code>LocalStorage</code> 本地持久化保存。<br>
-                  • <strong>雙向同步</strong>：與 5.3 抽屜勾選狀態實時連動。
+                  • <strong>一鍵釋放與同步</strong>：再次點擊即取消固定歸位；支援本地記憶並與 5.3 抽屜同步。
                 </td>
               </tr>
             </tbody>
