@@ -364,67 +364,112 @@
           </div>
         </div>
 
-        <!-- Core Functional Specifications & Credit Card Rule -->
-        <div class="table-container" style="margin-bottom: 24px;">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th style="width: 180px;">配置區域 / 規範項</th>
-                <th style="width: 200px;">控制項與交互元件</th>
-                <th>業務規格與詳細互動行為規則</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>主表欄位<br><small>(上方表格列)</small></strong></td>
-                <td>
-                  <span class="code-pill">左側主欄位控制</span><br>
-                  包含帳號信息、等級等分類。支援拖曳排序與點擊眼睛圖示切換顯隱。
-                </td>
-                <td>
-                  系統核心關鍵欄位標註為 🔒
-                  <strong>鎖定</strong>（如：<code>在線</code>、<code>用戶ID</code>、<code>會員名</code>、<code>代理</code>、<code>狀態</code>、<code>VIP等級</code>），預設固定在主表格列，不可隨意隱藏，防範操作員檢索定位遺失。
-                </td>
-              </tr>
-              <tr>
-                <td><strong>展開卡片<br><small>(列表底展開內容)</small></strong></td>
-                <td>
-                  <span class="code-pill">右側卡片與欄位歸屬</span><br>
-                  包含基本資料、額度、信貸、成長與積分、推薦關係等多個資訊卡片。
-                </td>
-                <td>
-                  可以自訂顯示字段卡片是否顯示，以及自訂該欄位是要呈現在<strong>「一級主表欄位」</strong>（標示 <code>已在主表</code>）或<strong>「卡片內」</strong>（標示
-                  <code>+</code> 號加入卡片），提供高度彈性之個人化排版。
-                </td>
-              </tr>
-              <tr style="background: rgba(234, 88, 12, 0.04);">
-                <td><strong>信貸卡片特殊規範<br><small>(核心業務防線)</small></strong></td>
-                <td>
-                  <span class="badge-tag badge-amber" style="font-weight: 700;">重要預設規則</span>
-                </td>
-                <td>
-                  <strong>信貸卡片的內容限制：</strong><br>
-                  <mark
-                    style="background: #fef08a; color: #854d0e; padding: 2px 8px; border-radius: 4px; font-weight: 800;">欠款
-                    (Debt) 跟 信用值 (Credit Score) 字段默認不顯示</mark>。<br>
-                  考量到信貸敏感資訊與一般客服作業介面乾淨度，系統預設關閉該兩項欄位展示；僅在具備相關信貸權限且操作員主動進入自訂抽屜勾選開啟時，始於展開卡片中呈現。
-                </td>
-              </tr>
-              <tr>
-                <td><strong>抽屜高度限制與重置記憶</strong></td>
-                <td>
-                  <span class="code-pill">邊界與狀態保存</span><br>
-                  抽屜右上角配置「重置」、「向上延伸按鈕 (↕)」與「關閉 (×)」按鈕。
-                </td>
-                <td>
-                  1. <strong>高度限制與向上延伸按鈕</strong>：抽屜由畫面下方向上彈出，右上角配置「向上延伸按鈕
-                  (↕)」供操作員展開獲取更多可視操作區塊。<strong>無論是預設展開狀態或點擊向上延伸按鈕，抽屜延伸之高度均嚴格限制「都不會超過表頭的高度」</strong>，確保主表格頂部之固定表頭始終清晰可見，絕不覆蓋遮蔽關鍵表頭資訊。<br>
-                  2. <strong>重置機制</strong>：點擊「重置」一鍵將所有主表欄位與展開卡片顯隱順序還原為預設狀態。<br>
-                  3. <strong>本地記憶</strong>：所有調整即時寫入 <code>LocalStorage</code> 持久化保存，頁面重整或切換後自動還原。
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <!-- Custom Columns Dual Cards Layout (Echoing Drawer Screenshot) -->
+        <div class="grid-2" style="margin-bottom: 20px; align-items: stretch;">
+          <!-- Left Card: 主表欄位 (上方表格列) -->
+          <div class="feature-box"
+            style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid var(--primary); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm);">
+            <div>
+              <div class="feature-box-header"
+                style="justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div class="feature-icon"
+                    style="background: var(--primary-light); color: var(--primary); width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-size: 16px;">
+                    📋
+                  </div>
+                  <div>
+                    <div style="font-size: 15px; font-weight: 700; color: var(--text-main);">主表欄位（上方表格列）</div>
+                    <div style="font-size: 12px; color: var(--text-subtle);">呼應抽屜左側：主表欄位與排序控制</div>
+                  </div>
+                </div>
+                <span class="badge-tag badge-primary" style="font-size: 11px;">左側主欄位控制</span>
+              </div>
+
+              <div
+                style="font-size: 13.5px; color: var(--text-muted); line-height: 1.7; display: flex; flex-direction: column; gap: 12px;">
+                <div>
+                  <strong style="color: var(--text-main);">• 包含分類與操作方式：</strong><br>
+                  包含帳號信息、等級、財務總額等多個維度分類。操作員可拖曳手柄微調前後順序，或點擊眼睛圖示切換顯隱。
+                </div>
+                <div
+                  style="background: rgba(37, 99, 235, 0.05); border-left: 3px solid var(--primary); padding: 12px 14px; border-radius: 0 8px 8px 0;">
+                  <strong style="color: var(--primary);">🔒 核心關鍵欄位鎖定防線：</strong><br>
+                  系統核心關鍵欄位標註為 🔒 <strong>鎖定</strong>（如：<code>在線</code>、<code>用戶ID</code>、<code>會員名</code>、<code>代理</code>、<code>狀態</code>、<code>VIP等級</code>），預設固定在主表格列，<strong>不可隨意隱藏</strong>，防範操作員檢索定位遺失。
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Card: 展開卡片 (列表底展開內容) & 信貸卡片特殊規範 -->
+          <div class="feature-box"
+            style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #8b5cf6; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm);">
+            <div>
+              <div class="feature-box-header"
+                style="justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div class="feature-icon"
+                    style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-size: 16px;">
+                    📑
+                  </div>
+                  <div>
+                    <div style="font-size: 15px; font-weight: 700; color: var(--text-main);">展開卡片（列表底展開內容）</div>
+                    <div style="font-size: 12px; color: var(--text-subtle);">呼應抽屜右側：卡片模組與次分組歸屬</div>
+                  </div>
+                </div>
+                <span class="badge-tag badge-purple" style="font-size: 11px;">右側卡片與欄位歸屬</span>
+              </div>
+
+              <div
+                style="font-size: 13.5px; color: var(--text-muted); line-height: 1.7; display: flex; flex-direction: column; gap: 12px;">
+                <div>
+                  <strong style="color: var(--text-main);">• 模組卡片歸屬與靈活流轉：</strong><br>
+                  包含基本資料、額度、信貸、成長與積分、推薦關係等多個卡片。可以自訂顯示字段卡片是否顯示，以及自訂該欄位是要呈現在<strong>「一級主表欄位」</strong>（標示 <code>已在主表</code>）或<strong>「卡片內」</strong>（標示 <code>+</code> 號加入卡片），提供高度彈性之個人化排版。
+                </div>
+                <div
+                  style="background: rgba(234, 88, 12, 0.05); border-left: 3px solid var(--amber); padding: 12px 14px; border-radius: 0 8px 8px 0;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                    <strong style="color: #b45309;">⚠️ 信貸卡片特殊規範（核心業務防線）：</strong>
+                    <span class="badge-tag badge-amber" style="font-size: 10.5px; font-weight: 700;">重要預設規則</span>
+                  </div>
+                  <div>
+                    <mark
+                      style="background: #fef08a; color: #854d0e; padding: 2px 8px; border-radius: 4px; font-weight: 800;">欠款
+                      (Debt) 跟 信用值 (Credit Score) 字段默認不顯示</mark>。<br>
+                    考量到信貸敏感資訊與一般客服作業介面乾淨度，系統預設關閉該兩項欄位展示；僅在具備相關信貸權限且操作員主動進入自訂抽屜勾選開啟時，始於展開卡片中呈現。
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Drawer Global Rules: Height Limit & Reset Memory -->
+        <div class="feature-box"
+          style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-left: 4px solid var(--accent); border-radius: 12px; padding: 18px 20px; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+          <div
+            style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 18px;">📐</span>
+              <strong style="font-size: 14.5px; color: var(--text-main);">抽屜高度限制與重置記憶</strong>
+            </div>
+            <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
+              <span class="code-pill">邊界與狀態保存</span>
+              <span style="font-size: 12px; color: var(--text-subtle);">抽屜右上角配置「重置」、「向上延伸按鈕 (↕)」與「關閉 (×)」按鈕</span>
+            </div>
+          </div>
+          <div
+            style="font-size: 13.5px; color: var(--text-muted); line-height: 1.7; display: flex; flex-direction: column; gap: 8px;">
+            <div>
+              1. <strong>高度限制與向上延伸按鈕</strong>：抽屜由畫面下方向上彈出，右上角配置「向上延伸按鈕
+              (↕)」供操作員展開獲取更多可視操作區塊。<strong>無論是預設展開狀態或點擊向上延伸按鈕，抽屜延伸之高度均嚴格限制「都不會超過表頭的高度」</strong>，確保主表格頂部之固定表頭始終清晰可見，絕不覆蓋遮蔽關鍵表頭資訊。
+            </div>
+            <div>
+              2. <strong>重置機制</strong>：點擊「重置」一鍵將所有主表欄位與展開卡片顯隱順序還原為預設狀態。
+            </div>
+            <div>
+              3. <strong>本地記憶</strong>：所有調整即時寫入 <code>LocalStorage</code> 持久化保存，頁面重整或切換後自動還原。
+            </div>
+          </div>
         </div>
 
         <!-- Custom Column Interaction Components Showcase -->
