@@ -432,10 +432,9 @@
           <table class="data-table">
             <thead>
               <tr>
-                <th style="width: 150px;">交互功能項</th>
-                <th style="width: 120px;">控制圖標</th>
-                <th style="width: 180px;">視覺反饋</th>
-                <th>交互與數據連動邏輯</th>
+                <th style="width: 180px;">交互功能項</th>
+                <th style="width: 130px;">控制圖標</th>
+                <th>視覺反饋</th>
               </tr>
             </thead>
             <tbody>
@@ -451,12 +450,6 @@
                   • 鼠標移入：浮現降序 <code>▼</code><br>
                   • 點擊啟用：高亮 <code>▼</code> / <code>▲</code>，排序列淺色高亮
                 </td>
-                <td>
-                  • <strong>順序排列</strong>：原本隱藏 → 鼠標移入出現<strong>降序 ▼</strong>（點擊啟用）→ 再次點擊切換為<strong>升序 ▲</strong> → 再次點擊<strong>還原隱藏</strong>。<br>
-                  • <strong>分頁與條件</strong>：重置為第 1 頁，保留現有搜尋條件發送請求。<br>
-                  • <strong>骨架過渡</strong>：觸發骨架屏載入（5.2.5），數據回傳後原地淡入。<br>
-                  • <strong>排他與防抖</strong>：點擊新欄位自動重置舊排序列；內建 300ms 連點防抖。
-                </td>
               </tr>
               <tr>
                 <td><strong>欄位固定在最前<br><small>(Freeze Column 📌)</small></strong></td>
@@ -469,11 +462,6 @@
                   • 未固定：半透明弱化 <code>📌</code><br>
                   • 已固定：實心高亮 <code>📌</code><br>
                   • 右側邊界帶垂直投影線
-                </td>
-                <td>
-                  • <strong>吸附凍結</strong>：緊跟展開列與勾選列後方（<code>sticky</code> 凍結，最多 3 欄）。<br>
-                  • <strong>橫向穿透</strong>：右側其餘欄位橫向滾動穿透，固定列始終可視。<br>
-                  • <strong>一鍵釋放與同步</strong>：再次點擊即取消固定歸位；支援本地記憶並與 5.3 抽屜同步。
                 </td>
               </tr>
             </tbody>
