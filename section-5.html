@@ -370,72 +370,24 @@
           <div
             style="padding: 12px 18px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
             <div style="display: flex; align-items: center; gap: 8px;">
-              <span class="badge-tag badge-purple">細部操作元件對照</span>
-              <strong style="font-size: 13.5px; color: var(--text-main);">自訂欄位與卡片配置：核心操作按鈕與階層控制項示意</strong>
+              <span class="badge-tag badge-purple">元件樣式對照截圖</span>
+              <strong style="font-size: 13.5px; color: var(--text-main);">自訂欄位控制項：微調排序、快捷新增、敏感欄位啟用與分組收合</strong>
             </div>
-            <span style="font-size: 12px; color: var(--text-subtle);">包含欄位微調、快捷新增、預設隱藏啟用與次分組收合</span>
+            <a href="custom_col_components_strip.png" target="_blank" class="btn btn-sm btn-outline"
+              style="font-size: 11px; padding: 4px 10px;">
+              <span>↗</span><span>開新分頁檢視原圖</span>
+            </a>
           </div>
-
           <div style="padding: 16px; background: #ffffff;">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
-
-              <!-- Item 1: Pill Controls -->
-              <div
-                style="border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px; background: #fafafa; display: flex; flex-direction: column;">
-                <div style="font-size: 12.5px; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">圖 A：欄位控制膠囊（微調排序與移除）</div>
-                <div
-                  style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px; display: flex; align-items: center; justify-content: center; flex: 1; min-height: 52px;">
-                  <img src="custom_col_pill_controls.png" alt="欄位控制膠囊：拖曳手柄、眼睛顯隱、左右位移箭頭、移除按鈕"
-                    style="max-width: 100%; height: auto; display: block; border-radius: 4px;">
-                </div>
-                <div style="font-size: 11.5px; color: var(--text-subtle); margin-top: 8px; line-height: 1.5;">
-                  <strong>功能說明：</strong> 包含 <code>::</code> 拖曳手柄、<code>👁</code> 顯隱開關、<code>&lt; &gt;</code> 左右位移微調箭頭（首末位自動禁用）與 <code>✕</code> 移除按鈕。
-                </div>
-              </div>
-
-              <!-- Item 2: Pill Add -->
-              <div
-                style="border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px; background: #fafafa; display: flex; flex-direction: column;">
-                <div style="font-size: 12.5px; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">圖 B：常規待選欄位新增</div>
-                <div
-                  style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px; display: flex; align-items: center; justify-content: center; flex: 1; min-height: 52px;">
-                  <img src="custom_col_pill_add.png" alt="常規待選欄位新增按鈕"
-                    style="max-width: 100%; height: auto; display: block; border-radius: 4px;">
-                </div>
-                <div style="font-size: 11.5px; color: var(--text-subtle); margin-top: 8px; line-height: 1.5;">
-                  <strong>功能說明：</strong> 待選池常態欄位（如 <code>用户标签</code>），點擊 <code>+</code> 按鈕一鍵加入當前展示卡片或主表。
-                </div>
-              </div>
-
-              <!-- Item 3: Pill Hidden Add -->
-              <div
-                style="border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px; background: #fafafa; display: flex; flex-direction: column;">
-                <div style="font-size: 12.5px; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">圖 C：預設隱藏欄位啟用</div>
-                <div
-                  style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px; display: flex; align-items: center; justify-content: center; flex: 1; min-height: 52px;">
-                  <img src="custom_col_pill_hidden_add.png" alt="預設隱藏敏感欄位啟用按鈕"
-                    style="max-width: 100%; height: auto; display: block; border-radius: 4px;">
-                </div>
-                <div style="font-size: 11.5px; color: var(--text-subtle); margin-top: 8px; line-height: 1.5;">
-                  <strong>功能說明：</strong> 預設隱藏欄位（如 <code>欠款</code>、<code>信用值</code>）以斜線眼睛 <code>👁‍🗨</code> 呈現，點擊 <code>+</code> 啟用點亮並加入卡片。
-                </div>
-              </div>
-
-              <!-- Item 4: Group Card -->
-              <div
-                style="border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px; background: #fafafa; display: flex; flex-direction: column;">
-                <div style="font-size: 12.5px; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">圖 D：模組卡片與次分組階層管理</div>
-                <div
-                  style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px; display: flex; align-items: center; justify-content: center; flex: 1; min-height: 52px;">
-                  <img src="custom_col_group_card.png" alt="模組卡片整組拖曳、鎖定圖示與次分組收合展開"
-                    style="max-width: 100%; height: auto; display: block; border-radius: 4px;">
-                </div>
-                <div style="font-size: 11.5px; color: var(--text-subtle); margin-top: 8px; line-height: 1.5;">
-                  <strong>功能說明：</strong> 卡片整組拖曳手柄 <code>::</code>、核心模組鎖定 <code>🔒</code>、次分組（主錢包/USDT）與 <code>^ v</code> 獨立收合展開箭頭。
-                </div>
-              </div>
-
-            </div>
+            <a href="custom_col_components_strip.png" target="_blank" title="點擊檢視元件樣式大圖">
+              <img src="custom_col_components_strip.png" alt="自訂欄位與卡片配置：核心操作按鈕與階層控制項示意圖"
+                style="width: 100%; height: auto; display: block; border-radius: 6px; cursor: zoom-in; border: 1px solid var(--border-subtle);">
+            </a>
+          </div>
+          <div
+            style="font-size: 12px; color: var(--text-subtle); padding: 10px 18px 14px 18px; background: #fafafa; border-top: 1px solid var(--border-subtle); line-height: 1.5;">
+            <strong>截圖特徵解析：</strong>
+            由左至右分別為：欄位控制膠囊（包含 <code>::</code> 拖曳手柄、<code>👁</code> 顯隱開關、<code>&lt; &gt;</code> 左右位移微調箭頭與 <code>✕</code> 移除按鈕）、常規待選欄位（<code>+</code> 快捷新增）、預設隱藏敏感欄位（<code>👁‍🗨</code> 欠款/信用值 <code>+</code> 授權啟用點亮）、模組卡片與次分組階層管理（<code>:: 存取款资料 🔒</code> 與 <code>^ v</code> 獨立收合展開箭頭）。
           </div>
         </div>
 
