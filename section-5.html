@@ -432,58 +432,58 @@
           <table class="data-table">
             <thead>
               <tr>
-                <th style="width: 170px;">交互功能項</th>
-                <th style="width: 150px;">介面觸發與熱區</th>
-                <th style="width: 220px;">視覺狀態反饋</th>
-                <th>表格佈局與數據連動邏輯</th>
-                <th style="width: 190px;">邊界防護與防錯機制</th>
+                <th style="width: 140px;">交互功能項</th>
+                <th style="width: 110px;">控制圖標</th>
+                <th style="width: 160px;">視覺反饋</th>
+                <th>交互與數據連動邏輯</th>
+                <th style="width: 160px;">防護機制</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><strong>金額表頭排序<br><small>(Amount Sorting)</small></strong></td>
                 <td>
-                  <span class="code-pill">表頭單元格點擊</span><br>
-                  <span class="code-pill">排序三角箭頭 <code>▲ / ▼</code></span>
+                  <div style="display: flex; flex-wrap: wrap; gap: 5px; align-items: center;">
+                    <span class="code-pill"><code>⇅</code></span>
+                    <span class="code-pill"><code>▲</code> / <code>▼</code></span>
+                  </div>
                 </td>
                 <td>
-                  • 預設無排序：顯示 <code>⇅</code><br>
-                  • 降序：顯示高亮向下箭頭 <code>▼</code><br>
-                  • 升序：顯示高亮向上箭頭 <code>▲</code>（圖三）<br>
-                  • 當前排序列背景帶有微淺著色高亮
+                  • <code>⇅</code> 預設未排序<br>
+                  • <code>▼</code> 降序 / <code>▲</code> 升序<br>
+                  • 排序列淺色高亮
                 </td>
                 <td>
-                  • <strong>三態循環</strong>：無排序 → 降序 ▼ → 升序 ▲ → 還原無排序。<br>
-                  • <strong>分頁連動</strong>：觸發排序時自動重置頁碼至 <code>page = 1</code>。<br>
-                  • <strong>條件繼承</strong>：保留頂部所有複合搜尋篩選條件發送 API。<br>
-                  • <strong>數據刷新</strong>：觸發加載骨架遮罩，後端回傳後平滑淡入渲染。
+                  • <strong>三態切換</strong>：預設 ⇅ → 降序 ▼ → 升序 ▲ → 還原。<br>
+                  • <strong>分頁與條件</strong>：重置為第 1 頁，保留現有搜尋條件發送請求。<br>
+                  • <strong>骨架過渡</strong>：觸發骨架屏載入（5.2.5），數據回傳後原地淡入。
                 </td>
                 <td>
-                  • <strong>排他性限制</strong>：全表單一排序列，點擊新欄位自動重置舊排序列。<br>
-                  • <strong>快速連點防抖</strong>：內建 300ms 防抖 (Debounce)，防止頻繁請求。
+                  • <strong>單列排他</strong>：點擊新欄位自動重置舊排序列。<br>
+                  • <strong>連點防抖</strong>：內建 300ms 防抖。
                 </td>
               </tr>
               <tr>
-                <td><strong>欄位固定在最前面<br><small>(Freeze Column 📌)</small></strong></td>
+                <td><strong>欄位固定在最前<br><small>(Freeze Column 📌)</small></strong></td>
                 <td>
-                  <span class="code-pill">表頭圖示按鈕 <code>📌</code></span><br>
-                  （自訂欄位抽屜亦支援勾選）
+                  <div style="display: flex; flex-wrap: wrap; gap: 5px; align-items: center;">
+                    <span class="code-pill"><code>📌</code></span>
+                  </div>
                 </td>
                 <td>
-                  • 未固定：半透明弱化圖標 <code>📌</code>，Hover 提示「固定在最前面」<br>
-                  • 已固定：實心高亮 <code>📌</code>，Hover 提示「取消固定」<br>
-                  • 右側邊界呈現垂直實體分隔線與向右立體投影（<code>box-shadow</code>）
+                  • 未固定：半透明弱化 <code>📌</code><br>
+                  • 已固定：實心高亮 <code>📌</code><br>
+                  • 右側邊界帶垂直投影線
                 </td>
                 <td>
-                  • <strong>固定在最前</strong>：緊跟在「行展開列 (48px)」與「勾選列 (48px)」之後。<br>
-                  • <strong>Sticky 偏移計算</strong>：依序累加前置欄位寬度計算 <code>left: offset</code>。<br>
-                  • <strong>水平穿透</strong>：右側欄位水平滾動時穿入固定列底層，固定列 100% 保持可視。<br>
-                  • <strong>取消還原</strong>：再次點擊即刻釋放，平滑歸位回主表原生次序。
+                  • <strong>吸附凍結</strong>：緊跟展開列與勾選列後方（<code>sticky</code> 凍結）。<br>
+                  • <strong>橫向穿透</strong>：右側其餘欄位橫向滾動穿透，固定列始終可視。<br>
+                  • <strong>一鍵釋放</strong>：再次點擊即取消固定並歸回原位。
                 </td>
                 <td>
-                  • <strong>固定數量上限</strong>：最多允許自訂固定 3 欄，避免壓迫滾動可視區。<br>
-                  • <strong>記憶持久化</strong>：寫入 <code>LocalStorage</code>，頁面重整自動還原。<br>
-                  • <strong>抽屜雙向連動</strong>：與 5.3 抽屜勾選狀態保持實時同步。
+                  • <strong>數量上限</strong>：最多允許自訂固定 3 欄。<br>
+                  • <strong>狀態記憶</strong>：<code>LocalStorage</code> 本地持久化保存。<br>
+                  • <strong>雙向同步</strong>：與 5.3 抽屜勾選狀態實時連動。
                 </td>
               </tr>
             </tbody>
