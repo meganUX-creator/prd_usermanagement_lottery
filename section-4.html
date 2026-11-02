@@ -658,13 +658,72 @@
         </div>
 
         <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 18px; margin-bottom: 24px;">
-          <h4 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-            <span>🏷️</span><span>動態搜尋標籤 (Search Tags) 互動規範</span>
+          <h4 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span>🏷️</span><span>動態搜尋標籤 (Search Tags) 互動規範</span>
+            </div>
+            <span class="badge-tag badge-purple" style="font-size: 11px;">支援極限狀態收起與展開</span>
           </h4>
+
+          <!-- 極限狀態截圖 1: 搜尋標籤折疊與換行全景圖 -->
+          <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+            <div style="padding: 10px 14px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span class="badge-tag badge-purple" style="font-size: 11px;">極限狀態全景</span>
+                <strong style="font-size: 13px; color: var(--text-main);">超量搜尋標籤折疊與換行展示</strong>
+              </div>
+              <a href="search_tags_extreme_overview.png" target="_blank" class="btn btn-sm btn-outline" style="font-size: 10.5px; padding: 2px 8px;">↗ 原圖</a>
+            </div>
+            <div style="padding: 14px; background: #f8fafc; overflow-x: auto;">
+              <a href="search_tags_extreme_overview.png" target="_blank" title="點擊檢視搜尋標籤極限狀態全景大圖">
+                <img src="search_tags_extreme_overview.png" alt="極限狀態搜尋標籤全景展示" style="width: 100%; height: auto; min-width: 720px; display: block; border-radius: 4px; border: 1px solid var(--border-subtle); cursor: zoom-in;">
+              </a>
+            </div>
+            <div style="padding: 8px 14px; font-size: 12px; color: var(--text-subtle); background: #ffffff; border-top: 1px solid var(--border-subtle); line-height: 1.5;">
+              <strong>特徵說明：</strong> 當使用者選擇大量用戶標籤與複合條件時，標籤列支援多行平鋪，末端自動附加「數量＋展開」控制按鈕（如 <code>+7 个条件 ⌵</code>）與一鍵清空按鈕（<code>🗑️</code>）。
+            </div>
+          </div>
+
+          <!-- 極限狀態截圖 2: 收起與展開狀態對照組 -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px;">
+            <!-- 狀態 1: 收起（折疊）狀態 -->
+            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+              <div style="padding: 8px 12px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between;">
+                <span style="font-weight: 600; font-size: 12px; color: var(--text-main);">1. 收起折疊狀態（數量＋展開）</span>
+                <span class="badge-tag badge-primary" style="font-size: 10.5px;">預設折疊</span>
+              </div>
+              <div style="padding: 16px; background: #ffffff; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 72px;">
+                <a href="search_tags_collapse_btn.png" target="_blank" title="點擊檢視收起狀態大圖">
+                  <img src="search_tags_collapse_btn.png" alt="超量標籤折疊狀態（+7 個條件 ⌵ 與清空按鈕）" style="height: 34px; width: auto; display: block; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); cursor: zoom-in;">
+                </a>
+              </div>
+              <div style="padding: 8px 12px; font-size: 11.5px; color: var(--text-muted); background: #fafafa; border-top: 1px solid var(--border-subtle); line-height: 1.5;">
+                過多標籤超出展示限制時，末端以<strong>「+N 個條件 ⌵」</strong>虛線膠囊按鈕形式呈現，右側保留一鍵清空圖示（<code>🗑️</code>）。
+              </div>
+            </div>
+
+            <!-- 狀態 2: 展開狀態 -->
+            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+              <div style="padding: 8px 12px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between;">
+                <span style="font-weight: 600; font-size: 12px; color: var(--text-main);">2. 展開狀態（點擊收起）</span>
+                <span class="badge-tag badge-emerald" style="font-size: 10.5px;">全部展開</span>
+              </div>
+              <div style="padding: 16px; background: #ffffff; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 72px;">
+                <a href="search_tags_expand_btn.png" target="_blank" title="點擊檢視展開狀態大圖">
+                  <img src="search_tags_expand_btn.png" alt="展開後收起按鈕（收起 ⌃）" style="height: 34px; width: auto; display: block; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); cursor: zoom-in;">
+                </a>
+              </div>
+              <div style="padding: 8px 12px; font-size: 11.5px; color: var(--text-muted); background: #fafafa; border-top: 1px solid var(--border-subtle); line-height: 1.5;">
+                點擊「+N 個條件 ⌵」後，標籤列完整展開平鋪，按鈕切換為<strong>「收起 ⌃」</strong>，點擊可重新收摺回緊湊狀態。
+              </div>
+            </div>
+          </div>
+
           <ul style="padding-left: 20px; color: var(--text-muted); display: flex; flex-direction: column; gap: 10px; margin-bottom: 0;">
             <li><strong>標籤觸發機制</strong>：當使用者於篩選列填寫或選取條件後，點擊「搜尋」按鈕，系統會在篩選列下方即時動態生成對應的搜尋標籤（例如：<code>排除条件: 测试账号 ×</code>、<code>状态: 正常 ×</code>）。</li>
+            <li><strong>極限狀態收起與展開機制（Overflow Folding）</strong>：當勾選或帶入過多標籤（極限情境）超出常規單行空間時，系統以<strong>「數量＋展開」按鈕（例如 <code>+7 个条件 ⌵</code>）</strong>方式折疊隱藏過多標籤；點擊該按鈕後平滑展開全部標籤，並將按鈕切換為 <strong><code>收起 ⌃</code></strong>，再次點擊即可折疊復原。</li>
             <li><strong>獨立標籤解除 (×)</strong>：每個產生的標籤右側均配有刪除（<code>×</code>）圖示。點擊特定標籤的刪除按鈕時，該項篩選條件會被即時解除、表單對應欄位清空還原，且列表會自動連動更新。</li>
-            <li><strong>一鍵清空所有標籤 (🗑️)</strong>：標籤列配置「清空圖示」，點擊後可一鍵移除所有生效標籤，等同於觸發重置行為。</li>
+            <li><strong>一鍵清空所有標籤 (🗑️)</strong>：標籤列最右側配置「清空圖示」，點擊後可一鍵移除所有生效標籤，等同於觸發重置行為。</li>
           </ul>
         </div>
 
@@ -708,7 +767,7 @@
             <span>⚡</span><span>極限情境處理機制 (Extreme Scenarios)</span>
           </h4>
           <ul style="padding-left: 20px; color: var(--text-muted); display: flex; flex-direction: column; gap: 8px; margin-bottom: 0;">
-            <li><strong>多條件標籤溢位處理</strong>：當使用者勾選或帶入過多篩選條件，導致產生的搜尋標籤數量超過單行顯示極限時，標籤列需支援<strong>自動換行顯示或橫向捲動（Scrollable / Wrapped）</strong>，確保所有已生效的條件皆不會被遮擋而無法檢視或移除。</li>
+            <li><strong>多條件標籤溢位處理</strong>：當使用者勾選或帶入過多篩選條件，導致產生的搜尋標籤數量超過顯示極限時，標籤列支援折疊收合（顯示 <code>+N 个条件 ⌵</code> 數量按鈕，詳見 4.5 節圖示規範）與多行平鋪展開（<code>收起 ⌃</code>），確保所有已生效的條件皆能清晰檢視或隨時一鍵清空（<code>🗑️</code>）。</li>
             <li><strong>超長欄位內容與字串截斷</strong>：當輸入框文字過長或特定標籤文字超出版面時，前端自動進行文字截斷（Ellipsis <code>...</code>），並支援滑鼠懸停 (Tooltip) 顯示完整內容。</li>
           </ul>
         </div>
