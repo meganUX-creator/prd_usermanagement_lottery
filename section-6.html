@@ -189,7 +189,7 @@
             </a>
           </div>
           <div style="font-size: 12.5px; color: var(--text-subtle); padding: 12px 18px 14px 18px; background: #fafafa; border-top: 1px solid var(--border-subtle); line-height: 1.6;">
-            <strong>截圖特徵解析：</strong> 畫面右側向左滑出 680px 寬度的「修改用戶詳情」抽屜，頂部配有 <code>[取消]</code> 與 <code>[保存修改]</code> 主按鈕、會員身分標籤與狀態燈號；內部提供 <code>基本信息</code> 與 <code>会员设置</code> 雙頁籤，下方表單依業務分類為「賬戶概況」與「聯絡方式」。
+            <strong>截圖特徵解析：</strong> 畫面右側向左滑出 680px 寬度的「修改用戶詳情」抽屜，頂部配有 <code>[取消]</code> 與 <code>[保存修改]</code> 主按鈕、會員身分標籤與狀態燈號；內部提供 <code>基本信息</code> 與 <code>会员设置</code> 雙頁籤，下方表單依業務分類為「賬戶概況」與「聯絡方式」（「聯絡方式」板塊僅在開啟「查看会员联络资讯」權限時顯示）。
           </div>
         </div>
 
@@ -213,7 +213,7 @@
 
             <div>
               <strong style="color: var(--text-main);">2. 雙核心頁籤切換 (Tabs)</strong><br>
-              • <strong style="color: var(--primary);">基本信息 (Default Tab)</strong>：涵蓋帳號核心識別身分、狀態切換與多渠道通訊方式。<br>
+              • <strong style="color: var(--primary);">基本信息 (Default Tab)</strong>：涵蓋帳號核心識別身分、狀態切換與多渠道通訊方式（「聯絡方式」敏感通訊渠道板塊僅在開啟「查看会员联络资讯」權限時顯示）。<br>
               • <strong>会员设置</strong>：涵蓋「费率与备注」（提现费率、备注）、「权限与限制」（第三方/彩票返水、转入限制、邀请码注册等 6 大開關，切換彈出二次確認視窗）以及「每日次数限制」（提现與充值返利次數上限）。
             </div>
 
@@ -223,8 +223,8 @@
                 <table class="data-table" style="font-size: 12.5px;">
                   <thead>
                     <tr>
-                      <th style="width: 140px;">分區名稱</th>
-                      <th style="width: 150px;">欄位名稱</th>
+                      <th style="width: 165px;">分區名稱</th>
+                      <th style="width: 145px;">欄位名稱</th>
                       <th style="width: 180px;">元件型態</th>
                       <th>業務規範與互動邏輯</th>
                     </tr>
@@ -272,7 +272,14 @@
                       <td>指派該會員所屬之存提款金流層級（如預設層、大額VIP通道層）。</td>
                     </tr>
                     <tr>
-                      <td rowspan="6"><strong>聯絡方式</strong><br><small style="color: var(--text-subtle);">敏感通訊渠道</small></td>
+                      <td rowspan="6" style="vertical-align: top;">
+                        <strong>聯絡方式</strong><br>
+                        <small style="color: var(--text-subtle);">敏感通訊渠道</small>
+                        <div style="margin-top: 8px; padding: 6px 8px; background: rgba(59, 130, 246, 0.08); border-left: 3px solid var(--primary); border-radius: 4px; font-size: 11px; line-height: 1.45; color: var(--text-main);">
+                          <span class="badge-tag badge-primary" style="font-size: 10px; margin-bottom: 4px; white-space: nowrap; word-break: keep-all;">權限控制</span><br>
+                          只有開啟「<strong>查看会员联络资讯</strong>」的會員權限才會顯示這個板塊。
+                        </div>
+                      </td>
                       <td><strong>电话</strong></td>
                       <td><span class="code-pill">輸入框 + [校验] 按鈕</span></td>
                       <td>輸入手機號碼，右側附帶 <code>[校验]</code> 按鈕供排查號碼格式與是否重複綁定。</td>
