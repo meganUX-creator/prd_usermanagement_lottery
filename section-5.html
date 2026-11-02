@@ -1305,7 +1305,7 @@
             </a>
           </div>
           <div style="font-size: 12.5px; color: var(--text-subtle); padding: 12px 18px 14px 18px; background: #fafafa; border-top: 1px solid var(--border-subtle); line-height: 1.6;">
-            <strong>截圖特徵解析：</strong> 固定置底呈現 5 大即時統計指標：<code>用户余额宝总金额</code>、<code>用户总额度</code>、<code>三方游戏总余额</code>、<code>当日注册</code>、<code>当日注册有效用户（首充）</code>；指標旁附帶 <code>❓</code> / <code>ⓘ</code> 提示圖示，右側配有圓形收起按鈕 <code>⌵</code>。
+            <strong>截圖特徵解析：</strong> 固定置底呈現 5 大即時統計指標：<code>用户余额宝总金额</code>、<code>用户总额度</code>、<code>三方游戏总余额</code>、<code>当日注册</code>、<code>当日注册有效用户（首充）</code>；指標旁附帶 <code>❓</code> / <code>ⓘ</code> 提示圖示，中間配有圓形收起按鈕 <code>⌵</code>。
           </div>
         </div>
 
@@ -1319,7 +1319,7 @@
             </div>
           </div>
           <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
-            下方為底部固定列之真實交互模擬：請嘗試<strong>將滑鼠移入 <code>❓</code> 圖示</strong>查看提示，或<strong>點擊右側 <code>⌵</code> 按鈕</strong>體驗收起與展開。
+            下方為底部固定列之真實交互模擬：請嘗試<strong>將滑鼠移入 <code>❓</code> 圖示</strong>查看提示，或<strong>點擊中間 <code>⌵</code> 按鈕</strong>體驗收起與展開。
           </p>
 
           <!-- 模擬的表格資料預覽背景容器 -->
@@ -1328,11 +1328,18 @@
               <span>（上方為會員數據列表資料展示區，數據行水平/垂直捲動時，下方匯總列始終浮動固定在畫面最底層）</span>
             </div>
 
+            <!-- 中間圓形收起按鈕 (置於匯總列上方中央) -->
+            <div id="demo-collapse-btn-wrapper" style="display: flex; justify-content: center; position: relative; z-index: 10; margin-bottom: -14px;">
+              <button type="button" id="demo-collapse-btn" onclick="toggleDemoSummaryBar()" title="點擊收起/展開金額匯總列" style="width: 28px; height: 28px; border-radius: 50%; border: 1px solid #cbd5e1; background: #ffffff; color: #64748b; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.08); flex-shrink: 0;">
+                <span id="demo-collapse-icon" style="font-size: 13px; font-weight: 700; transition: transform 0.2s;">⌵</span>
+              </button>
+            </div>
+
             <!-- 底部匯總列主體容器 -->
-            <div id="demo-summary-bar" style="background: #ffffff; border-top: 1px solid #e2e8f0; padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; box-shadow: 0 -2px 10px rgba(0,0,0,0.03); transition: all 0.3s ease;">
+            <div id="demo-summary-bar" style="background: #ffffff; border-top: 1px solid #e2e8f0; padding: 14px 18px 10px 18px; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; box-shadow: 0 -2px 10px rgba(0,0,0,0.03); transition: all 0.3s ease;">
               
-              <!-- 左側匯總數據項清單 -->
-              <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 12.5px; color: #334155;">
+              <!-- 匯總數據項清單 (置中排列) -->
+              <div style="display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; font-size: 12.5px; color: #334155;">
                 
                 <!-- 項目 1: 用户余额宝总金额 -->
                 <div style="display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">
@@ -1391,16 +1398,11 @@
 
               </div>
 
-              <!-- 右側收起按鈕 -->
-              <button type="button" id="demo-collapse-btn" onclick="toggleDemoSummaryBar()" title="點擊收起金額匯總列" style="width: 28px; height: 28px; border-radius: 50%; border: 1px solid #cbd5e1; background: #ffffff; color: #64748b; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 1px 2px rgba(0,0,0,0.05); flex-shrink: 0;">
-                <span id="demo-collapse-icon" style="font-size: 13px; font-weight: 700; transition: transform 0.2s;">⌵</span>
-              </button>
-
             </div>
 
-            <!-- 收起時顯示的微型展開指示條 -->
-            <div id="demo-collapsed-trigger" style="display: none; padding: 6px 16px; background: #ffffff; border-top: 1px solid #e2e8f0; text-align: right; box-shadow: 0 -2px 8px rgba(0,0,0,0.03);">
-              <button type="button" onclick="toggleDemoSummaryBar()" class="btn btn-sm btn-outline" style="font-size: 11px; padding: 2px 10px; gap: 4px;">
+            <!-- 收起時顯示的微型展開指示條 (置中) -->
+            <div id="demo-collapsed-trigger" style="display: none; padding: 6px 16px; background: #ffffff; border-top: 1px solid #e2e8f0; text-align: center; box-shadow: 0 -2px 8px rgba(0,0,0,0.03);">
+              <button type="button" onclick="toggleDemoSummaryBar()" class="btn btn-sm btn-outline" style="font-size: 11px; padding: 2px 12px; gap: 4px;">
                 <span>⌃</span><span>展開金額匯總</span>
               </button>
             </div>
@@ -1422,7 +1424,7 @@
 
             <div>
               <strong style="color: var(--text-main);">2. 點擊收起與展開機制 (Collapsible Interaction)</strong><br>
-              • <strong>收起按鈕</strong>：匯總列最右側常駐圓形收起按鈕（圖示為 <code>⌵</code>）。<br>
+              • <strong>收起按鈕</strong>：匯總列中間上方配有圓形收起按鈕（圖示為 <code>⌵</code>）。<br>
               • <strong>收起狀態</strong>：操作員點擊收起按鈕後，匯總列向下滑動摺疊收合，轉為貼底微型展開按鈕（<code>[ ⌃ 展開金額匯總 ]</code>），最大化表格資料行的垂直展示空間。<br>
               • <strong>狀態記憶</strong>：收起或展開之偏好設定可持久化保存於前端 <code>LocalStorage</code>，刷新頁面後維持先前的收合狀態。
             </div>
@@ -1439,9 +1441,8 @@
                 <table class="data-table" style="font-size: 12.5px;">
                   <thead>
                     <tr>
-                      <th style="width: 180px; white-space: nowrap;">指標名稱</th>
-                      <th style="width: 140px; white-space: nowrap;">介面展示範例</th>
-                      <th style="width: 140px; white-space: nowrap;">提示圖標 (Tips)</th>
+                      <th style="width: 220px; white-space: nowrap;">指標名稱</th>
+                      <th style="width: 180px; white-space: nowrap;">介面展示範例</th>
                       <th>統計口徑定義與連動邏輯</th>
                     </tr>
                   </thead>
@@ -1449,38 +1450,32 @@
                     <tr>
                       <td><strong>用户余额宝总金额</strong></td>
                       <td><code>41.25 USDT</code></td>
-                      <td><span class="badge-tag badge-primary" style="font-size: 11px;">❓ 已排除測試帳號</span></td>
-                      <td>當前篩選範圍內，所有真實會員存入系統「餘額寶」之累計總金額，單位隨幣種變換（千分位格式化）。</td>
+                      <td>照舊</td>
                     </tr>
                     <tr>
                       <td><strong>用户总额度</strong></td>
                       <td><code>25,818.78 USDT</code></td>
-                      <td><span class="badge-tag badge-primary" style="font-size: 11px;">❓ 已排除測試帳號</span></td>
-                      <td>所有真實有效會員主錢包可用餘額加總。數值受幣種加權過濾連動。</td>
+                      <td>照舊</td>
                     </tr>
                     <tr>
                       <td><strong>三方游戏总余额</strong></td>
                       <td><code>0 USDT</code></td>
-                      <td><span class="badge-tag badge-primary" style="font-size: 11px;">ⓘ 已排除測試帳號</span></td>
-                      <td>會員在各外部第三方遊戲場館（如電子、真人、體育、棋牌）錢包內留存之未轉出總餘額。</td>
+                      <td>照舊</td>
                     </tr>
                     <tr>
                       <td><strong>当日注册</strong></td>
                       <td><strong style="color: var(--primary);">2</strong> 人</td>
-                      <td><span class="code-pill muted">無提示</span></td>
-                      <td>當日（今日 00:00:00 至當前時刻）系統新增註冊之會員人數總計。</td>
+                      <td>照舊</td>
                     </tr>
                     <tr>
                       <td><strong>当日注册有效用户（首充）</strong></td>
                       <td><strong style="color: var(--emerald);">0</strong> 人</td>
-                      <td><span class="code-pill muted">無提示</span></td>
-                      <td>當日註冊且已成功完成「首次充值入款」之高質量新會員人數，用於評估當日引流轉化效率。</td>
+                      <td>照舊</td>
                     </tr>
                     <tr>
                       <td><strong>收起 / 展開按鈕</strong></td>
                       <td><code>⌵</code> / <code>⌃</code></td>
-                      <td><span class="code-pill">控制按鈕</span></td>
-                      <td>點擊一鍵收起或重新展開底部匯總固定列，節省垂直檢視空間。</td>
+                      <td>照舊</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1489,7 +1484,7 @@
 
           </div>
         </div>
-</section>
+      </section>
 
 <!-- Page Navigation Buttons -->
 <div class="page-nav-bar">

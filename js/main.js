@@ -192,12 +192,16 @@ function switchSection5ViewMode(mode) {
 function toggleDemoSummaryBar() {
   const bar = document.getElementById('demo-summary-bar');
   const trigger = document.getElementById('demo-collapsed-trigger');
+  const btnWrapper = document.getElementById('demo-collapse-btn-wrapper');
   if (!bar || !trigger) return;
   if (bar.style.display !== 'none') {
     bar.style.display = 'none';
+    if (btnWrapper) btnWrapper.style.display = 'none';
     trigger.style.display = 'block';
   } else {
     bar.style.display = 'flex';
+    if (btnWrapper) btnWrapper.style.display = 'flex';
     trigger.style.display = 'none';
   }
 }
+
