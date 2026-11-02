@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>《彩票後台 - 會員管理改版 PRD》- 2. 全局通用設計規範</title>
   <meta name="description" content="抽屜式交互標準（680px主抽屜/560px二級抽屜）、數值千分位、空值顯性標記（以顏色區分）、零值顯性展示與LocalStorage。">
-  
+
   <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
   <!-- Top Sticky Bar -->
@@ -40,11 +44,12 @@
     <aside class="sidebar">
       <div class="toc-search-box">
         <span class="toc-search-icon">🔍</span>
-        <input type="text" class="toc-search-input" id="toc-filter" placeholder="搜尋 PRD 章節或關鍵字..." oninput="filterTOC()">
+        <input type="text" class="toc-search-input" id="toc-filter" placeholder="搜尋 PRD 章節或關鍵字..."
+          oninput="filterTOC()">
       </div>
 
       <nav class="toc-nav">
-                                <ul class="toc-list" id="toc-list">
+        <ul class="toc-list" id="toc-list">
           <li class="toc-item">
             <a href="section-1.html" class="toc-link">
               <span>1. 概述與文檔資訊</span>
@@ -171,24 +176,31 @@
         <div id="sec-2-1" style="margin-bottom: 30px;">
           <h3 class="sub-title" style="margin-top: 10px;">2.1 交互佈局改版區塊說明</h3>
           <p class="paragraph">
-            根據改版原型系統（<a href="https://pm-doc-new-sports.pages.dev/" target="_blank" style="color: var(--primary); font-weight: 600; text-decoration: underline;">pm-doc-new-sports.pages.dev</a>），主作業畫面重塑為四大核心交互板塊：<strong>模式切換區塊</strong>、<strong>篩選區塊</strong>、<strong>列表區塊</strong>與<strong>底部吸底匯總數據區塊</strong>，消除舊版資訊擁擠與多層彈窗遮擋痛點，大幅提升營運與風控審核效率。
+            根據改版原型系統（<a href="https://pm-doc-new-sports.pages.dev/" target="_blank"
+              style="color: var(--primary); font-weight: 600; text-decoration: underline;">pm-doc-new-sports.pages.dev</a>），主作業畫面重塑為四大核心交互板塊：<strong>模式切換區塊</strong>、<strong>篩選區塊</strong>、<strong>列表區塊</strong>與<strong>底部吸底匯總數據區塊</strong>，消除舊版資訊擁擠與多層彈窗遮擋痛點，大幅提升營運與風控審核效率。
           </p>
 
           <!-- Overview Screenshot Preview -->
           <div class="feature-box" style="margin-top: 14px; padding: 18px; border-top: 3px solid var(--primary);">
-            <div class="feature-box-header" style="justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <div class="feature-box-header"
+              style="justify-content: space-between; align-items: center; margin-bottom: 12px;">
               <div style="display: flex; align-items: center; gap: 8px;">
                 <div class="feature-icon" style="background: rgba(59, 130, 246, 0.12); color: var(--primary);">🖥️</div>
                 <div class="feature-title" style="font-size: 15px; font-weight: 700;">改版主作業介面全景佈局</div>
               </div>
-              <a href="https://pm-doc-new-sports.pages.dev/" target="_blank" class="badge-tag badge-primary" style="text-decoration: none; font-size: 11.5px; padding: 4px 10px;">
+              <a href="https://pm-doc-new-sports.pages.dev/" target="_blank" class="badge-tag badge-primary"
+                style="text-decoration: none; font-size: 11.5px; padding: 4px 10px;">
                 🔗 開啟線上原型 ↗
               </a>
             </div>
 
-            <div style="padding: 10px; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; text-align: center;">
-              <a href="prototype_layout.png" target="_blank" title="點擊檢視高解析度原圖" style="display: block; cursor: zoom-in;">
-                <img src="prototype_layout.png" alt="彩票會員管理改版原型交互佈局全景圖" style="width: 100%; height: auto; max-height: 480px; object-fit: contain; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.005)'" onmouseout="this.style.transform='scale(1)'">
+            <div
+              style="padding: 10px; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; text-align: center;">
+              <a href="prototype_layout.png" target="_blank" title="點擊檢視高解析度原圖"
+                style="display: block; cursor: zoom-in;">
+                <img src="prototype_layout.png" alt="彩票會員管理改版原型交互佈局全景圖"
+                  style="width: 100%; height: auto; max-height: 480px; object-fit: contain; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: transform 0.2s;"
+                  onmouseover="this.style.transform='scale(1.005)'" onmouseout="this.style.transform='scale(1)'">
               </a>
             </div>
             <div style="margin-top: 8px; font-size: 12px; color: var(--text-subtle); text-align: center;">
@@ -254,6 +266,7 @@
                   <li><strong>固定於底部展示</strong>：常駐固定吸底於瀏覽器視窗最下方，滾動列表時始終可視，利於隨時掌握大盤數據。</li>
                   <li><strong>點擊快捷收起/展開</strong>：中央提供收合按鈕（向下箭頭 <code>⌵</code>），點擊即可快速收起該區塊，極大化表格縱向瀏覽視野。</li>
                   <li><strong>多維核心數據匯總</strong>：展示用戶總金額（不含測試用戶）、三方遊戲總餘額（參考值）、當日註冊人數、當日首充有效用戶等關鍵指標。</li>
+                  <li><strong>敏感金額脫敏防護</strong>：關鍵金額旁配置眼睛圖示（👁️），支援點擊切換掩碼脫敏（如 <code>***</code>），防止敏感營運資產外洩。</li>
                 </ul>
               </div>
             </div>
@@ -288,7 +301,8 @@
               <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">
                 點擊「編輯」或「詳情」自右側滑入。頂部提供快捷關閉、會員摘要與 Tab 導航。
               </p>
-              <div style="margin-top: 14px; font-size: 11px; background: rgba(0,0,0,0.2); padding: 6px; border-radius: 4px;">
+              <div
+                style="margin-top: 14px; font-size: 11px; background: rgba(0,0,0,0.2); padding: 6px; border-radius: 4px;">
                 點擊「同IP: 8人」➜ 觸發二級抽屜
               </div>
             </div>
@@ -304,10 +318,12 @@
 
         <!-- Drawer Layout Examples -->
         <div class="feature-box" style="margin-top: 18px; padding: 20px;">
-          <div class="feature-box-header" style="justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <div class="feature-box-header"
+            style="justify-content: space-between; align-items: center; margin-bottom: 12px;">
             <div style="display: flex; align-items: center; gap: 8px;">
               <div class="feature-icon" style="background: rgba(99, 102, 241, 0.12); color: #6366f1;">🗂️</div>
-              <div class="feature-title" style="font-size: 15px; font-weight: 700;">抽屜佈局範例 (Drawer Layout Examples)</div>
+              <div class="feature-title" style="font-size: 15px; font-weight: 700;">抽屜佈局範例 (Drawer Layout Examples)
+              </div>
             </div>
             <span class="badge-tag badge-primary" style="font-size: 12px; font-weight: 600;">原型佈局規範</span>
           </div>
@@ -317,33 +333,45 @@
 
           <div class="grid-2" style="gap: 16px;">
             <!-- Drawer 1 -->
-            <div style="border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-              <div style="padding: 10px 14px; background: #f8fafc; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
-                <span style="font-size: 13px; font-weight: 700; color: var(--text-main);">📑 Level 1 一級主抽屜 (寬度: 680px)</span>
+            <div
+              style="border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+              <div
+                style="padding: 10px 14px; background: #f8fafc; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 13px; font-weight: 700; color: var(--text-main);">📑 Level 1 一級主抽屜 (寬度:
+                  680px)</span>
                 <span class="badge-tag badge-purple" style="font-size: 11px;">用戶詳情</span>
               </div>
               <div style="padding: 10px; background: #f1f5f9; text-align: center;">
                 <a href="drawer1.png" target="_blank" title="點擊檢視大圖" style="display: block; cursor: zoom-in;">
-                  <img src="drawer1.png" alt="Level 1 一級主抽屜範例 (查看詳情)" style="width: 100%; height: auto; max-height: 380px; object-fit: contain; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.01)'" onmouseout="this.style.transform='scale(1)'">
+                  <img src="drawer1.png" alt="Level 1 一級主抽屜範例 (查看詳情)"
+                    style="width: 100%; height: auto; max-height: 380px; object-fit: contain; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); transition: transform 0.2s;"
+                    onmouseover="this.style.transform='scale(1.01)'" onmouseout="this.style.transform='scale(1)'">
                 </a>
               </div>
-              <div style="padding: 10px 14px; font-size: 12px; color: var(--text-secondary); background: #fff; border-top: 1px solid #f1f5f9; line-height: 1.5;">
+              <div
+                style="padding: 10px 14px; font-size: 12px; color: var(--text-secondary); background: #fff; border-top: 1px solid #f1f5f9; line-height: 1.5;">
                 <strong>核心佈局特性</strong>：自右側滑入 680px 展開，保留背景列表半透明遮罩與視覺連續性。頂部包含狀態標籤、關閉按鈕與 Tab 分頁導航（會員信息、審核、提現、設備與IP）。
               </div>
             </div>
 
             <!-- Drawer 2 -->
-            <div style="border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-              <div style="padding: 10px 14px; background: #f8fafc; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
-                <span style="font-size: 13px; font-weight: 700; color: var(--text-main);">🔗 Level 2 二級關聯抽屜 (寬度: 560px)</span>
+            <div
+              style="border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+              <div
+                style="padding: 10px 14px; background: #f8fafc; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 13px; font-weight: 700; color: var(--text-main);">🔗 Level 2 二級關聯抽屜 (寬度:
+                  560px)</span>
                 <span class="badge-tag badge-amber" style="font-size: 11px;">風控穿透分析</span>
               </div>
               <div style="padding: 10px; background: #f1f5f9; text-align: center;">
                 <a href="drawer2.png" target="_blank" title="點擊檢視大圖" style="display: block; cursor: zoom-in;">
-                  <img src="drawer2.png" alt="Level 2 二級關聯抽屜範例 (詳細內容)" style="width: 100%; height: auto; max-height: 380px; object-fit: contain; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.01)'" onmouseout="this.style.transform='scale(1)'">
+                  <img src="drawer2.png" alt="Level 2 二級關聯抽屜範例 (詳細內容)"
+                    style="width: 100%; height: auto; max-height: 380px; object-fit: contain; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); transition: transform 0.2s;"
+                    onmouseover="this.style.transform='scale(1.01)'" onmouseout="this.style.transform='scale(1)'">
                 </a>
               </div>
-              <div style="padding: 10px 14px; font-size: 12px; color: var(--text-secondary); background: #fff; border-top: 1px solid #f1f5f9; line-height: 1.5;">
+              <div
+                style="padding: 10px 14px; font-size: 12px; color: var(--text-secondary); background: #fff; border-top: 1px solid #f1f5f9; line-height: 1.5;">
                 <strong>核心佈局特性</strong>：點擊「同IP / 同設備」人數觸發，自右側疊加滑入 560px 二級抽屜，直接穿透展示關聯帳號名單與最後登錄紀錄，不跳頁且維持操作上下文。
               </div>
             </div>
@@ -393,7 +421,9 @@
               <div class="feature-title">空值顯性標記</div>
             </div>
             <div class="feature-desc">
-              數據空狀態以<strong>顏色區分</strong>弱化顯示：數值/無數據定義為 <span class="code-pill muted">-</span>，字符定義為 <span class="code-pill muted">N/A</span>；若有數據 0 定義為 <span class="code-pill">0</span>（金額為 <span class="code-pill">0.00</span>）正常展示即可，嚴禁留白、出現 undefined 或破圖。
+              數據空狀態以<strong>顏色區分</strong>弱化顯示：數值/無數據定義為 <span class="code-pill muted">-</span>，字符定義為 <span
+                class="code-pill muted">N/A</span>；若有數據 0 定義為 <span class="code-pill">0</span>（金額為 <span
+                class="code-pill">0.00</span>）正常展示即可，嚴禁留白、出現 undefined 或破圖。
             </div>
           </div>
         </div>
@@ -402,7 +432,9 @@
         <div class="callout callout-info">
           <div>💡</div>
           <div>
-            <p style="margin-bottom: 8px;">系統會自動儲存使用者的畫面設定，包含：<strong>篩選條件的展開狀態</strong>、<strong>欄位的顯示/隱藏與排序</strong>，以及<strong>列表/巢狀視圖的偏好</strong>。</p>
+            <p style="margin-bottom: 8px;">
+              系統會自動儲存使用者的畫面設定，包含：<strong>篩選條件的展開狀態</strong>、<strong>欄位的顯示/隱藏與排序</strong>，以及<strong>列表/巢狀視圖的偏好</strong>。
+            </p>
             <p>無論是切換到其他頁面後返回、重新整理網頁，或是重新登入，系統都會自動還原先前的設定，無須重新調整。</p>
             <div style="margin-top: 10px; font-size: 12px; color: var(--text-subtle);">
               ⚙️ 實現機制：透過前端 <code>LocalStorage</code> 持久化儲存 (Key: <code>LOTTERY_USER_MGT_CONFIG_v1</code>)。
@@ -411,23 +443,23 @@
         </div>
       </section>
 
-        <!-- Page Navigation Buttons -->
-        <div class="page-nav-bar">
-          <a href="index.html" class="page-nav-btn prev">
-            <span style="font-size: 18px;">←</span>
-            <div>
-              <span class="page-nav-subtitle">上一章 (Previous)</span>
-              <span class="page-nav-title">1. 概述與文檔資訊</span>
-            </div>
-          </a>
-          <a href="section-3.html" class="page-nav-btn next">
-            <div>
-              <span class="page-nav-subtitle">下一章 (Next)</span>
-              <span class="page-nav-title">3. 權限管控矩陣</span>
-            </div>
-            <span style="font-size: 18px;">→</span>
-          </a>
-        </div>
+      <!-- Page Navigation Buttons -->
+      <div class="page-nav-bar">
+        <a href="index.html" class="page-nav-btn prev">
+          <span style="font-size: 18px;">←</span>
+          <div>
+            <span class="page-nav-subtitle">上一章 (Previous)</span>
+            <span class="page-nav-title">1. 概述與文檔資訊</span>
+          </div>
+        </a>
+        <a href="section-3.html" class="page-nav-btn next">
+          <div>
+            <span class="page-nav-subtitle">下一章 (Next)</span>
+            <span class="page-nav-title">3. 權限管控矩陣</span>
+          </div>
+          <span style="font-size: 18px;">→</span>
+        </a>
+      </div>
 
     </main>
   </div>
@@ -442,11 +474,17 @@
           <span class="badge-tag badge-primary" id="modal-state-badge">NORMAL STATE</span>
         </div>
         <div style="display: flex; align-items: center; gap: 8px;">
-          <button class="btn btn-sm btn-outline" onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=normal')">🟢 正常</button>
-          <button class="btn btn-sm btn-outline" onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=nodata&mode=nested')">📭 無數據</button>
-          <button class="btn btn-sm btn-outline" onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=extreme&mode=nested')">⚡ 極限</button>
+          <button class="btn btn-sm btn-outline"
+            onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=normal')">🟢 正常</button>
+          <button class="btn btn-sm btn-outline"
+            onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=nodata&mode=nested')">📭
+            無數據</button>
+          <button class="btn btn-sm btn-outline"
+            onclick="switchModalIframe('https://pm-doc-new-sport.pages.dev/content.html?mock=extreme&mode=nested')">⚡
+            極限</button>
           <a href="https://pm-doc-new-sport.pages.dev/" target="_blank" class="btn btn-sm btn-primary">在新視窗開啟 ↗</a>
-          <button class="icon-btn" onclick="closePrototypeModal()" style="width: 28px; height: 28px; font-size: 14px;">✕</button>
+          <button class="icon-btn" onclick="closePrototypeModal()"
+            style="width: 28px; height: 28px; font-size: 14px;">✕</button>
         </div>
       </div>
       <div class="modal-body">
@@ -462,4 +500,5 @@
 
   <script src="js/main.js"></script>
 </body>
+
 </html>

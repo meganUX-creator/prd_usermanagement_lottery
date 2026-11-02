@@ -326,6 +326,84 @@
           </div>
         </div>
 
+        <!-- 搜尋列收起與展開機制卡片 (圖一、圖二、圖三) -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 18px; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 16px;">📐</span>
+              <strong style="font-size: 14.5px; color: var(--text-main);">搜尋列一鍵收起與展開互動機制 (Filter Bar Collapse &amp; Expand)</strong>
+            </div>
+            <span class="badge-tag badge-purple" style="font-size: 11px;">支援點擊收起 / 展開</span>
+          </div>
+
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 14px;">
+            點擊此按鈕可以<strong>收起或者展開上面的整個搜尋列</strong>。圖一與圖三為展開/收起控制按鈕，圖二為收起後下方數據表格展開的真實全貌樣式：
+          </p>
+
+          <!-- 圖一與圖三：展開收起按鈕特寫對照 -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px;">
+            
+            <!-- 圖一：收起按鈕 -->
+            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+              <div style="padding: 8px 12px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span class="badge-tag badge-purple" style="font-size: 10.5px;">圖一</span>
+                  <strong style="font-size: 12.5px; color: var(--text-main);">收起按鈕 (Collapse Button)</strong>
+                </div>
+                <span class="badge-tag badge-primary" style="font-size: 10.5px;">當前：搜尋列展開中</span>
+              </div>
+              <div style="padding: 16px; background: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 80px;">
+                <a href="filter_collapse_btn.png" target="_blank" title="點擊檢視收起按鈕大圖">
+                  <img src="filter_collapse_btn.png" alt="圖一：收起按鈕（雙箭頭向上）" style="width: 32px; height: auto; display: block; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); cursor: zoom-in;">
+                </a>
+              </div>
+              <div style="padding: 8px 12px; font-size: 11.5px; color: var(--text-muted); background: #fafafa; border-top: 1px solid var(--border-subtle); line-height: 1.5;">
+                <strong>外觀與行為：</strong> 呈方形圓角邊框，內部為雙箭頭向上圖示（<code>︽</code>）。點擊後立即向上平滑收起整個多欄位搜尋列。
+              </div>
+            </div>
+
+            <!-- 圖三：展開按鈕 -->
+            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+              <div style="padding: 8px 12px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span class="badge-tag badge-purple" style="font-size: 10.5px;">圖三</span>
+                  <strong style="font-size: 12.5px; color: var(--text-main);">展開按鈕 (Expand Button)</strong>
+                </div>
+                <span class="badge-tag badge-emerald" style="font-size: 10.5px;">當前：搜尋列收起中</span>
+              </div>
+              <div style="padding: 16px; background: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 80px;">
+                <a href="filter_expand_btn.png" target="_blank" title="點擊檢視展開按鈕大圖">
+                  <img src="filter_expand_btn.png" alt="圖三：展開按鈕（雙箭頭向下）" style="width: 32px; height: auto; display: block; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); cursor: zoom-in;">
+                </a>
+              </div>
+              <div style="padding: 8px 12px; font-size: 11.5px; color: var(--text-muted); background: #fafafa; border-top: 1px solid var(--border-subtle); line-height: 1.5;">
+                <strong>外觀與行為：</strong> 呈方形圓角邊框，內部為雙箭頭向下圖示（<code>︾</code>）。點擊後立即向下還原展開完整的搜尋條件欄位。
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 圖二：收起後下方數據表格展開樣式全景截圖 -->
+          <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+            <div style="padding: 10px 14px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span class="badge-tag badge-purple" style="font-size: 11px;">圖二</span>
+                <strong style="font-size: 13px; color: var(--text-main);">收起後下方數據表格展開樣式</strong>
+              </div>
+              <a href="filter_collapsed_table_expanded.png" target="_blank" class="btn btn-sm btn-outline" style="font-size: 10.5px; padding: 2px 8px;">↗ 原圖</a>
+            </div>
+            <div style="padding: 14px; background: #f8fafc; overflow-x: auto;">
+              <a href="filter_collapsed_table_expanded.png" target="_blank" title="點擊檢視收起後數據表格展開大圖">
+                <img src="filter_collapsed_table_expanded.png" alt="圖二：收起後下方數據表格展開的樣式" style="width: 100%; height: auto; min-width: 720px; display: block; border-radius: 4px; border: 1px solid var(--border-subtle); cursor: zoom-in;">
+              </a>
+            </div>
+            <div style="padding: 8px 14px; font-size: 12px; color: var(--text-subtle); background: #ffffff; border-top: 1px solid var(--border-subtle); line-height: 1.55;">
+              <strong>特徵解析：</strong> 當收起上方搜尋列時，頂部僅保留已生效的搜尋標籤列（如 <code>排除条件: 测试账号 ×</code>、<code>🗑️</code>）與分頁控制項；下方會員數據列表區域垂直高度顯著擴增，可視資料筆數倍增，大幅優化操作員瀏覽與批量管理的檢視效率。
+            </div>
+          </div>
+
+        </div>
+
         <h3 id="sec-4-4" class="sub-title">4.4 篩選欄位字典與控制項規格</h3>
         <p class="paragraph">
           篩選列採用多維度彈性網格排版，依據業務查詢頻率與使用場景，共規劃 15 大篩選維度控制項。本表已全面整合「自訂篩選欄位清單（14 項）」與核心常駐控制項，並規範<strong>系統初始與重置時「默認全部勾選顯示」</strong>之業務需求：
@@ -733,7 +811,7 @@
           </h4>
           <ul style="padding-left: 20px; color: var(--text-muted); display: flex; flex-direction: column; gap: 10px; margin-bottom: 0;">
             <li><strong>表單滾動收摺機制</strong>：當頁面往下滾動時，完整的「多欄位篩選表單」會自動向上平滑收起隱藏，僅保留「已生效的搜尋標籤列」與右側「展開/收起控制圖示」固定於畫面上方，以釋放更多檢視表格的垂直空間。</li>
-            <li><strong>手動切換控制</strong>：使用者可隨時透過標籤列右側的收摺/展開圖示（<code>︿</code> / <code>﹀</code>）手動切換進階篩選表單的顯示與隱藏。</li>
+            <li><strong>手動切換控制</strong>：使用者可隨時透過標籤列右側的收摺/展開雙箭頭按鈕（圖一 <code>︽</code> / 圖三 <code>︾</code>，詳見「第二部分：搜尋與篩選列模塊」介面展示）手動切換進階篩選表單的顯示與隱藏，收起後下方數據表格自動向上展開（圖二樣式）。</li>
           </ul>
         </div>
 

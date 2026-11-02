@@ -55,7 +55,7 @@
 
 ## 4. 上方按鈕與搜尋篩選模塊
 > 對應來源：功能修改對照表 - 上方功能按鈕列與篩選列；權限對照表
-- **對應介面區塊截圖**：`button&search_area_1023.png`（上方快捷按鈕與進階搜尋篩選列）、`search_filter_area.png`（第二部分搜尋與篩選列）
+- **對應介面區塊截圖**：`button&search_area_1023.png`（上方快捷按鈕與進階搜尋篩選列）、`search_filter_area.png`（第二部分搜尋與篩選列）、`filter_collapse_btn.png` / `filter_expand_btn.png`（圖一與圖三收起/展開按鈕）、`filter_collapsed_table_expanded.png`（圖二收起後下方數據表格展開樣式）
 - **4.1 獨立快捷按鈕**
   - 視圖模式切換按鈕（頂部左側：巢狀樹狀模式 vs 扁平列表模式，截圖：`view_mode_toggle.png`）
   - 新增會員按鈕（連動『新增會員』權限）
