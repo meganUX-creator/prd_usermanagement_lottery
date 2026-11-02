@@ -143,7 +143,7 @@
   - 介面截圖參照：
     - `drawer_edit_user.png`（圖一：編輯用戶抽屜介面示意圖 · 基本信息）
     - `drawer_edit_user_settings.png`（會員設置抽屜介面截圖）
-    - `drawer_edit_confirm_modal.png`（修改「權限與限制」二次確定視窗）
+    - `drawer_edit_confirm_modal.png`（圖二：修改「權限與限制」二次確認彈窗）
   - 抽屜佈局與內容調整（頂部操作列、狀態指示、[取消]/[保存修改] 按鈕）
   - Tab 切換按鈕：『基本信息』與『會員設置』
   - 「基本信息」表單區塊：賬戶概況（三段狀態切換鈕、出生年月日DatePicker、等級與支付層級）、聯絡方式（電話校驗按鈕、多渠道社群帳號）
