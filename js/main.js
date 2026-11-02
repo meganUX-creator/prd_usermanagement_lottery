@@ -188,3 +188,16 @@ function switchSection5ViewMode(mode) {
   }
 }
 
+// Section 5.4 Demo Summary Bar Toggle
+function toggleDemoSummaryBar() {
+  const bar = document.getElementById('demo-summary-bar');
+  const trigger = document.getElementById('demo-collapsed-trigger');
+  if (!bar || !trigger) return;
+  if (bar.style.display !== 'none') {
+    bar.style.display = 'none';
+    trigger.style.display = 'block';
+  } else {
+    bar.style.display = 'flex';
+    trigger.style.display = 'none';
+  }
+}

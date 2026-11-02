@@ -679,6 +679,12 @@
     .status-pill-success { background: #d1fae5; color: #065f46; }
     .status-pill-danger { background: #fee2e2; color: #991b1b; }
 
+    /* Custom Tooltip on Hover */
+    .has-tooltip:hover .custom-tooltip {
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
     /* Alert / Callout Boxes */
     .callout {
       border-radius: 10px;

@@ -112,6 +112,7 @@
               <li><a href="#sec-5-2-4" class="toc-sublink">5.2.4 特殊欄位合併與彈層邏輯</a></li>
               <li><a href="#sec-5-2-5" class="toc-sublink">5.2.5 頁面骨架屏加載規格</a></li>
               <li><a href="#sec-5-3" class="toc-sublink">5.3 自訂欄位與卡片配置</a></li>
+              <li><a href="#sec-5-4" class="toc-sublink">5.4 底部金額匯總列規範</a></li>
             </ul>
           </li>
           <li class="toc-item">
@@ -1280,6 +1281,213 @@
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <h3 id="sec-5-4" class="sub-title">5.4 底部金額與數據匯總固定列規範 (Sticky Bottom Summary Bar)</h3>
+        <p class="paragraph">
+          為利於營運與風控人員在瀏覽海量會員數據時隨時掌握整體資金大盤與註冊動態，列表畫面最底部配置常駐之<strong>「金額與數據匯總固定列 (Fixed Bottom Summary Bar)」</strong>。該列固定置底，上下捲動表格時始終保持可視，並提供手動收起/展開與已排除測試帳號之數據說明 Tooltip。
+        </p>
+
+        <!-- 介面示意圖卡片 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+          <div style="padding: 12px 18px; background: var(--bg-body); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="badge-tag badge-purple">示意圖</span>
+              <strong style="font-size: 13.5px; color: var(--text-main);">底部金額匯總固定列介面截圖 (Sticky Bottom Summary Bar)</strong>
+            </div>
+            <a href="bottom_amount_summary_bar.png" target="_blank" class="btn btn-sm btn-outline" style="font-size: 11px; padding: 4px 10px;">
+              <span>↗</span><span>開新分頁檢視原圖</span>
+            </a>
+          </div>
+          <div style="padding: 16px; background: #ffffff;">
+            <a href="bottom_amount_summary_bar.png" target="_blank" title="點擊檢視底部金額匯總固定列大圖">
+              <img src="bottom_amount_summary_bar.png" alt="底部金額匯總固定列介面截圖" style="width: 100%; height: auto; display: block; border-radius: 6px; cursor: zoom-in; border: 1px solid var(--border-subtle);">
+            </a>
+          </div>
+          <div style="font-size: 12.5px; color: var(--text-subtle); padding: 12px 18px 14px 18px; background: #fafafa; border-top: 1px solid var(--border-subtle); line-height: 1.6;">
+            <strong>截圖特徵解析：</strong> 固定置底呈現 5 大即時統計指標：<code>用户余额宝总金额</code>、<code>用户总额度</code>、<code>三方游戏总余额</code>、<code>当日注册</code>、<code>当日注册有效用户（首充）</code>；指標旁附帶 <code>❓</code> / <code>ⓘ</code> 提示圖示，右側配有圓形收起按鈕 <code>⌵</code>。
+          </div>
+        </div>
+
+        <!-- 5.4 即時互動模擬展示卡片 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 16px;">⚡</span>
+              <strong style="font-size: 14.5px; color: var(--text-main);">底部匯總列即時互動效果模擬 (Live Interactive Demo)</strong>
+              <span class="badge-tag badge-emerald" style="font-size: 11px;">支援點擊收起與滑鼠移入 TIPS</span>
+            </div>
+          </div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
+            下方為底部固定列之真實交互模擬：請嘗試<strong>將滑鼠移入 <code>❓</code> 圖示</strong>查看提示，或<strong>點擊右側 <code>⌵</code> 按鈕</strong>體驗收起與展開。
+          </p>
+
+          <!-- 模擬的表格資料預覽背景容器 -->
+          <div style="border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; background: #f8fafc; position: relative;">
+            <div style="padding: 24px 20px; font-size: 12.5px; color: #94a3b8; text-align: center; border-bottom: 1px dashed var(--border-subtle); background: #ffffff;">
+              <span>（上方為會員數據列表資料展示區，數據行水平/垂直捲動時，下方匯總列始終浮動固定在畫面最底層）</span>
+            </div>
+
+            <!-- 底部匯總列主體容器 -->
+            <div id="demo-summary-bar" style="background: #ffffff; border-top: 1px solid #e2e8f0; padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; box-shadow: 0 -2px 10px rgba(0,0,0,0.03); transition: all 0.3s ease;">
+              
+              <!-- 左側匯總數據項清單 -->
+              <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 12.5px; color: #334155;">
+                
+                <!-- 項目 1: 用户余额宝总金额 -->
+                <div style="display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">
+                  <span>用户余额宝总金额</span>
+                  <div class="has-tooltip" style="position: relative; display: inline-flex; align-items: center; cursor: help;">
+                    <span style="display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; border-radius: 50%; border: 1px solid #94a3b8; font-size: 10px; color: #64748b; font-weight: 700;">?</span>
+                    <span class="custom-tooltip" style="visibility: hidden; opacity: 0; position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%); background: #1e293b; color: #ffffff; padding: 4px 8px; border-radius: 4px; font-size: 11px; white-space: nowrap; transition: opacity 0.2s; pointer-events: none; z-index: 20; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">已排除測試帳號</span>
+                  </div>
+                  <strong style="color: #0f172a; font-size: 13px;">41.25</strong>
+                  <span style="font-size: 11.5px; color: #64748b;">USDT</span>
+                </div>
+
+                <span style="color: #cbd5e1;">|</span>
+
+                <!-- 項目 2: 用户总额度 -->
+                <div style="display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">
+                  <span>用户总额度</span>
+                  <div class="has-tooltip" style="position: relative; display: inline-flex; align-items: center; cursor: help;">
+                    <span style="display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; border-radius: 50%; border: 1px solid #94a3b8; font-size: 10px; color: #64748b; font-weight: 700;">?</span>
+                    <span class="custom-tooltip" style="visibility: hidden; opacity: 0; position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%); background: #1e293b; color: #ffffff; padding: 4px 8px; border-radius: 4px; font-size: 11px; white-space: nowrap; transition: opacity 0.2s; pointer-events: none; z-index: 20; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">已排除測試帳號</span>
+                  </div>
+                  <strong style="color: #0f172a; font-size: 13px;">25,818.78</strong>
+                  <span style="font-size: 11.5px; color: #64748b;">USDT</span>
+                </div>
+
+                <span style="color: #cbd5e1;">|</span>
+
+                <!-- 項目 3: 三方游戏总余额 -->
+                <div style="display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">
+                  <span>三方游戏总余额</span>
+                  <div class="has-tooltip" style="position: relative; display: inline-flex; align-items: center; cursor: help;">
+                    <span style="display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; border-radius: 50%; border: 1px solid #94a3b8; font-size: 10px; color: #64748b; font-weight: 700; font-style: italic;">i</span>
+                    <span class="custom-tooltip" style="visibility: hidden; opacity: 0; position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%); background: #1e293b; color: #ffffff; padding: 4px 8px; border-radius: 4px; font-size: 11px; white-space: nowrap; transition: opacity 0.2s; pointer-events: none; z-index: 20; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">已排除測試帳號</span>
+                  </div>
+                  <strong style="color: #0f172a; font-size: 13px;">0</strong>
+                  <span style="font-size: 11.5px; color: #64748b;">USDT</span>
+                </div>
+
+                <span style="color: #cbd5e1;">|</span>
+
+                <!-- 項目 4: 当日注册 -->
+                <div style="display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">
+                  <span>当日注册</span>
+                  <strong style="color: var(--primary); font-size: 13px;">2</strong>
+                  <span style="font-size: 11.5px; color: #64748b;">人</span>
+                </div>
+
+                <span style="color: #cbd5e1;">|</span>
+
+                <!-- 項目 5: 当日注册有效用户（首充） -->
+                <div style="display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">
+                  <span>当日注册有效用户（首充）</span>
+                  <strong style="color: var(--emerald); font-size: 13px;">0</strong>
+                  <span style="font-size: 11.5px; color: #64748b;">人</span>
+                </div>
+
+              </div>
+
+              <!-- 右側收起按鈕 -->
+              <button type="button" id="demo-collapse-btn" onclick="toggleDemoSummaryBar()" title="點擊收起金額匯總列" style="width: 28px; height: 28px; border-radius: 50%; border: 1px solid #cbd5e1; background: #ffffff; color: #64748b; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 1px 2px rgba(0,0,0,0.05); flex-shrink: 0;">
+                <span id="demo-collapse-icon" style="font-size: 13px; font-weight: 700; transition: transform 0.2s;">⌵</span>
+              </button>
+
+            </div>
+
+            <!-- 收起時顯示的微型展開指示條 -->
+            <div id="demo-collapsed-trigger" style="display: none; padding: 6px 16px; background: #ffffff; border-top: 1px solid #e2e8f0; text-align: right; box-shadow: 0 -2px 8px rgba(0,0,0,0.03);">
+              <button type="button" onclick="toggleDemoSummaryBar()" class="btn btn-sm btn-outline" style="font-size: 11px; padding: 2px 10px; gap: 4px;">
+                <span>⌃</span><span>展開金額匯總</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5.4 規格詳解與業務邏輯說明 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 20px; margin-bottom: 28px;">
+          <h4 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+            <span>📐</span><span>5.4 底部金額匯總列核心機制與互動規格</span>
+          </h4>
+
+          <div style="display: flex; flex-direction: column; gap: 16px; font-size: 13px; color: var(--text-muted); line-height: 1.7;">
+            <div>
+              <strong style="color: var(--text-main);">1. 固定置底機制 (Fixed / Sticky Bottom)</strong><br>
+              • <strong>常駐位置</strong>：匯總列固定置於視窗或表格容器最下方（<code>position: sticky; bottom: 0;</code>），確保操作員在向下滾動瀏覽數百條會員資料時，隨時掌握大盤核心財務與新增註冊人數。<br>
+              • <strong>響應式橫向捲動</strong>：若螢幕寬度較小，匯總列內部支援平滑橫向滾動或彈性排列，確保所有指標均可被完整檢視，不發生文字遮擋。
+            </div>
+
+            <div>
+              <strong style="color: var(--text-main);">2. 點擊收起與展開機制 (Collapsible Interaction)</strong><br>
+              • <strong>收起按鈕</strong>：匯總列最右側常駐圓形收起按鈕（圖示為 <code>⌵</code>）。<br>
+              • <strong>收起狀態</strong>：操作員點擊收起按鈕後，匯總列向下滑動摺疊收合，轉為貼底微型展開按鈕（<code>[ ⌃ 展開金額匯總 ]</code>），最大化表格資料行的垂直展示空間。<br>
+              • <strong>狀態記憶</strong>：收起或展開之偏好設定可持久化保存於前端 <code>LocalStorage</code>，刷新頁面後維持先前的收合狀態。
+            </div>
+
+            <div>
+              <strong style="color: var(--text-main);">3. 鼠標移入「？」圖標提示規範 (Hover Tips)</strong><br>
+              • <strong>提示內容</strong>：在金額相關指標（用戶餘額寶總金額、用戶總額度、三方遊戲總餘額）旁配置圖示（<code>❓</code> 或 <code>ⓘ</code>），<strong>當滑鼠懸停（Hover）時，立即浮現 Tooltip 提示文字：「已排除測試帳號」</strong>。<br>
+              • <strong>業務對齊</strong>：與 <strong>4.6 節「排除條件整合」</strong>（預設勾選「排除測試帳號」）保持完全口徑一致，明確告知管理員當前大盤數據已自動扣除白名單與內部測試帳號之數據干擾。
+            </div>
+
+            <div>
+              <strong style="color: var(--text-main);">4. 底部匯總各項統計指標口徑規格表</strong>
+              <div class="table-container" style="margin-top: 8px; margin-bottom: 0;">
+                <table class="data-table" style="font-size: 12.5px;">
+                  <thead>
+                    <tr>
+                      <th style="width: 180px; white-space: nowrap;">指標名稱</th>
+                      <th style="width: 140px; white-space: nowrap;">介面展示範例</th>
+                      <th style="width: 140px; white-space: nowrap;">提示圖標 (Tips)</th>
+                      <th>統計口徑定義與連動邏輯</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>用户余额宝总金额</strong></td>
+                      <td><code>41.25 USDT</code></td>
+                      <td><span class="badge-tag badge-primary" style="font-size: 11px;">❓ 已排除測試帳號</span></td>
+                      <td>當前篩選範圍內，所有真實會員存入系統「餘額寶」之累計總金額，單位隨幣種變換（千分位格式化）。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>用户总额度</strong></td>
+                      <td><code>25,818.78 USDT</code></td>
+                      <td><span class="badge-tag badge-primary" style="font-size: 11px;">❓ 已排除測試帳號</span></td>
+                      <td>所有真實有效會員主錢包可用餘額加總。數值受幣種加權過濾連動。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>三方游戏总余额</strong></td>
+                      <td><code>0 USDT</code></td>
+                      <td><span class="badge-tag badge-primary" style="font-size: 11px;">ⓘ 已排除測試帳號</span></td>
+                      <td>會員在各外部第三方遊戲場館（如電子、真人、體育、棋牌）錢包內留存之未轉出總餘額。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>当日注册</strong></td>
+                      <td><strong style="color: var(--primary);">2</strong> 人</td>
+                      <td><span class="code-pill muted">無提示</span></td>
+                      <td>當日（今日 00:00:00 至當前時刻）系統新增註冊之會員人數總計。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>当日注册有效用户（首充）</strong></td>
+                      <td><strong style="color: var(--emerald);">0</strong> 人</td>
+                      <td><span class="code-pill muted">無提示</span></td>
+                      <td>當日註冊且已成功完成「首次充值入款」之高質量新會員人數，用於評估當日引流轉化效率。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>收起 / 展開按鈕</strong></td>
+                      <td><code>⌵</code> / <code>⌃</code></td>
+                      <td><span class="code-pill">控制按鈕</span></td>
+                      <td>點擊一鍵收起或重新展開底部匯總固定列，節省垂直檢視空間。</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
         </div>
 </section>
 
