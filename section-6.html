@@ -513,18 +513,24 @@
               <strong style="color: var(--text-main); font-size: 14px;">👤 頁籤一：會員信息 (Default Tab - 基本資料與通訊矩陣)</strong>
               <div style="margin-top: 8px; display: flex; flex-direction: column; gap: 10px;">
                 <div>
-                  <strong>• 基本資料卡片 (Basic Info Card)</strong>：<br>
+                  <strong>• 基本資料卡片</strong>：<br>
                   - <strong>頭像展示</strong>：左側展示圓形會員頭像（未上傳時呈現預設人物頭像輪廓）。<br>
                   - <strong>雙列資訊膠囊</strong>：右側採用資訊卡片，成對呈現「用戶暱稱 / 帳號」、「真實姓名 / 出生年月日」。<br>
                   - <strong>空值展示規範</strong>：真實姓名若未綁定，一律顯性顯示 <code>"-"</code>（以顏色區分弱化），嚴禁空白留白。
                 </div>
                 <div>
-                  <strong>• 聯絡方式卡片 (Contact Methods - 8 大維度矩陣)</strong>：<br>
+                  <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <strong>• 聯絡方式卡片</strong>
+                    <span class="badge-tag badge-primary" style="font-size: 10.5px; white-space: nowrap; word-break: keep-all;">權限控制</span>
+                  </div>
+                  <div style="margin-top: 6px; margin-bottom: 8px; padding: 6px 10px; background: rgba(59, 130, 246, 0.08); border-left: 3px solid var(--primary); border-radius: 4px; font-size: 12px; color: var(--text-main); line-height: 1.5;">
+                    🔒 <strong>只有開啟「查看会员联络资讯」的會員權限才會顯示這個板塊。</strong>
+                  </div>
                   - <strong>涵蓋管道</strong>：雙欄網格依序陳列 <code>电话</code>、<code>Email</code>、<code>QQ</code>、<code>微信 (WeChat)</code>、<code>Zalo</code>、<code>WhatsApp</code>、<code>Telegram</code>、<code>Facebook</code>。<br>
                   - <strong>統一安全脫敏與空值表現</strong>：未填寫或無綁定數據之管道，欄位框內部統一展示 <code>"-"</code>（以顏色區分弱化），杜絕舊版粗暴留白問題；具備資料者依後台敏感資訊查看權限進行加密脫敏或明文呈現。
                 </div>
                 <div>
-                  <strong>• 備註與營運紀錄 (Remarks)</strong>：<br>
+                  <strong>• 備註與營運紀錄</strong>：<br>
                   - 展示該會員歷次電銷跟進、風控加註、客服諮詢等歷史備註文字，支援超過長度截斷與展開完整歷程。
                 </div>
               </div>
